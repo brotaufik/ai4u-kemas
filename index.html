@@ -4126,6 +4126,16 @@ pcard("KE","Aktiviti 2.1: Baiki prompt kabur",7,()=>`
       <div class="bub ya t16" style="margin-top:auto"><b>Contoh siap:</b> "Anda Penolong Pegawai KEMAS Daerah. Draf hebahan Program Keluarga Sihat pada 2 Nov, 9 pagi, di Dewan Orang Ramai, untuk ibu bapa TABIKA. Nada mesra, maksimum 100 perkataan, 3 hashtag."</div>
     </div>
   </div>`);
+pcard("KE","Sumber GitHub untuk belajar sendiri",0,()=>`
+  ${cardHd(KEH,"Sumber GitHub untuk belajar sendiri",0,plate("PERCUMA · SELEPAS KURSUS"))}
+  <div class="body col" style="gap:14px">${RES([
+    ["GITHUB","Prompt Engineering Guide","dair-ai","Panduan prompt paling lengkap: zero/few-shot, chain-of-thought, risiko. Versi laman web: promptingguide.ai.","https://github.com/dair-ai/Prompt-Engineering-Guide"],
+    ["GITHUB","Generative AI for Beginners","Microsoft · kursus percuma","Lebih 20 pelajaran berstruktur, termasuk 2 pelajaran khusus prompt engineering.","https://github.com/microsoft/generative-ai-for-beginners"],
+    ["GITHUB","Prompt Engineering Guide (ringkas)","Brex","Bacaan pendek tentang cara LLM berfikir dan teknik prompt asas.","https://github.com/brexhq/prompt-engineering"],
+    ["GITHUB","Awesome ChatGPT Prompts","f · prompts.chat","Koleksi besar contoh prompt \"Act as…\". Ambil idea, sesuaikan dengan konteks KEMAS.","https://github.com/f/awesome-chatgpt-prompts"],
+    ["GITHUB","NotebookLM Prompts","GMartin-Data · komuniti","Templat prompt untuk NotebookLM. Repo komuniti kecil: uji dahulu sebelum guna.","https://github.com/GMartin-Data/notebooklm-prompts"],
+    ["RASMI","Gamma Help Center","Gamma · panduan rasmi","Tiada tutorial Gamma yang bernilai di GitHub; panduan rasmi ialah sumber terbaik.","https://help.gamma.app"]])}
+  <div class="t16 muted lh">Semua sumber dalam bahasa Inggeris. Klik kanan › <b>Translate to Melayu</b> dalam Chrome untuk terjemahan pantas. Untuk bahan BM, rujuk <b>AI Untuk Rakyat</b> (MyDIGITAL).</div></div>`);
 {const KEEP=["K0","K1","KP","KA","KE","KB","KC","KD","K4","KN"];
  const CORE=["M2 · Kenapa prompt gagal","M2 · Nota: Kerangka PTKF","Aktiviti 2.1: Baiki prompt kabur","Aktiviti 2.2: Semak dengan VERIFY"];
  SL.forEach(s=>{if(s.k==="KE"&&!CORE.includes(s.t)){s.k="KN";s.tr="B";s.t=s.t.replace(/^M2 · /,"Lanjutan · ")}});
