@@ -301,8 +301,9 @@ body.side-off #sideOpen{display:inline-flex}
 .dk-l{font-size:11.5px;font-weight:900;letter-spacing:1px}.dk-s{font-size:11px;color:var(--muted);line-height:1.2}
 .dk-grid{display:grid;gap:8px;flex:1;min-height:0;align-items:stretch}
 .dkcol{display:flex;flex-direction:column;gap:4px;padding:10px 8px;min-width:0;min-height:0}
-.dk-k{font-size:10.5px;font-weight:900;letter-spacing:1px;text-transform:uppercase;height:13px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
-.dk-t{font-size:14px;font-weight:900;line-height:1.15;height:33px;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
+.dk-k{font-size:11px;font-weight:900;letter-spacing:1.5px;text-transform:uppercase;height:14px;line-height:14px;color:var(--accent);white-space:nowrap}
+:root[data-theme="light"] .dk-k{color:#c1121f!important}
+.dk-t{font-size:12.5px;letter-spacing:-.2px;font-weight:900;line-height:18px;height:18px;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .dk-m{font-size:10.5px;font-weight:800;color:var(--faint);letter-spacing:.5px;border-bottom:1px solid var(--line);padding-bottom:5px;margin-bottom:2px}
 .dk-list{display:grid;gap:4px;flex:1;min-height:0}
 .ses.dk{flex-direction:row;align-items:center;justify-content:space-between;gap:4px;padding:3px 6px;min-height:0;height:100%;overflow:hidden}
@@ -741,11 +742,11 @@ add("K0","Dashboard ilmu",()=>{
   const kpi=[["MODUL","5","M1 hingga M5"],["KAD SESI",String(all.length-nLan),"Mula di sini hingga penutup"],["MINIT AKTIVITI",String(mCore),"Jumlah pemasa kad sesi"],["AKTIVITI","" + nAkt,"Amali dan latihan"],["NOTA LANJUTAN",String(nLan),"Bacaan selepas kursus"]];
   const ROWS=Math.max(...PCOLS.map(col=>PCARDS.filter(c=>c.k===col.k).length));
   const cols=PCOLS.map(col=>{const cs=PCARDS.filter(c=>c.k===col.k);const tot=cs.reduce((a,c)=>a+(c.m||0),0);
-    const pr=col.t.split(" · ");const kick=pr.length>1?pr[0]:"Sesi";const ttl=pr.length>1?pr.slice(1).join(" · "):pr[0];
+    const pr=col.t.split(" · ");const KK={K1:"SESI 1",KA:"MODUL 1",KE:"MODUL 2",KB:"MODUL 3",KC:"MODUL 4",KD:"MODUL 5",K4:"SESI 2",KN:"NOTA 1",KN2:"NOTA 2"};const kick=KK[col.k]||pr[0];const ttl=pr.length>1?pr.slice(1).join(" · "):pr[0];
     const items=cs.map(c=>{const i=SL.findIndex(x=>x.k===c.k&&x.t===c.t);return `<button class="ses dk" type="button" data-goi="${i}"><span class="nm">${esc(c.t.replace(/^M\d · /,"").replace(/^Lanjutan · /,""))}</span><span class="fc">${c.m?c.m+"′":""}</span></button>`});
     while(items.length<ROWS)items.push(`<div class="dk-empty"></div>`);
     return `<div class="card dkcol" style="border-top:4px solid ${col.c}">
-      <div class="dk-k" style="color:${col.c}">${esc(kick)}</div>
+      <div class="dk-k">${esc(kick)}</div>
       <div class="dk-t">${esc(ttl)}</div>
       <div class="dk-m">${cs.length} KAD${tot?` · ${tot} MIN`:""}</div>
       <div class="dk-list" style="grid-template-rows:repeat(${ROWS},1fr)">${items.join("")}</div></div>`}).join("");
