@@ -6,3 +6,5 @@ Portal Kursus AI KEMAS Perak: Tools AI Produktiviti, Etika & Tadbir Urus (ChatGP
 - Fasilitator: Taufik Bin Mohd Yusop, Pengarah KEMAS Negeri Sarawak
 
 Buka portal: https://brotaufik.github.io/ai4u-kemas/
+
+Enjin Prompt AI4U (prompt BM dan English untuk teks, imej, video, slaid, audio dan sumber): https://brotaufik.github.io/ai4u-kemas/enjin-prompt.html

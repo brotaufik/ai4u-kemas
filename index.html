@@ -458,6 +458,11 @@ button.modgo:focus-visible{outline:3px solid #FFD23F;outline-offset:2px}
 :root[data-theme="light"] .modgo-ar{color:#c1121f!important}
 .btn.rst{color:#fde68a;border:1px solid rgba(253,230,138,.45)}
 .btn.rst:hover{color:#fff;border-color:#FFD23F}
+
+/* Enjin Prompt terbenam */
+.enjin-wrap{position:relative;flex:1;min-width:0;border:1px solid rgba(255,255,255,.16);background:#040a18;box-shadow:0 14px 28px rgba(0,0,0,.35)}
+.enjin-wrap iframe{position:absolute;inset:0;width:100%;height:100%;border:0;display:block;background:transparent}
+:root[data-theme="light"] .enjin-wrap{border-color:rgba(11,31,68,.25);background:#f6f8fd}
 </style>
 </head>
 <body>
@@ -1572,6 +1577,24 @@ pcard("KE","M2 · Rubrik skor prompt",3,()=>`
     <div class="g3" style="gap:14px">${[["9 – 10","Sedia guna","ya"],["6 – 8","Baiki satu elemen paling lemah",""],["0 – 5","Tulis semula dengan PTKF","no"]].map(x=>`<div class="bub ${x[2]} t16" style="text-align:center;padding:12px 14px${x[2]?"":";background:linear-gradient(180deg,#fff6d1,#fde68a);color:#4a3a00;border:1px solid #d9b443"}"><b style="font-size:22px">${x[0]}</b><br>${x[1]}</div>`).join("")}</div>
     <div class="well ps t16 lh"><b>Ujian rakan sekerja:</b> jika rakan baharu membaca prompt anda tanpa penjelasan lain, bolehkah dia menyiapkan tugasan itu? Jika tidak, AI juga tidak boleh.</div>
     ${facNote("Guna rubrik ini untuk menilai prompt Aktiviti 2.1. Minta 2 peserta kongsi skor dan elemen yang paling sukar.")}
+  </div>`);
+const ENJIN_QR="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAXIAAAFyAQAAAADAX2ykAAAC90lEQVR4nO2cXarjOBBGT7UMeZQhC7hLUXbW9JJ6B/ZSegED1uMFma8fJDnJDNw7zfh6Yqh6CCI+Dx9USvUjOSb+xOZvf4SD8847/6V8tmY31rro3w2YjdCfD8focX5nPkiS1FcFszGIpHcjLUCSJC1H6XF+b74FZzZjtgFNsQB52D7M7HagHuf34oe/f5GWazEwBMKO1uP8V/JBZuNqNX5nM2Me/089zv9XvsZvb5JWa6t8kSWtA+nnFYgC8hF6nN+f36pmguyWB+z7ApAvzduzmZmNR+lxfj8ePdgCmqIEUT2k4yOg6dX0O/+JSUtovkwqdCcXNBFqz9Sfun9PycdCDdOJILsRZN9/XQT0Sot7u/SC+p3/yCSVukmTVABC9XSNZC1AWoLaT+DV9Dv/sQ2QrzIIRbO1vdjScsXSVAaIZQDW3gi/mn7nP7E2moylZtg2i1RplVZaQBPUdOzxezZ+25pb/m31M0H3xHzPzu7fs/G9P9qKaOI9iHtOrkHs+feE/MP+/NAVpeWpvtp2b/fv2finChlarN5rarrPpcX35/Pxfb4RS111K+1pG2eV+hNw/56N5+7LamkB2AK2VtIE+f58Wr5Vzb0Nojl5HtftfHBbvaJ+5z+wNnDuVVXfix8H0/eDB4/fs/FbfQX3DbmfH/V2uDVJnn/PxzevtllVb40m2I6THn3u/j0bX+9vGBE0vxUgvpuIS716ZRAw4l+QpiP0OL8v3+/n5O7O2YKMuA5AkNWjhXwR5Gt5Pf3Of2JP9zfaMeA/mqQl9HT8avqd/8TaBBJawp3oZ0V1fvVQWHv+PR8/AKEOOIw89qzb8y8AIq/m+ffEfHt/AehFNNBCd61XJ/VjPE6P83vxz+8vhGLz27tp7sErKIPII5AHr69Oxz/7dzXStGJJ6yDyFeqeHctgSUfocf4r+MepVe2FLrIbq9ktFki/hmf+q/U4vxf/dHkuX4ugIHg3zW9q7XBdjcsBepzfl+8vHP1L8/9ncN75F+J/Aw+gQT/Bi9KGAAAAAElFTkSuQmCC";
+pcard("KE","M2 · Enjin Prompt AI4U",5,()=>`
+  ${cardHd(KEH,"Enjin Prompt AI4U: satu formula, enam output",5,plate("BM + ENGLISH"))}
+  <div class="body row" style="gap:16px;align-items:stretch">
+    <div class="enjin-wrap"><iframe class="enjin" src="enjin-prompt.html?embed=1&theme=${document.documentElement.getAttribute("data-theme")||"dark"}" title="Enjin Prompt AI4U" loading="lazy" onload="try{this.contentWindow.postMessage({ai4uTheme:document.documentElement.getAttribute('data-theme')||'dark'},'*')}catch(e){}"></iframe></div>
+    <div class="col" style="flex:0 0 268px;width:268px;gap:12px">
+      <div class="card ps col" style="gap:10px;align-items:center;text-align:center">
+        <div class="h4">Imbas untuk guna di telefon</div>
+        <img src="${ENJIN_QR}" width="184" height="184" alt="Kod QR Enjin Prompt AI4U" style="background:#fff;padding:6px">
+        ${ext("enjin-prompt.html","Buka enjin penuh",true)}
+      </div>
+      <div class="card ps col" style="gap:10px">
+        <div class="h4">Tiga langkah</div>
+        ${steps(["Pilih jenis output: teks, imej, video, slaid, audio atau sumber.","Isi 4 kotak PTKF, atau klik <b>🎲 Isi contoh KEMAS</b>.","Salin versi BM atau English, tampal dalam alat AI, kemudian semak."],"t15")}
+      </div>
+      ${facNote("Demo 2 minit: pilih Imej, klik Isi contoh, tunjuk skor naik ke PRO, salin versi English dan tampal dalam ChatGPT. Kemudian minta peserta imbas QR dan bina satu prompt untuk tugas sebenar (data Hijau sahaja).")}
+    </div>
   </div>`);
 pcard("KE","Aktiviti 2.2: Semak dengan VERIFY",6,()=>`
   ${cardHd(KEH,"Aktiviti 2.2: Semak dengan VERIFY, kemudian baiki",6)}
@@ -4485,7 +4508,7 @@ pcard("KE","M2 · Laluan belajar selepas kursus",0,()=>{
     <div class="t14 muted lh">Video BM dihasilkan oleh pencipta kandungan bebas, bukan sumber rasmi. Google Prompting Essentials berbayar selepas tempoh percubaan; semak tawaran biasiswa sebelum mendaftar.</div>
   </div>`});
 {const KEEP=["K0","K1","KP","KA","KE","KB","KC","KD","K4","KN","KN2"];
- const CORE=["M2 · Apa itu Prompt Engineering","M2 · Kenapa prompt gagal","M2 · Nota: Kerangka PTKF","M2 · Satu idea, banyak nama","Aktiviti 2.1: Baiki prompt kabur","M2 · Rubrik skor prompt","Aktiviti 2.2: Semak dengan VERIFY"];
+ const CORE=["M2 · Apa itu Prompt Engineering","M2 · Kenapa prompt gagal","M2 · Nota: Kerangka PTKF","M2 · Satu idea, banyak nama","Aktiviti 2.1: Baiki prompt kabur","M2 · Rubrik skor prompt","M2 · Enjin Prompt AI4U","Aktiviti 2.2: Semak dengan VERIFY"];
  SL.forEach(s=>{if(s.k==="KE"&&!CORE.includes(s.t)){s.k="KN";s.tr="B";s.t=s.t.replace(/^M2 · /,"Lanjutan · ")}});
  PCARDS.forEach(c=>{if(c.k==="KE"&&!CORE.includes(c.t)){c.k="KN";c.t=c.t.replace(/^M2 · /,"Lanjutan · ")}});
  SECS.push({k:"KN",label:"Nota Lanjutan 1 · Asas Prompt",sub:"Bacaan selepas kursus · ±40 minit",tr:"B",badge:"N1"});
@@ -4516,7 +4539,7 @@ function fit(){const m=$("#main");const s=Math.min((m.clientWidth-36)/1600,(m.cl
 window.fitStage=fit; addEventListener("resize",fit);
 
 /* tema */
-function applyTheme(t){root.setAttribute("data-theme",t)}
+function applyTheme(t){root.setAttribute("data-theme",t);try{document.querySelectorAll("iframe.enjin").forEach(f=>f.contentWindow&&f.contentWindow.postMessage({ai4uTheme:t},"*"))}catch(e){}}
 if(st.theme)applyTheme(st.theme); else if(!root.getAttribute("data-theme")){let l=false;try{l=matchMedia("(prefers-color-scheme: light)").matches}catch(e){}applyTheme(l?"light":"dark")}
 function tema(){const n=root.getAttribute("data-theme")==="dark"?"light":"dark";applyTheme(n);st.theme=n;save()}
 $("#tog").onclick=tema;
