@@ -1374,6 +1374,30 @@ pcard("KE","M2 · Peta modul",2,()=>`
     </div>
   </div>`);
 
+pcard("KE","M2 · Apa itu Prompt Engineering",3,()=>{
+  const go=t=>SL.findIndex(s=>s.t===t);
+  const RT=[["1","Faham","Slaid ini",""],["2","Diagnosis 5A","Kenapa prompt gagal","M2 · Kenapa prompt gagal"],["3","Struktur PTKF","Peranan · Tugas · Konteks · Format","M2 · Nota: Kerangka PTKF"],["4","Amali & rubrik","Baiki prompt, beri skor","Aktiviti 2.1: Baiki prompt kabur"],["5","Semak VERIFY","Jangan terus percaya","Aktiviti 2.2: Semak dengan VERIFY"]];
+  return `
+  ${cardHd(KEH,"Apa itu Prompt Engineering?",3,plate("MULA DI SINI"))}
+  <div class="body col" style="gap:14px">
+    <div class="g2" style="gap:18px">
+      <div class="card p col" style="gap:10px">
+        <div class="h4">Definisi mudah</div>
+        <div class="t19 lh"><b>Prompt</b> ialah arahan, soalan atau bahan yang anda beri kepada AI.</div>
+        <div class="t19 lh"><b>Prompt Engineering</b> ialah kemahiran menyusun prompt yang <b>jelas, lengkap dan berstruktur</b> supaya AI menghasilkan output yang tepat dan boleh digunakan, kemudian <b>menambah baik</b> prompt itu secara berulang.</div>
+        <div class="well ps t17 b" style="text-align:center">Prompt jelas + konteks relevan + semakan manusia = output berkualiti</div>
+      </div>
+      <div class="card p col" style="gap:10px">
+        <div class="h4">Analogi: taklimat kepada pegawai baharu</div>
+        <div class="t18 lh">Bayangkan AI sebagai pegawai baharu yang <b>rajin, laju dan berpengetahuan luas</b>, tetapi baru masuk kerja hari ini. Dia tidak kenal KEMAS, tidak tahu program anda dan <b>tidak boleh membaca fikiran anda</b>.</div>
+        <div class="bub ya t17" style="margin-top:auto"><b>Prompt = taklimat tugasan.</b> Kualiti kerja AI bergantung pada kualiti taklimat anda.</div>
+      </div>
+    </div>
+    <div class="g3" style="gap:14px">${[["🎯","Lebih tepat","Kurang tekaan dan halusinasi kerana AI tahu apa yang dikehendaki."],["⏱️","Jimat masa","Kurang ulang-alik membetulkan jawapan yang tidak kena."],["🛡️","Lebih selamat","Anda tentukan sempadan tugas dan data yang boleh digunakan."]].map(x=>`<div class="card ps row" style="gap:12px;align-items:center"><span style="font-size:30px">${x[0]}</span><div><div class="t18 b">${x[1]}</div><div class="t15 muted lh">${x[2]}</div></div></div>`).join("")}</div>
+    <div class="row" style="gap:10px;align-items:center;flex-wrap:wrap"><span class="t16 b" style="color:#fb7185">Prompt Engineering BUKAN:</span>${["menulis kod","prompt paling panjang","ayat ajaib","sekali jadi"].map(x=>`<span class="tagc crit" style="font-size:14px;padding:5px 12px">✕ ${x}</span>`).join("")}</div>
+    <div class="chev">${RT.map(x=>`<div ${x[3]?`data-goi="${go(x[3])}" role="button" tabindex="0" title="Pergi ke slaid: ${x[3]}" style="cursor:pointer;min-height:66px"`:`style="min-height:66px"`}><b style="font-size:16px">${x[0]} · ${x[1]}</b><span style="font-size:13px">${x[2]}</span></div>`).join("")}</div>
+    ${facNote("Tanya peserta: siapa pernah dapat jawapan AI yang tidak kena? Punca biasa: AI meneka perkara yang tidak ditulis dalam prompt. Itulah sebab kita belajar prompt engineering. Klik anak panah laluan untuk terus ke slaid berkaitan.")}
+  </div>`});
 pcard("KE","M2 · Kenapa prompt gagal",5,()=>`
   ${cardHd(KEH,"Kenapa prompt gagal: ambiguity gap &amp; diagnosis 5A",5)}
   <div class="body row" style="gap:22px">
@@ -4422,7 +4446,7 @@ pcard("KE","M2 · Laluan belajar selepas kursus",0,()=>{
     <div class="t14 muted lh">Video BM dihasilkan oleh pencipta kandungan bebas, bukan sumber rasmi. Google Prompting Essentials berbayar selepas tempoh percubaan; semak tawaran biasiswa sebelum mendaftar.</div>
   </div>`});
 {const KEEP=["K0","K1","KP","KA","KE","KB","KC","KD","K4","KN","KN2"];
- const CORE=["M2 · Kenapa prompt gagal","M2 · Nota: Kerangka PTKF","M2 · Satu idea, banyak nama","Aktiviti 2.1: Baiki prompt kabur","M2 · Rubrik skor prompt","Aktiviti 2.2: Semak dengan VERIFY"];
+ const CORE=["M2 · Apa itu Prompt Engineering","M2 · Kenapa prompt gagal","M2 · Nota: Kerangka PTKF","M2 · Satu idea, banyak nama","Aktiviti 2.1: Baiki prompt kabur","M2 · Rubrik skor prompt","Aktiviti 2.2: Semak dengan VERIFY"];
  SL.forEach(s=>{if(s.k==="KE"&&!CORE.includes(s.t)){s.k="KN";s.tr="B";s.t=s.t.replace(/^M2 · /,"Lanjutan · ")}});
  PCARDS.forEach(c=>{if(c.k==="KE"&&!CORE.includes(c.t)){c.k="KN";c.t=c.t.replace(/^M2 · /,"Lanjutan · ")}});
  SECS.push({k:"KN",label:"Nota Lanjutan 1 · Asas Prompt",sub:"Bacaan selepas kursus · ±40 minit",tr:"B",badge:"N1"});
