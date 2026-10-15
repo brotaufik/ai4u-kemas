@@ -444,6 +444,8 @@ button.modgo:focus-visible{outline:3px solid #FFD23F;outline-offset:2px}
 .modgo-ar{margin-left:auto;font-size:30px;font-weight:900;color:#FFD23F;line-height:1}
 .modgo-go{margin-top:auto;color:#67e8f9;letter-spacing:.5px}
 :root[data-theme="light"] .modgo-ar{color:#c1121f!important}
+.btn.rst{color:#fde68a;border:1px solid rgba(253,230,138,.45)}
+.btn.rst:hover{color:#fff;border-color:#FFD23F}
 </style>
 </head>
 <body>
@@ -774,6 +776,7 @@ const WHY={
  kep:["Tugasan ringkas dengan input jelas: Role, Task, Format sudah cukup.","Ada contoh rujukan untuk ditiru: CARE (Context, Action, Result, Example).","Ada input dan langkah proses: RISE (Role, Input, Steps, Expectation).","Analisis pelbagai sumber untuk keputusan Pengarah: perlukan P.R.E.C.I.S.E. lengkap.","Ekstrak ringkas ke jadual: RTF sudah memadai."]};
 const inp=(k,ph,style)=>`<input class="inp" id="${k}" data-ws="${k}" value="${esc(W(k))}" placeholder="${esc(ph)}" style="${style||""}">`;
 const ta=(k,ph,h,attr)=>`<textarea class="inp" id="${k}" ${attr||`data-ws="${k}"`} placeholder="${esc(ph)}" style="height:${h}px">${esc(attr?st.notes[k.replace("note-","")]||"":W(k))}</textarea>`;
+const rstBtn=(p,n)=>`<button class="btn sm rst" type="button" data-rst="${p}" data-n="${n}" title="Kosongkan semua jawapan pada slaid ini">↺ Reset jawapan</button>`;
 const ansBtn=()=>`<button class="btn sm ${st.showAns?"on":""}" type="button" data-ans="1">${st.showAns?"Jawapan cadangan: ON":"Jawapan cadangan: OFF"}</button>`;
 
 /* ---------- slaid ---------- */
@@ -965,7 +968,7 @@ pcard("K1","Aktiviti 0.1: Tugas berulang saya",4,()=>`
   </div>`);
 const DIAG=["Saya pernah menggunakan AI untuk mendraf atau meringkas kandungan kerja.","Saya tahu data jabatan yang tidak boleh dimasukkan ke dalam alat AI awam.","Saya pernah menyemak fakta dalam jawapan AI sebelum menggunakannya.","Unit saya mempunyai garis panduan bertulis tentang penggunaan AI.","Saya boleh menerangkan perbezaan AI generatif dengan carian Google kepada rakan sekerja."];
 pcard("K1","Aktiviti 0.2: Diagnostik kesediaan",3,()=>{const y=DIAG.filter((_,i)=>PK("dg"+i)==="Y").length;return `
-  ${cardHd("Mula di sini","Aktiviti 0.2: Diagnostik kesediaan",3)}
+  ${cardHd("Mula di sini","Aktiviti 0.2: Diagnostik kesediaan",3,rstBtn("dg",5))}
   <div class="body row" style="gap:22px">
     <div class="card ps col" style="flex:1.7;gap:2px"><div class="h4" style="margin-bottom:6px">Jawab Ya atau Tidak</div>${DIAG.map((q,i)=>`<div class="qr"><span class="n">${i+1}</span><span class="q">${q}</span>${pseg("dg"+i,[["Y","Ya"],["T","Tidak"]])}</div>`).join("")}</div>
     <div class="col" style="flex:1;gap:16px"><div class="card p col" style="align-items:center;text-align:center;gap:6px"><div class="h4">Jumlah Ya</div><div class="stat" id="dgScore">${y}/5</div></div>
@@ -1067,13 +1070,13 @@ pcard("KA","M1 · Demo: halusinasi secara langsung",3,()=>`
       ${facNote("Cuba soalan ini pada pagi kursus. Jika ChatGPT menjawab dengan betul atau menolak, tukar kepada soalan lebih spesifik, contoh nama pegawai atau statistik daerah tertentu.")}</div>
   </div>`);
 pcard("KA","Aktiviti 1.1: Boleh atau tidak?",5,()=>`
-  ${cardHd("Modul 1 · Etika & Tadbir Urus","Aktiviti 1.1: Boleh atau tidak dimasukkan?",5,ansBtn())}
+  ${cardHd("Modul 1 · Etika & Tadbir Urus","Aktiviti 1.1: Boleh atau tidak dimasukkan?",5,rstBtn("dt",8)+ansBtn())}
   <div class="body col" style="gap:14px"><div class="g2" style="flex:1;min-height:0">${[0,4].map(o=>`<div class="card ps col" style="gap:2px">${DATA.slice(o,o+4).map((q,j)=>{const i=o+j;return `<div class="qr"><span class="n">${i+1}</span><span class="q">${q[0]}${mark(PK("dt"+i),q[1],q[1]==="B"?"Boleh":"Tidak boleh",WHY.dt[i])}</span>${pseg("dt"+i,[["B","Boleh"],["T","Tidak"]])}</div>`}).join("")}</div>`).join("")}</div>
     ${hantar("Borang Jawapan Kursus › Aktiviti 1.1 · berpasangan, bincang sebab bagi item yang berbeza pendapat")}</div>`,{bk:1});
 const RISK=[["Menjana idea tajuk program Hari Keluarga","R"],["Ringkasan laporan prestasi TABIKA untuk mesyuarat pengurusan","S"],["Soalan lazim pendaftaran TASKA untuk laman web","S"],["Mengesyorkan isi rumah untuk dikeluarkan daripada senarai bantuan","T"],["Membetulkan bahasa siaran media yang telah diluluskan","R"],["Meringkaskan rekod tatatertib seorang pegawai","D"]];
 const RLB={R:"Rendah",S:"Sederhana",T:"Tinggi",D:"Dilarang"};
 pcard("KA","Aktiviti 1.2: Matriks tahap risiko",5,()=>`
-  ${cardHd("Modul 1 · Etika & Tadbir Urus","Aktiviti 1.2: Matriks tahap risiko",5,ansBtn())}
+  ${cardHd("Modul 1 · Etika & Tadbir Urus","Aktiviti 1.2: Matriks tahap risiko",5,rstBtn("rk",6)+ansBtn())}
   <div class="body row" style="gap:22px">
     <div class="card ps col" style="flex:1.6;gap:2px">${RISK.map((q,i)=>`<div class="qr"><span class="n">${i+1}</span><span class="q">${q[0]}${mark(PK("rk"+i),q[1],RLB[q[1]],WHY.rk[i])}</span>${pseg("rk"+i,[["R","R","Rendah"],["S","S","Sederhana"],["T","T","Tinggi"],["D","D","Dilarang"]])}</div>`).join("")}</div>
     <div class="col" style="flex:1;gap:12px">${box("Kawalan minimum",`<div class="t16 lh"><b class="okc">Rendah</b>: semakan biasa<br><b class="warnc">Sederhana</b>: semak fakta, namakan penyemak<br><b class="critc">Tinggi</b>: bukan keputusan akhir, perlu kelulusan dan audit<br><b>Dilarang</b>: hentikan, rujuk dasar keselamatan</div>`)}
@@ -1272,7 +1275,7 @@ pcard("KC","Aktiviti 4.1: Sahkan draf dengan notebook",15,()=>`
   </div>`);
 const TESTS=[["Ujian 1 · Ketepatan","Soalan yang jawapannya JELAS ADA dalam dokumen. Lulus jika tepat dan merujuk sumber yang betul."],["Ujian 2 · Sintesis","Soalan yang memerlukan gabungan DUA dokumen. Lulus jika kedua-dua sumber digabung dengan betul."],["Ujian 3 · Kejujuran","Soalan yang jawapannya TIADA dalam dokumen. Lulus hanya jika AI mengaku maklumat tiada."]];
 pcard("KC","Aktiviti 4.2: Uji dengan tiga soalan",10,()=>`
-  ${cardHd("Modul 4 · NotebookLM (Gemini Notebook)","Aktiviti 4.2: Uji notebook dengan tiga soalan",10)}
+  ${cardHd("Modul 4 · NotebookLM (Gemini Notebook)","Aktiviti 4.2: Uji notebook dengan tiga soalan",10,rstBtn("ts,tq",3))}
   <div class="body col" style="gap:14px">
     <div class="g3" style="flex:1">${TESTS.map((t,i)=>`<div class="card ps col" style="gap:10px"><div class="row" style="justify-content:space-between;align-items:center"><b class="t19">${t[0]}</b>${pseg("ts"+i,[["L","Lulus"],["G","Gagal"]])}</div><div class="t16 muted lh">${t[1]}</div>${pinp("tq"+i,"Soalan yang saya tanya")}</div>`).join("")}</div>
     <div class="bub ya t17"><b>Ujian 3 paling penting.</b> Alat yang mereka-reka jawapan apabila maklumat tiada tidak sesuai untuk dokumen rasmi tanpa semakan.</div>
@@ -1465,7 +1468,7 @@ pcard("KE","M2 · Teknik: zero, one & few-shot",6,()=>`
 const KEF=[["Kehadiran menurun daripada 82% (Jan) kepada 61% (Apr).","F"],["Pegawai sudah tidak berminat dengan kursus dalaman.","A"],["Waktu petang mungkin berkaitan dengan kadar kehadiran.","H"],["Reminder tidak dihantar secara konsisten.","F"],["Perbandingan kehadiran sesi pagi dan petang belum ada.","M"],["Jika semua kursus dibuat online, masalah selesai.","A"]];
 const KEFL={F:"Fakta",A:"Andaian",H:"Hipotesis",M:"Maklumat hilang"};
 pcard("KE","Latihan lanjutan A: Fakta atau andaian?",6,()=>`
-  ${cardHd(KEH,"Latihan lanjutan A: Fakta atau andaian?",6,ansBtn())}
+  ${cardHd(KEH,"Latihan lanjutan A: Fakta atau andaian?",6,rstBtn("kef",6)+ansBtn())}
   <div class="body row" style="gap:20px">
     <div class="col" style="flex:0.85;gap:12px">${KE_CASE}<div class="bub ya t16"><b>Prinsip:</b> AI boleh bantu membina hipotesis. AI tidak boleh menukar andaian menjadi fakta.</div></div>
     <div class="card ps col" style="flex:1.35;gap:2px">${KEF.map((q,i)=>`<div class="qr"><span class="n">${i+1}</span><span class="q" style="font-size:19px">${q[0]}${mark(PK("kef"+i),q[1],KEFL[q[1]],WHY.kef[i])}</span>${pseg("kef"+i,[["F","Fakta"],["A","Andaian"],["H","Hipotesis"],["M","Hilang"]])}</div>`).join("")}
@@ -1500,7 +1503,7 @@ pcard("KE","M2 · Pilih kerangka yang cukup",5,()=>`
 const KEP=[["Tukar tiga fakta yang sudah jelas kepada e-mel makluman ringkas.","R"],["Hebahan pendaftaran TABIKA mesti ikut gaya contoh hebahan tahun lepas.","C"],["Baca 50 komen peserta, kelompokkan tema, asingkan positif dan negatif, kenal pasti isu.","I"],["Analisis isu kehadiran kursus daripada beberapa sumber data dan sediakan cadangan kepada Pengarah.","P"],["Ekstrak semua tindakan daripada minit mesyuarat ke dalam jadual.","R"]];
 const KEPL={R:"RTF",C:"CARE",I:"RISE",P:"P.R.E.C.I.S.E."};
 pcard("KE","Latihan lanjutan B: Pilih kerangka",4,()=>`
-  ${cardHd(KEH,"Latihan lanjutan B: Pilih kerangka",4,ansBtn())}
+  ${cardHd(KEH,"Latihan lanjutan B: Pilih kerangka",4,rstBtn("kep",5)+ansBtn())}
   <div class="body col" style="gap:14px"><div class="card ps col" style="gap:2px;flex:1">${KEP.map((q,i)=>`<div class="qr"><span class="n">${i+1}</span><span class="q" style="font-size:21px;padding:10px 0">${q[0]}${mark(PK("kep"+i),q[1],KEPL[q[1]],WHY.kep[i],1)}</span>${pseg("kep"+i,[["R","RTF"],["C","CARE"],["I","RISE"],["P","PRECISE"]])}</div>`).join("")}</div>
     <div class="row" style="gap:16px"><div class="bub ya t18" style="flex:1"><b>Tiada satu jawapan mutlak.</b> Pilihan bergantung pada tugasan, maklumat, risiko dan cara output digunakan.</div>${facNote("Minta dua peserta yang memilih kerangka berbeza bagi item 3 atau 4 menerangkan sebab masing-masing.")}</div></div>`,{bk:1});
 
@@ -4557,6 +4560,7 @@ document.addEventListener("click",e=>{
   const sch=e.target.closest(".sch");if(sch){const g=sch.parentElement;const o=g.classList.contains("open");g.classList.toggle("open",!o);if(!o)goSec(g.dataset.k);return}
   const si=e.target.closest(".si");if(si){go(+si.dataset.i);if(innerWidth<1000)setSide(false);return}
   const dt=e.target.closest("#dots i");if(dt){go(+dt.dataset.i);return}
+  const rs=e.target.closest("[data-rst]");if(rs){rs.dataset.rst.split(",").forEach(p=>{for(let i=0;i<+rs.dataset.n;i++)delete st.pk[p+i]});save();rer(cur);return}
   const gi=e.target.closest("[data-goi]");if(gi){go(+gi.dataset.goi);return}
   const tb=e.target.closest("[data-tmr]");if(tb){timerClick(+tb.dataset.tmr);return}
   const fc=e.target.closest("[data-fac]");if(fc){setFac(!B.classList.contains("fac"));return}
