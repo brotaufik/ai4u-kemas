@@ -439,7 +439,7 @@ body.side-off #sideOpen{display:inline-flex}
 </head>
 <body>
 <aside id="side" aria-label="Panel seksyen">
-  <div class="sh"><div class="t1">AI4U <b>- AI UNTUK SEMUA</b></div><div class="t2">KURSUS AI KEMAS PERAK · ETIKA, TADBIR URUS &amp; AI PRODUKTIVITI · ISNIN 19 OKTOBER 2026 · GOOGLE MEET</div><button class="btn" id="sideX" title="Tutup panel (S)" type="button">⟨</button>
+  <div class="sh"><div class="t1">AI4U <b>- AI UNTUK SEMUA</b></div><div class="t2">KURSUS AI KEMAS PERAK · TOOLS AI PRODUKTIVITI, ETIKA &amp; TADBIR URUS · ISNIN 19 OKTOBER 2026 · GOOGLE MEET</div><button class="btn" id="sideX" title="Tutup panel (S)" type="button">⟨</button>
     <div class="trks"><button class="trk" type="button" data-trk="U" title="Kursus UPSI (U)"><b>UPSI</b><small>Kursus pensijilan<br>4–9 Okt 2026</small></button><button class="trk" type="button" data-trk="B" title="Kursus Bro (B)"><b>BRO</b><small>Kursus AI KEMAS Perak<br>19 Okt 2026</small></button></div></div>
   <nav id="secs"></nav>
   <div class="sf">S panel · T tema · N nota · F skrin penuh · ← → slaid</div>
@@ -853,7 +853,7 @@ add("K0","Tajuk kursus",()=>`
     <div class="col" style="flex:1.2;gap:22px">
       <span class="kick" style="align-self:flex-start">AI4U - AI UNTUK SEMUA · KEMAS Perak</span>
       <div class="t22 b muted" style="letter-spacing:3px;text-transform:uppercase">Kursus AI untuk kakitangan KEMAS</div>
-      <div class="covt" style="font-size:88px;font-weight:900;line-height:1;letter-spacing:-.5px;margin-top:-6px">Etika, Tadbir Urus<br>&amp; AI Produktiviti</div>
+      <div class="covt" style="font-size:88px;font-weight:900;line-height:1;letter-spacing:-.5px;margin-top:-6px">Tools AI Produktiviti,<br>Etika &amp; Tadbir Urus</div>
       <div class="t24 muted" style="max-width:760px;line-height:1.4">ChatGPT, NotebookLM (kini Gemini Notebook) dan Gamma AI dalam satu aliran kerja tugasan KEMAS yang sebenar: dari dokumen ke pembentangan.</div>
       <div class="row" style="gap:12px;flex-wrap:wrap"><div class="plate">📅 ISNIN, 19 OKTOBER 2026</div><div class="plate">⏰ 2.00 HINGGA 5.00 PETANG</div><div class="plate">💻 GOOGLE MEET</div></div>
     </div>
@@ -902,7 +902,7 @@ const FACT=(title,rows)=>`<table class="tbl" style="font-size:17px"><thead><tr><
 /* --- K1 MULA DI SINI --- */
 sec("K1","Mula Di Sini","2.00 – 2.15 petang",{badge:"▶"});
 pcard("K1","Selamat datang & peta 3 jam",0,()=>`
-  ${cardHd("Mula di sini","Etika, Tadbir Urus &amp; AI Produktiviti",0,plate("2.00 – 5.00 PETANG"))}
+  ${cardHd("Mula di sini","Tools AI Produktiviti, Etika &amp; Tadbir Urus",0,plate("2.00 – 5.00 PETANG"))}
   <div class="body col" style="gap:18px">
     <div class="g4" style="grid-template-columns:repeat(5,minmax(0,1fr))">${[["🛡️","M1 · Etika & Tadbir Urus","Peraturan data, halusinasi dan matriks risiko"],["🎯","M2 · Prompt Engineering","Bina prompt jelas dengan PTKF, semak dengan VERIFY"],["✍️","M3 · ChatGPT","Tulis draf dengan kerangka PTKF dan CO-STAR"],["📘","M4 · NotebookLM","Sahkan fakta draf dengan dokumen rasmi bersumber"],["📊","M5 · Gamma AI","Tukar draf yang disahkan menjadi deck 8 slaid"]].map(x=>`<div class="card p col" style="gap:10px"><div class="ico">${x[0]}</div><div class="t22 b">${x[1]}</div><div class="t17 muted lh">${x[2]}</div></div>`).join("")}</div>
     <div class="chev">${[["2.15","M1 Etika"],["2.35","M2 Prompt"],["3.00","M3 ChatGPT"],["3.30","M4 NotebookLM"],["4.00","M5 Gamma"],["4.25","Minum petang & Asar"],["4.45","Galeri & ikrar"]].map((x,i)=>`<div style="background:linear-gradient(180deg,${["#d64545","#ec4899","#10a37f","#3b82f6","#e0702a","#64748b","#1f9d55"][i]},${["#b83232","#be185d","#0b8a6b","#2563eb","#c75e1c","#4b5563","#178548"][i]})"><b>${x[0]}</b><span>${x[1]}</span></div>`).join("")}</div>
