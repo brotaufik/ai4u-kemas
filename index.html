@@ -310,6 +310,9 @@ body.side-off #sideOpen{display:inline-flex}
 .ses.dk .nm{font-size:11px;line-height:1.15;font-weight:800;overflow:hidden;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical}
 .ses.dk .fc{font-size:10.5px;white-space:nowrap;flex:0 0 auto}
 .dk-empty{border:1px dashed var(--line);opacity:.5}
+.ans.ok,.ans.no{font-size:14px}
+.qr .why{font-size:14px;margin-top:4px}
+:root[data-theme="light"] .ans.ok{background:#dff5ea!important}:root[data-theme="light"] .ans.no{background:#ffe1e4!important}
 </style>
 </head>
 <body>
@@ -632,7 +635,12 @@ const ls=(arr,cls,size)=>`<ul class="ls ${cls||""} ${size||"t19"}">${arr.map(x=>
 const hd=(kick,title,right)=>`<div class="hd"><div><span class="kick">${kick}</span><h2>${title}</h2></div>${right?`<div class="hdr">${right}</div>`:""}</div>`;
 const plate=t=>`<div class="plate">${t}</div>`;
 function seg(name,opts){const v=W(name);return `<span class="seg">${opts.map(o=>`<label title="${esc(o[2]||o[1])}"><input type="radio" name="${name}" value="${o[0]}" data-ws="${name}" ${v===o[0]?"checked":""}><span>${o[1]}</span></label>`).join("")}</span>`}
-function mark(user,ans,label){if(!st.showAns)return "";if(!user)return `<span class="ans in">${esc(label||ans)}</span>`;return user===ans?`<span class="ans ok">✓ Betul</span>`:`<span class="ans no">Cadangan: ${esc(label||ans)}</span>`}
+function mark(user,ans,label,why,soft){const w=why?`<span class="why">${why}</span>`:"";if(!user)return st.showAns?`<span class="ans in">${esc(label||ans)}</span>`:`<i class="mkx"></i>`;return user===ans?`<span class="ans ok">✓ Betul</span>${w}`:`<span class="ans no">✗ ${soft?"Kurang tepat · Cadangan":"Salah · Jawapan"}: ${esc(label||ans)}</span>${w}`}
+const WHY={
+ dt:["Dokumen ini sudah diterbitkan secara awam.","Data peribadi ibu bapa dan kanak-kanak dilindungi.","Data terbuka agregat tanpa nama individu.","Dasar yang belum diumumkan ialah maklumat terperingkat.","Nama individu sudah dibuang, tiada data peribadi.","Rekod LNPT kekal sulit walaupun nama ditukar kepada kod; individu masih boleh dikenal pasti.","Data rekaan untuk latihan selamat digunakan.","Kata laluan tidak boleh dikongsi dengan mana-mana alat AI."],
+ rk:["Idea kreatif tanpa data sensitif; semakan biasa memadai.","Data dalaman untuk pengurusan; semak fakta dan namakan penyemak.","Kandungan untuk orang awam mesti tepat dengan peraturan semasa.","Keputusan memberi kesan terus kepada bantuan isi rumah; AI tidak boleh membuat keputusan akhir.","Teks sudah diluluskan; AI hanya membaiki bahasa.","Rekod tatatertib ialah data peribadi sulit; dilarang dimasukkan ke AI."],
+ kef:["Angka bersumber dan boleh disahkan dengan rekod.","Kesimpulan tentang minat pegawai tanpa bukti.","Perkataan 'mungkin berkaitan' menunjukkan kenyataan yang boleh diuji dengan data.","Boleh disahkan melalui rekod penghantaran reminder.","Data ini belum ada tetapi diperlukan untuk menguji hipotesis waktu petang.","Jangkaan umum tanpa bukti."],
+ kep:["Tugasan ringkas dengan input jelas: Role, Task, Format sudah cukup.","Ada contoh rujukan untuk ditiru: CARE (Context, Action, Result, Example).","Ada input dan langkah proses: RISE (Role, Input, Steps, Expectation).","Analisis pelbagai sumber untuk keputusan Pengarah: perlukan P.R.E.C.I.S.E. lengkap.","Ekstrak ringkas ke jadual: RTF sudah memadai."]};
 const inp=(k,ph,style)=>`<input class="inp" id="${k}" data-ws="${k}" value="${esc(W(k))}" placeholder="${esc(ph)}" style="${style||""}">`;
 const ta=(k,ph,h,attr)=>`<textarea class="inp" id="${k}" ${attr||`data-ws="${k}"`} placeholder="${esc(ph)}" style="height:${h}px">${esc(attr?st.notes[k.replace("note-","")]||"":W(k))}</textarea>`;
 const ansBtn=()=>`<button class="btn sm ${st.showAns?"on":""}" type="button" data-ans="1">${st.showAns?"Jawapan cadangan: ON":"Jawapan cadangan: OFF"}</button>`;
@@ -798,17 +806,17 @@ pcard("K1","Semakan akaun & persediaan",0,()=>`
       ${facNote("Lakukan semakan ini semasa peserta masuk Google Meet (1.45 petang). Peserta yang belum ada akaun dibantu dalam breakout room.")}</div>
   </div>`);
 const PRE_URL="https://docs.google.com/forms/d/e/1FAIpQLSdgbkaGhEAdzYxoGRTMla97oDTiWE-j9yIwGfU-Cl48lOp6Pg/viewform",PRE_QR="data:image/png;base64,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";
+const QRBOX=(lbl,url,qr,btn,foot)=>!url?`<div class="card p col" style="flex:1;gap:14px;align-items:center;text-align:center"><div class="h4">${lbl}</div><div class="t16 muted" style="width:230px;height:230px;display:flex;align-items:center;justify-content:center;border:2px dashed currentColor;padding:10px">QR akan dipaparkan oleh fasilitator</div><div class="t16 muted">${foot}</div></div>`:`<div class="card p col" style="flex:1;gap:14px;align-items:center;text-align:center"><div class="h4">${lbl}</div>
+  <div class="row" style="gap:22px;align-items:center;justify-content:center">
+    <img src="${qr}" width="230" height="230" alt="Kod QR ${lbl}" style="background:#fff;padding:6px;flex:0 0 auto">
+    <div class="col" style="gap:10px;align-items:flex-start;text-align:left;max-width:230px"><div class="t14 b muted" style="letter-spacing:1px">ATAU KLIK PAUTAN</div>${ext(url,btn,true)}<a href="${url}" target="_blank" rel="noopener" class="t13 muted" style="word-break:break-all;line-height:1.3;color:inherit">${url.replace(/^https:\/\//,"").slice(0,58)}…</a></div>
+  </div><div class="t16 muted">${foot}</div></div>`;
 pcard("K1","Pre test",8,()=>`
-  ${cardHd("Mula di sini","Pre test · AI Readiness Assessment · 20 soalan",8)}
+  ${cardHd("Mula di sini","Pre test · AI Readiness Assessment",8)}
   <div class="body row" style="gap:22px;align-items:center">
-    <div class="card p col" style="flex:1.3;gap:14px"><div class="h4">Cara menjawab</div>${steps(["Imbas kod QR dengan kamera telefon, atau klik butang <b>Buka pre test</b>.","Isi profil: nama, parlimen &amp; daerah, negeri, kumpulan perkhidmatan dan tempat bertugas.","<b>Bahagian A</b> (12 soalan): alat AI generatif. <b>Bahagian B</b> (8 soalan): AI umum dan etika.","Klik <b>Submit</b>, kemudian <b>View score</b> untuk melihat skor dan penjelasan setiap jawapan."],"t19")}
-      <div class="t18 muted lh">15 soalan ialah kuiz. Markah <b>tidak dinilai</b>; ia membantu fasilitator menyesuaikan kursus dan dibandingkan dengan post test.</div>
-      <div class="row" style="gap:14px;align-items:center">${ext(PRE_URL,"Buka pre test",true)}<span class="t16 muted">± 7 minit</span></div></div>
-    <div class="card p col" style="flex:1;gap:10px;text-align:center;align-items:center"><div class="h4">Imbas untuk menjawab</div><img src="${PRE_QR}" width="260" height="260" alt="Kod QR pre test AI Readiness Assessment" style="background:#fff;padding:6px"><div class="t16 muted">Sasaran: <b>+30%</b> purata skor post test berbanding pre test</div></div>
+    <div class="card p col" style="flex:1.1;gap:16px"><div class="h4">Dua langkah mudah</div>${steps(["Imbas kod QR dengan kamera telefon, atau klik pautan di sebelah. Isi profil anda.","Jawab 20 soalan (Bahagian A 12, Bahagian B 8), klik <b>Submit</b>, kemudian <b>Lihat skor</b>."],"t22")}<div class="t17 muted">± 7 minit · Markah tidak dinilai; ia dibandingkan dengan post test di akhir kursus.</div></div>
+    ${QRBOX("Imbas untuk pre test",PRE_URL,PRE_QR,"Buka pre test","Sasaran: <b>+30%</b> purata skor post test berbanding pre test")}
   </div>`);
-
-/* --- K2 PART 1 --- */
-
 pcard("K1","Aktiviti 0.1: Tugas berulang saya",4,()=>`
   ${cardHd("Mula di sini","Aktiviti 0.1: Tugas berulang saya",4)}
   <div class="body row" style="gap:22px">
@@ -928,14 +936,14 @@ pcard("KA","M1 · Demo: halusinasi secara langsung",3,()=>`
   </div>`);
 pcard("KA","Aktiviti 1.1: Boleh atau tidak?",5,()=>`
   ${cardHd("Modul 1 · Etika & Tadbir Urus","Aktiviti 1.1: Boleh atau tidak dimasukkan?",5,ansBtn())}
-  <div class="body col" style="gap:14px"><div class="g2" style="flex:1;min-height:0">${[0,4].map(o=>`<div class="card ps col" style="gap:2px">${DATA.slice(o,o+4).map((q,j)=>{const i=o+j;return `<div class="qr"><span class="n">${i+1}</span><span class="q">${q[0]}${mark(PK("dt"+i),q[1],q[1]==="B"?"Boleh":"Tidak boleh")}</span>${pseg("dt"+i,[["B","Boleh"],["T","Tidak"]])}</div>`}).join("")}</div>`).join("")}</div>
+  <div class="body col" style="gap:14px"><div class="g2" style="flex:1;min-height:0">${[0,4].map(o=>`<div class="card ps col" style="gap:2px">${DATA.slice(o,o+4).map((q,j)=>{const i=o+j;return `<div class="qr"><span class="n">${i+1}</span><span class="q">${q[0]}${mark(PK("dt"+i),q[1],q[1]==="B"?"Boleh":"Tidak boleh",WHY.dt[i])}</span>${pseg("dt"+i,[["B","Boleh"],["T","Tidak"]])}</div>`}).join("")}</div>`).join("")}</div>
     ${hantar("Borang Jawapan Kursus › Aktiviti 1.1 · berpasangan, bincang sebab bagi item yang berbeza pendapat")}</div>`,{bk:1});
 const RISK=[["Menjana idea tajuk program Hari Keluarga","R"],["Ringkasan laporan prestasi TABIKA untuk mesyuarat pengurusan","S"],["Soalan lazim pendaftaran TASKA untuk laman web","S"],["Mengesyorkan isi rumah untuk dikeluarkan daripada senarai bantuan","T"],["Membetulkan bahasa siaran media yang telah diluluskan","R"],["Meringkaskan rekod tatatertib seorang pegawai","D"]];
 const RLB={R:"Rendah",S:"Sederhana",T:"Tinggi",D:"Dilarang"};
 pcard("KA","Aktiviti 1.2: Matriks tahap risiko",5,()=>`
   ${cardHd("Modul 1 · Etika & Tadbir Urus","Aktiviti 1.2: Matriks tahap risiko",5,ansBtn())}
   <div class="body row" style="gap:22px">
-    <div class="card ps col" style="flex:1.6;gap:2px">${RISK.map((q,i)=>`<div class="qr"><span class="n">${i+1}</span><span class="q">${q[0]}${mark(PK("rk"+i),q[1],RLB[q[1]])}</span>${pseg("rk"+i,[["R","R","Rendah"],["S","S","Sederhana"],["T","T","Tinggi"],["D","D","Dilarang"]])}</div>`).join("")}</div>
+    <div class="card ps col" style="flex:1.6;gap:2px">${RISK.map((q,i)=>`<div class="qr"><span class="n">${i+1}</span><span class="q">${q[0]}${mark(PK("rk"+i),q[1],RLB[q[1]],WHY.rk[i])}</span>${pseg("rk"+i,[["R","R","Rendah"],["S","S","Sederhana"],["T","T","Tinggi"],["D","D","Dilarang"]])}</div>`).join("")}</div>
     <div class="col" style="flex:1;gap:12px">${box("Kawalan minimum",`<div class="t16 lh"><b class="okc">Rendah</b>: semakan biasa<br><b class="warnc">Sederhana</b>: semak fakta, namakan penyemak<br><b class="critc">Tinggi</b>: bukan keputusan akhir, perlu kelulusan dan audit<br><b>Dilarang</b>: hentikan, rujuk dasar keselamatan</div>`)}
       <div class="bub ya t16"><b>Tiga soalan penentu:</b> Siapa terjejas jika salah? Boleh dikesan awal? Boleh ditarik balik?</div></div>
   </div>`,{bk:1});
@@ -1304,7 +1312,7 @@ pcard("KE","Latihan lanjutan A: Fakta atau andaian?",6,()=>`
   ${cardHd(KEH,"Latihan lanjutan A: Fakta atau andaian?",6,ansBtn())}
   <div class="body row" style="gap:20px">
     <div class="col" style="flex:0.85;gap:12px">${KE_CASE}<div class="bub ya t16"><b>Prinsip:</b> AI boleh bantu membina hipotesis. AI tidak boleh menukar andaian menjadi fakta.</div></div>
-    <div class="card ps col" style="flex:1.35;gap:2px">${KEF.map((q,i)=>`<div class="qr"><span class="n">${i+1}</span><span class="q" style="font-size:19px">${q[0]}${mark(PK("kef"+i),q[1],KEFL[q[1]])}</span>${pseg("kef"+i,[["F","Fakta"],["A","Andaian"],["H","Hipotesis"],["M","Hilang"]])}</div>`).join("")}
+    <div class="card ps col" style="flex:1.35;gap:2px">${KEF.map((q,i)=>`<div class="qr"><span class="n">${i+1}</span><span class="q" style="font-size:19px">${q[0]}${mark(PK("kef"+i),q[1],KEFL[q[1]],WHY.kef[i])}</span>${pseg("kef"+i,[["F","Fakta"],["A","Andaian"],["H","Hipotesis"],["M","Hilang"]])}</div>`).join("")}
       <div class="t15 muted" style="margin-top:auto">Hilang = maklumat yang masih diperlukan sebelum membuat keputusan.</div></div>
   </div>`,{bk:1});
 
@@ -1337,7 +1345,7 @@ const KEP=[["Tukar tiga fakta yang sudah jelas kepada e-mel makluman ringkas.","
 const KEPL={R:"RTF",C:"CARE",I:"RISE",P:"P.R.E.C.I.S.E."};
 pcard("KE","Latihan lanjutan B: Pilih kerangka",4,()=>`
   ${cardHd(KEH,"Latihan lanjutan B: Pilih kerangka",4,ansBtn())}
-  <div class="body col" style="gap:14px"><div class="card ps col" style="gap:2px;flex:1">${KEP.map((q,i)=>`<div class="qr"><span class="n">${i+1}</span><span class="q" style="font-size:21px;padding:10px 0">${q[0]}${mark(PK("kep"+i),q[1],KEPL[q[1]])}</span>${pseg("kep"+i,[["R","RTF"],["C","CARE"],["I","RISE"],["P","PRECISE"]])}</div>`).join("")}</div>
+  <div class="body col" style="gap:14px"><div class="card ps col" style="gap:2px;flex:1">${KEP.map((q,i)=>`<div class="qr"><span class="n">${i+1}</span><span class="q" style="font-size:21px;padding:10px 0">${q[0]}${mark(PK("kep"+i),q[1],KEPL[q[1]],WHY.kep[i],1)}</span>${pseg("kep"+i,[["R","RTF"],["C","CARE"],["I","RISE"],["P","PRECISE"]])}</div>`).join("")}</div>
     <div class="row" style="gap:16px"><div class="bub ya t18" style="flex:1"><b>Tiada satu jawapan mutlak.</b> Pilihan bergantung pada tugasan, maklumat, risiko dan cara output digunakan.</div>${facNote("Minta dua peserta yang memilih kerangka berbeza bagi item 3 atau 4 menerangkan sebab masing-masing.")}</div></div>`,{bk:1});
 
 const KEPC=[["P","Purpose","Mengapa saya perlukan hasil ini?","Kenal pasti faktor untuk diuji sebelum memilih intervensi"],["R","Role","Perspektif apa yang membantu?","Fasilitator problem solving yang mengutamakan bukti"],["E","Expectation","Apa rupa output yang baik?","Fakta, maksimum 5 hipotesis, data diperlukan, maklumat hilang"],["C","Context","Apa yang AI perlu faham?","Kehadiran 82% → 61%; 2.00–5.00 petang; reminder tidak konsisten"],["I","Input","Berdasarkan bahan apa?","Data kes dan komen peserta sahaja; source of truth"],["S","Style","Bagaimana hasil disampaikan?","BM profesional, ringkas, jadual Hipotesis | Bukti | Status | Data"],["E","Example","Bolehkah saya tunjuk pattern?","Satu baris contoh: hipotesis → bukti → status → data"]];
@@ -1586,12 +1594,13 @@ pcard("K4","Galeri hasil",6,()=>`
     ${box("Format galeri",steps(["Tiga peserta membentangkan deck masing-masing, 2 minit setiap seorang.","Peserta lain memberi satu pujian dan satu cadangan.","Fasilitator menonjolkan satu amalan etika yang baik daripada setiap deck."],"t19"),"flex:1.2")}
     ${box("Soalan panduan maklum balas",`<div class="t18 lh">Adakah mesej utama jelas dalam 10 saat?<br>Adakah setiap angka boleh dijejak kepada sumber?<br>Adakah deck ini boleh dibentang di mesyuarat sebenar minggu depan?</div>`,"flex:1")}
   </div>`);
-pcard("K4","Post test & maklum balas",5,()=>`
-  ${cardHd("Penilaian","Post test &amp; maklum balas",5)}
+const POST_URL="",POST_QR="";
+pcard("K4","Post test & maklum balas",8,()=>`
+  ${cardHd("Penilaian","Post test &amp; maklum balas",8)}
   <div class="body row" style="gap:22px;align-items:center">
-    <div class="card p col" style="flex:1.2;gap:16px"><div class="h4">Dua langkah terakhir</div>${steps(["Jawab post test 20 soalan secara Kuiz Live (soalan sama dengan pre test, susunan dikocok).","Isi borang maklum balas kursus."],"t22")}<div class="col" style="gap:12px">${kzL("pasca")?lbtn("pasca","Buka post test"):kzSet("pasca")}${st.links.hantar?lbtn("hantar","Borang maklum balas"):""}</div></div>
-    <div class="card p col" style="flex:1;gap:10px;text-align:center;align-items:center"><div class="h4">Imbas untuk post test</div>${kzQR("pasca",230)}<div class="t16 muted">Sasaran kepuasan peserta: <b>85%</b></div></div>
-  </div>`,{dyn:1});
+    <div class="card p col" style="flex:1.1;gap:16px"><div class="h4">Dua langkah terakhir</div>${steps(["Imbas kod QR atau klik pautan di sebelah. Guna <b>nama yang sama</b> seperti pre test.","Jawab 20 soalan (sama dengan pre test, susunan jawapan dikocok) dan 5 soalan maklum balas kursus."],"t22")}<div class="t17 muted">± 10 minit · Klik <b>Submit</b>, kemudian <b>Lihat skor</b> untuk bandingkan dengan pre test.</div></div>
+    ${QRBOX("Imbas untuk post test",POST_URL,POST_QR,"Buka post test","Sasaran kepuasan peserta: <b>85%</b>")}
+  </div>`);
 pcard("K4","Ikrar 30 hari",4,()=>{const s=`Dalam tempoh 30 hari, saya akan menggunakan AI untuk ${PK("ik1")||"[tugasan]"}, diukur dengan ${PK("ik2")||"[satu metrik bernombor]"}, dan disemak oleh ${PK("ik3")||"[nama jawatan penyemak]"}.`;return `
   ${cardHd("Penutup","Ikrar 30 hari",4)}
   <div class="body col" style="gap:18px">
@@ -4336,7 +4345,7 @@ $("#sideX").onclick=()=>setSide(false);$("#sideOpen").onclick=()=>setSide(true);
 if(innerWidth<1000||st.side===0)B.classList.add("side-off");
 function renderLinks(){
  const U=[["📝","Praujian","GOOGLE FORM",LINKS.pra],["📁","Nota peserta","GOOGLE DRIVE",DRIVE],["🎥","Rakaman taklimat","GOOGLE DRIVE",LINKS.taklimat],["🌐","schtg.com","KOD ypa75g · 11 OKT",LINKS.host],["💻","Muat turun XAMPP","APACHEFRIENDS",LINKS.xampp],["📍","Lokasi hotel","GOOGLE MAPS",LINKS.map]];
- const Bl=[["🎥","Meet","ISNIN 19 OKT · 2 PTG","https://meet.google.com/ymt-ycar-joa"],["📝","PRE TEST","GOOGLE FORM · 20 SOALAN","https://docs.google.com/forms/d/e/1FAIpQLSdgbkaGhEAdzYxoGRTMla97oDTiWE-j9yIwGfU-Cl48lOp6Pg/viewform"],["✅","POST TEST","KUIZ LIVE · 20 SOALAN",kzL("pasca"),"Post test & maklum balas"],["📁","Folder bahan","GOOGLE DRIVE",st.links.folder],["📘","NotebookLM","GOOGLE","https://notebooklm.google.com"],["📊","Gamma AI","GAMMA.APP","https://gamma.app"],["✍️","ChatGPT","OPENAI","https://chatgpt.com"]];
+ const Bl=[["🎥","Meet","ISNIN 19 OKT · 2 PTG","https://meet.google.com/ymt-ycar-joa"],["📝","PRE TEST","IMBAS QR · 20 SOALAN","","Pre test"],["✅","POST TEST","IMBAS QR · 25 SOALAN","","Post test & maklum balas"],["📁","Folder bahan","GOOGLE DRIVE",st.links.folder],["📘","NotebookLM","GOOGLE","https://notebooklm.google.com"],["📊","Gamma AI","GAMMA.APP","https://gamma.app"],["✍️","ChatGPT","OPENAI","https://chatgpt.com"]];
  $("#links").innerHTML=(st.track==="B"?Bl:U).map(r=>r[3]?`<a class="ql" href="${r[3]}" target="_blank" rel="noopener"><span class="qi">${r[0]}</span><span><b>${r[1]}</b><small>${r[2]}</small></span></a>`:r[4]?`<a class="ql" href="#" data-goslide="${r[4]}" title="Buka slaid ${r[1]}"><span class="qi">${r[0]}</span><span><b>${r[1]}</b><small>${r[2]}</small></span></a>`:`<span class="ql" style="opacity:.55" title="Tetapkan pautan dalam slaid Tetapan fasilitator"><span class="qi">${r[0]}</span><span><b>${r[1]}</b><small>AKAN DIKONGSI</small></span></span>`).join("");
  $$("#links [data-goslide]").forEach(a=>a.onclick=e=>{e.preventDefault();const i=SL.findIndex(x=>x.tr==="B"&&x.t===a.dataset.goslide);if(i>=0)go(i)});
  $("#trkName").textContent="PERAK";
@@ -4406,7 +4415,7 @@ document.addEventListener("change",e=>{const t=e.target;
   if(t.dataset.modDone){st.mod[t.dataset.modDone]=t.checked;save();rerWhere((x,i)=>x.dyn||x.notes&&x.k===t.dataset.modDone);buildSide();return}
   if(t.dataset.wsc){st.ws[t.dataset.wsc]=t.checked?"1":"";save();return}
   if(t.dataset.pkc){st.pk[t.dataset.pkc]=t.checked?"1":"";save();return}
-  if(t.dataset.pkr){st.pk[t.dataset.pkr]=t.value;save();if(t.dataset.pkr==="fw"||SL[cur].rr){rer(cur);return}if(st.showAns&&SL[cur].bk)rer(cur);if(SL[cur].dg){const el=document.getElementById("dgScore");if(el)el.textContent=DIAG.filter((_,i)=>PK("dg"+i)==="Y").length+"/5"}return}
+  if(t.dataset.pkr){st.pk[t.dataset.pkr]=t.value;save();if(t.dataset.pkr==="fw"||SL[cur].rr){rer(cur);return}if(SL[cur].bk||document.querySelector(`.slide[data-i="${cur}"] :is(.mkx,.ans)`))rer(cur);if(SL[cur].dg){const el=document.getElementById("dgScore");if(el)el.textContent=DIAG.filter((_,i)=>PK("dg"+i)==="Y").length+"/5"}return}
   if(t.dataset.lnk){st.links[t.dataset.lnk]=t.value.trim();save();rerWhere((x,i)=>i!==cur||t.dataset.lnk==="kuiz");renderLinks();return}
   if(t.type==="radio"&&t.dataset.ws){st.ws[t.dataset.ws]=t.value;save();if(st.showAns)rer(cur);return}
 });
