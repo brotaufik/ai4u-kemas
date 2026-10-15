@@ -1126,8 +1126,32 @@ pcard("KA","M1 · Rujukan & video",0,()=>`
     ["GLOBAL","AI and Digital Transformation in Government","UNESCO & Oxford · 12 jam · percuma","Untuk penjawat awam: etika, hak asasi, tadbir urus data dan amali GenAI.","https://oxsbs.link/unesco"]])}</div>`);
 sec("KB","Modul 3 · ChatGPT","3.00 – 3.30 petang",{badge:"M3"});
 const shotImg=(k,marks,style)=>`<div class="shot" title="Klik untuk besarkan" style="cursor:zoom-in;position:relative;border-radius:14px;overflow:hidden;border:1px solid var(--line,rgba(255,255,255,.12));box-shadow:0 8px 24px rgba(0,0,0,.35);${style||""}"><img src="${SHOT[k]}" alt="Gambar skrin" style="display:block;width:100%;height:100%;object-fit:cover;object-position:top"> ${(marks||[]).map(m=>`<span class="num" style="position:absolute;top:${m[1]}%;left:${m[2]}%;width:34px;height:34px;font-size:17px;transform:translate(-50%,-50%);box-shadow:0 0 0 4px rgba(245,197,66,.35)">${m[0]}</span>`).join("")}</div>`;
+pcard("KB","M3 · Apa itu ChatGPT",3,()=>{
+  const go=t=>SL.findIndex(s=>s.t===t);
+  const RT=[["1","Faham","Slaid ini",""],["2","Personalization","Kenalkan diri anda kepada ChatGPT","M3 · Personalization ChatGPT"],["3","Privasi","Matikan latihan model","M3 · Tetapan privasi ChatGPT"],["4","Projects","Satu folder setiap tugasan","M3 · Projects: ruang kerja AI"],["5","Amali 3.0 – 3.2","Bina prompt, draf, semak","Aktiviti 3.0: Cipta Project saya"]];
+  return `
+  ${cardHd("Modul 3 · ChatGPT","Apa itu ChatGPT?",3,plate("MULA DI SINI"))}
+  <div class="body col" style="gap:14px">
+    <div class="g2" style="gap:18px">
+      <div class="card p col" style="gap:10px">
+        <div class="h4">Definisi mudah</div>
+        <div class="t19 lh"><b>ChatGPT</b> ialah chatbot AI generatif oleh OpenAI. Anda menaip arahan dalam bahasa biasa, dan ia <b>menjana teks</b>: draf, ringkasan, terjemahan, idea dan analisis ringkas.</div>
+        <div class="t19 lh">Ia berasaskan <b>LLM</b> yang meramal perkataan seterusnya. Ia <b>bukan enjin carian</b> dan <b>bukan pangkalan data fakta</b>.</div>
+        <div class="well ps t17 b" style="text-align:center">ChatGPT menulis draf · anda menyemak · anda menandatangani</div>
+      </div>
+      <div class="card p col" style="gap:10px">
+        <div class="h4">Analogi: penulis draf yang sangat laju</div>
+        <div class="t18 lh">Bayangkan pembantu yang boleh menyiapkan <b>draf pertama dalam beberapa saat</b>, dalam gaya rasmi atau mesra, BM atau English. Tetapi ia tidak tahu dasar dalaman KEMAS dan kadang-kadang <b>yakin walaupun salah</b>.</div>
+        <div class="bub ya t17" style="margin-top:auto"><b>Peranan anda = editor.</b> Gunakan draf ChatGPT sebagai titik mula, bukan hasil akhir.</div>
+      </div>
+    </div>
+    <div class="g3" style="gap:14px">${[["✍️","Draf pantas","Surat, minit mesyuarat, laporan program dan hebahan."],["🔄","Ubah gaya & ringkaskan","Tukar nada, bahasa dan panjang teks dalam satu arahan."],["💡","Jana idea & struktur","Rangka program, soalan kuiz dan outline deck."]].map(x=>`<div class="card ps row" style="gap:12px;align-items:center"><span style="font-size:30px">${x[0]}</span><div><div class="t18 b">${x[1]}</div><div class="t15 muted lh">${x[2]}</div></div></div>`).join("")}</div>
+    <div class="row" style="gap:10px;align-items:center;flex-wrap:wrap"><span class="t16 b" style="color:#fb7185">Batasan:</span>${["boleh mereka fakta (halusinasi)","tidak tahu dasar dalaman KEMAS","maklumat mungkin tidak terkini","bukan tempat data sulit"].map(x=>`<span class="tagc crit" style="font-size:14px;padding:5px 12px">⚠ ${x}</span>`).join("")}</div>
+    <div class="chev">${RT.map(x=>`<div ${x[3]?`data-goi="${go(x[3])}" role="button" tabindex="0" title="Pergi ke slaid: ${x[3]}" style="cursor:pointer;min-height:66px"`:`style="min-height:66px"`}><b style="font-size:16px">${x[0]} · ${x[1]}</b><span style="font-size:13px">${x[2]}</span></div>`).join("")}</div>
+    ${facNote("Tanya peserta: siapa sudah guna ChatGPT untuk kerja? Kongsi skrin dan tunjuk tiga bahagian antara muka: kotak chat, sejarah perbualan di sidebar dan Projects. Ingatkan: semua latihan guna data awam atau rekaan. Klik anak panah laluan untuk terus ke slaid berkaitan.")}
+  </div>`});
 pcard("KB","M3 · Personalization ChatGPT",4,()=>`
-  ${cardHd("Modul 3 · ChatGPT","Mula di sini: Personalization",4,plate("SETTINGS › PERSONALIZATION"))}
+  ${cardHd("Modul 3 · ChatGPT","Langkah 1: Personalization",4,plate("SETTINGS › PERSONALIZATION"))}
   <div class="body row" style="gap:22px">
     <div class="col" style="flex:0 0 520px;gap:8px;min-height:0">
       <div class="row" style="gap:10px;align-items:center"><span class="t15 b">Klik profil › Settings ›</span>${shotImg("pz_menu",[],"height:34px;width:219px;border-radius:8px")}</div>
