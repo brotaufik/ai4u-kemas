@@ -4,6 +4,18 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>AI4U - AI UNTUK SEMUA · Kursus AI KEMAS Perak</title>
+<meta name="description" content="Kursus AI KEMAS Perak · Tools AI Produktiviti, Etika &amp; Tadbir Urus (ChatGPT, NotebookLM dan Gamma AI) · Isnin 19 Oktober 2026, 2.00 hingga 5.00 petang, Google Meet.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="AI4U - AI UNTUK SEMUA">
+<meta property="og:title" content="Tools AI Produktiviti, Etika &amp; Tadbir Urus · Kursus AI KEMAS Perak">
+<meta property="og:description" content="ChatGPT, NotebookLM dan Gamma AI · Isnin 19 Oktober 2026, 2.00 hingga 5.00 petang · Google Meet">
+<meta property="og:url" content="https://brotaufik.github.io/ai4u-kemas/">
+<meta property="og:image" content="https://brotaufik.github.io/ai4u-kemas/og-tajuk.jpg">
+<meta property="og:image:type" content="image/jpeg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Slaid tajuk: Tools AI Produktiviti, Etika &amp; Tadbir Urus">
+<meta name="twitter:card" content="summary_large_image">
 <style>
 .fac .nofac{display:none!important}
 
@@ -4525,7 +4537,8 @@ function markSide(){const k=SL[cur].k;$$(".si").forEach(x=>x.classList.toggle("o
   const on=$(".si.on");if(on&&on.scrollIntoView)try{on.scrollIntoView({block:"nearest"})}catch(e){}}
 function setSide(v){B.classList.toggle("side-off",!v);st.side=v?1:0;save();setTimeout(fit,320);fit()}
 $("#sideX").onclick=()=>setSide(false);$("#sideOpen").onclick=()=>setSide(true);
-if(innerWidth<1000||st.side===0)B.classList.add("side-off");
+function NARROW(){try{return matchMedia("(max-width:999.98px)").matches}catch(e){return innerWidth<1000}}
+if(NARROW()||st.side===0)B.classList.add("side-off");
 function renderLinks(){
  const U=[["📝","Praujian","GOOGLE FORM",LINKS.pra],["📁","Nota peserta","GOOGLE DRIVE",DRIVE],["🎥","Rakaman taklimat","GOOGLE DRIVE",LINKS.taklimat],["🌐","schtg.com","KOD ypa75g · 11 OKT",LINKS.host],["💻","Muat turun XAMPP","APACHEFRIENDS",LINKS.xampp],["📍","Lokasi hotel","GOOGLE MAPS",LINKS.map]];
  const Bl=[["🎥","Meet","19 OKT · 2 PTG","https://meet.google.com/ymt-ycar-joa"],["📝","PRE TEST","QR · 20 SOALAN","","Pre test"],["✅","POST TEST","QR · 25 SOALAN","","Post test & maklum balas"],["📁","Folder bahan","GOOGLE DRIVE",st.links.folder],["📘","NotebookLM","GOOGLE","https://notebooklm.google.com"],["📊","Gamma AI","GAMMA.APP","https://gamma.app"],["✍️","ChatGPT","OPENAI","https://chatgpt.com"]];
@@ -4544,7 +4557,7 @@ function go(i){cur=Math.max(0,Math.min(SL.length-1,i));if(SL[cur].tr!==st.track)
   const k=SL[cur].k, grp=SL.map((x,j)=>[x,j]).filter(([x])=>x.k===k);
   $("#dots").innerHTML=grp.map(([x,j])=>`<i class="${j===cur?"on":""}" data-i="${j}" title="${j+1}. ${esc(x.t)}"></i>`).join("");
   {const TR=trackIdx();$("#ctr").textContent=(TR.indexOf(cur)+1)+" / "+TR.length;} markSide(); st.cur=cur; save();
-  try{history.replaceState(null,"","#"+(cur+1))}catch(e){}}
+  }
 function goSec(k){const i=SL.findIndex(x=>x.k===k);if(i>=0)go(i)}
 $("#prev").onclick=()=>step(-1);$("#next").onclick=()=>step(1);$("#home").onclick=()=>go(trackIdx()[0]);
 $$(".trk").forEach(b=>b.onclick=()=>setTrack(b.dataset.trk));
@@ -4582,7 +4595,7 @@ function wsExport(){const L=["AI-LEAD Hub · BUKU KERJA MODUL 1: AI & AI Generat
 /* peristiwa */
 document.addEventListener("click",e=>{
   const sch=e.target.closest(".sch");if(sch){const g=sch.parentElement;const o=g.classList.contains("open");g.classList.toggle("open",!o);if(!o)goSec(g.dataset.k);return}
-  const si=e.target.closest(".si");if(si){go(+si.dataset.i);if(innerWidth<1000)setSide(false);return}
+  const si=e.target.closest(".si");if(si){go(+si.dataset.i);if(NARROW())setSide(false);return}
   const dt=e.target.closest("#dots i");if(dt){go(+dt.dataset.i);return}
   const rs=e.target.closest("[data-rst]");if(rs){rs.dataset.rst.split(",").forEach(p=>{for(let i=0;i<+rs.dataset.n;i++)delete st.pk[p+i]});save();rer(cur);return}
   const gi=e.target.closest("[data-goi]");if(gi){go(+gi.dataset.goi);return}
@@ -4629,8 +4642,8 @@ let lm=-1;setInterval(()=>{tick();const m=myt().getMinutes();if(m!==lm){lm=m;con
 document.addEventListener("click",e=>{const im=e.target.closest(".shot img");if(!im)return;const o=document.createElement("div");o.style.cssText="position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,.88);display:flex;align-items:center;justify-content:center;cursor:zoom-out;padding:2vh";o.innerHTML=`<img src="${im.src}" style="max-width:96vw;max-height:96vh;border-radius:12px;box-shadow:0 20px 60px rgba(0,0,0,.6)">`;o.onclick=()=>o.remove();document.body.appendChild(o)},true);
 if(st.fac)B.classList.add("fac");
 tick(); buildSide(); renderLinks(); fit();
-const h=parseInt((location.hash||"").slice(1),10);
-go(h>0?h-1:(typeof st.cur==="number"?st.cur:0));
+try{if(location.hash)history.replaceState(null,"",location.pathname+location.search)}catch(e){}
+go(0);
 window.__SL=SL;window.__go=go;
 })();
 
