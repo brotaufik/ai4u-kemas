@@ -65,7 +65,10 @@ h1{font:700 42px/1.02 var(--hd);text-transform:uppercase;letter-spacing:.8px;col
 .step>b{display:inline-grid;place-items:center;width:24px;height:24px;background:var(--acc);color:#fff;font-size:12.5px;letter-spacing:0}
 :root[data-theme="light"] .step>b{background:transparent;color:var(--ink);border:2px solid var(--acc)}
 .step .hint{font:600 12.5px/1.2 var(--bd);letter-spacing:0;text-transform:none;color:var(--fnt)}
-.emb-open{display:none;margin-left:auto}
+.emb-open{display:none}
+.stp-act{margin-left:auto;display:flex;gap:8px}
+.btn.rst{color:#fde68a;border-color:rgba(253,230,138,.55)}
+:root[data-theme="light"] .btn.rst{color:var(--ink);border-color:var(--acc)}
 
 /* jenis output */
 .types{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:10px}
@@ -251,7 +254,7 @@ body.embed .solo pre.out{max-height:max(240px,calc(100vh - 340px))}
     </div>
   </header>
 
-  <div class="step"><b>1</b>Pilih jenis output<a class="btn sm emb-open" href="enjin-prompt.html" target="_blank" rel="noopener">Buka penuh ↗</a></div>
+  <div class="step"><b>1</b>Pilih jenis output<span class="stp-act"><button class="btn sm rst" type="button" id="bReset2" title="Kosongkan semua isian jenis output ini">↺ Reset</button><a class="btn sm emb-open" href="enjin-prompt.html" target="_blank" rel="noopener">Buka penuh ↗</a></span></div>
   <nav class="types" id="types" aria-label="Jenis output"></nav>
 
   <div class="fbar" id="fbar"></div>
@@ -271,7 +274,7 @@ body.embed .solo pre.out{max-height:max(240px,calc(100vh - 340px))}
     </section>
 
     <section class="col-out" id="out" aria-label="Prompt yang dijana">
-      <div class="step"><b>3</b>Salin prompt<span class="hint">dikemas kini secara langsung</span></div>
+      <div class="step"><b>3</b>Salin prompt<span class="hint">dikemas kini secara langsung</span><span class="stp-act"><button class="btn sm rst" type="button" id="bReset3">↺ Reset</button></span></div>
       <div class="card">
         <div class="meter">
           <div class="big" id="mBig">0<small>/100</small></div>
@@ -637,7 +640,7 @@ document.addEventListener("click",e=>{
     toast((red?"⚠️ Ada data Merah. ":"✓ ")+(L==="bm"?"Prompt BM disalin":"Prompt English disalin")+(tool?". Tampal dalam "+tool+" (Ctrl+V)":""));
     if(cp.tagName!=="A")e.preventDefault();return}
   if(e.target.closest("#bEx")){example();return}
-  if(e.target.closest("#bReset")){reset();return}
+  if(e.target.closest("#bReset,#bReset2,#bReset3")){reset();return}
   if(e.target.closest("#bTheme")){setTheme(document.documentElement.getAttribute("data-theme")==="dark"?"light":"dark",true);return}
   if(e.target.closest("#bQr")){$("#mQr").classList.add("on");return}
   if(e.target.closest("#bQrX")||e.target===$("#mQr")){$("#mQr").classList.remove("on");return}
