@@ -313,6 +313,7 @@ body.side-off #sideOpen{display:inline-flex}
 .ans.ok,.ans.no{font-size:14px}
 .qr .why{font-size:14px;margin-top:4px}
 :root[data-theme="light"] .ans.ok{background:#dff5ea!important}:root[data-theme="light"] .ans.no{background:#ffe1e4!important}
+#links .ql{padding:7px 12px;justify-content:center;text-align:center}
 </style>
 </head>
 <body>
@@ -4345,12 +4346,12 @@ $("#sideX").onclick=()=>setSide(false);$("#sideOpen").onclick=()=>setSide(true);
 if(innerWidth<1000||st.side===0)B.classList.add("side-off");
 function renderLinks(){
  const U=[["📝","Praujian","GOOGLE FORM",LINKS.pra],["📁","Nota peserta","GOOGLE DRIVE",DRIVE],["🎥","Rakaman taklimat","GOOGLE DRIVE",LINKS.taklimat],["🌐","schtg.com","KOD ypa75g · 11 OKT",LINKS.host],["💻","Muat turun XAMPP","APACHEFRIENDS",LINKS.xampp],["📍","Lokasi hotel","GOOGLE MAPS",LINKS.map]];
- const Bl=[["🎥","Meet","ISNIN 19 OKT · 2 PTG","https://meet.google.com/ymt-ycar-joa"],["📝","PRE TEST","IMBAS QR · 20 SOALAN","","Pre test"],["✅","POST TEST","IMBAS QR · 25 SOALAN","","Post test & maklum balas"],["📁","Folder bahan","GOOGLE DRIVE",st.links.folder],["📘","NotebookLM","GOOGLE","https://notebooklm.google.com"],["📊","Gamma AI","GAMMA.APP","https://gamma.app"],["✍️","ChatGPT","OPENAI","https://chatgpt.com"]];
- $("#links").innerHTML=(st.track==="B"?Bl:U).map(r=>r[3]?`<a class="ql" href="${r[3]}" target="_blank" rel="noopener"><span class="qi">${r[0]}</span><span><b>${r[1]}</b><small>${r[2]}</small></span></a>`:r[4]?`<a class="ql" href="#" data-goslide="${r[4]}" title="Buka slaid ${r[1]}"><span class="qi">${r[0]}</span><span><b>${r[1]}</b><small>${r[2]}</small></span></a>`:`<span class="ql" style="opacity:.55" title="Tetapkan pautan dalam slaid Tetapan fasilitator"><span class="qi">${r[0]}</span><span><b>${r[1]}</b><small>AKAN DIKONGSI</small></span></span>`).join("");
+ const Bl=[["🎥","Meet","19 OKT · 2 PTG","https://meet.google.com/ymt-ycar-joa"],["📝","PRE TEST","QR · 20 SOALAN","","Pre test"],["✅","POST TEST","QR · 25 SOALAN","","Post test & maklum balas"],["📁","Folder bahan","GOOGLE DRIVE",st.links.folder],["📘","NotebookLM","GOOGLE","https://notebooklm.google.com"],["📊","Gamma AI","GAMMA.APP","https://gamma.app"],["✍️","ChatGPT","OPENAI","https://chatgpt.com"]];
+ $("#links").innerHTML=(st.track==="B"?Bl:U).map(r=>r[3]?`<a class="ql" href="${r[3]}" target="_blank" rel="noopener"><span><b>${r[1]}</b><small>${r[2]}</small></span></a>`:r[4]?`<a class="ql" href="#" data-goslide="${r[4]}" title="Buka slaid ${r[1]}"><span><b>${r[1]}</b><small>${r[2]}</small></span></a>`:`<span class="ql" style="opacity:.55" title="Tetapkan pautan dalam slaid Tetapan fasilitator"><span><b>${r[1]}</b><small>AKAN DIKONGSI</small></span></span>`).join("");
  $$("#links [data-goslide]").forEach(a=>a.onclick=e=>{e.preventDefault();const i=SL.findIndex(x=>x.tr==="B"&&x.t===a.dataset.goslide);if(i>=0)go(i)});
  $("#trkName").textContent="PERAK";
 }
-const __unused=[].map(r=>`<a class="ql" href="${r[3]}" target="_blank" rel="noopener"><span class="qi">${r[0]}</span><span><b>${r[1]}</b><small>${r[2]}</small></span></a>`).join("");
+const __unused=[].map(r=>`<a class="ql" href="${r[3]}" target="_blank" rel="noopener"><span><b>${r[1]}</b><small>${r[2]}</small></span></a>`).join("");
 
 /* navigasi */
 st.track="B";
