@@ -503,6 +503,12 @@ button.modgo:focus-visible{outline:3px solid #FFD23F;outline-offset:2px}
 /* patch31: prompt lebih besar; fitCode() kecilkan hanya jika melimpah */
 #slides .code pre{font-size:20px;line-height:1.5}
 #slides .code.sm pre{font-size:19px;line-height:1.45}
+
+#slides .stbtn{transition:transform .15s,box-shadow .15s}
+#slides .stbtn:hover{transform:translateY(-2px)}
+#slides .stbtn.on{box-shadow:0 0 0 3px #FFD23F,0 8px 20px var(--sh);transform:scale(1.03)}
+:root[data-theme="dark"] #slides .stbtn b{filter:brightness(1.35)}
+:root[data-theme="light"] #slides .stbtn.on{box-shadow:0 0 0 3px #d99a00,0 8px 20px var(--sh)}
 </style>
 </head>
 <body>
@@ -1541,6 +1547,68 @@ pcard("KC","M5 · Audio Overview dalam BM",3,()=>`
       <div class="bub ya t16"><b>Idea KEMAS:</b> jana The Brief daripada pekeliling baharu, kongsikan kepada staf sebagai taklimat audio 2 minit.</div>
       ${facNote("Demo The Brief sahaja (±1 minit menjana). Deep Dive mengambil masa lebih lama.")}</div>
   </div>`);
+/* ===== M5 STUDIO NOTEBOOKLM ===== */
+const STUDIO=[
+ ["🎧","Audio Overview","#2563eb","Podcast dua hos daripada sumber anda",
+  "Perbualan audio dua hos yang membincangkan isi dokumen yang dimuat naik. Boleh dalam Bahasa Melayu.",
+  "Taklimat audio 2 minit pekeliling baharu untuk staf TABIKA yang tiada masa membaca; dengar semasa memandu.",
+  ["Studio › Audio Overview › Customize (ikon pensel).","Pilih bahasa output Bahasa Melayu dan format The Brief.","Tulis fokus: 'tindakan yang perlu dibuat Pendidik Masyarakat'.","Generate, dengar 1 minit pertama, semak angka."],
+  "Pilihan Longer dan mod Interactive hanya dalam bahasa Inggeris. Audio ialah tafsiran AI; dokumen asal tetap rujukan rasmi."],
+ ["🎬","Video Overview","#16a34a","Video naratif dengan slaid visual",
+  "Video pendek bersuara dengan slaid yang dijana daripada sumber, sesuai untuk tontonan di telefon.",
+  "Hebahan dalaman program baharu kepada 40 staf daerah tanpa mengadakan taklimat bersemuka.",
+  ["Studio › Video Overview › Customize.","Pilih gaya visual dan bahasa; tulis fokus 3 ayat.","Generate (ambil masa beberapa minit).","Tonton penuh dahulu sebelum kongsi; semak teks pada slaid."],
+  "Teks dalam video kadangkala tersilap eja. Jangan guna logo rasmi atau wajah sebenar dalam video janaan."],
+ ["📑","Reports","#db2777","Dokumen taklimat, FAQ, garis masa",
+  "Laporan berstruktur daripada sumber: Briefing Doc, Study Guide, FAQ, garis masa atau format tersuai yang anda terangkan.",
+  "Briefing Doc 1 muka untuk Pengarah sebelum mesyuarat, dijana daripada 3 pekeliling berkaitan.",
+  ["Studio › Reports › pilih format atau taip format sendiri.","Nyatakan audiens: 'untuk Pengarah, maksimum 1 muka'.","Buka laporan, klik nombor rujukan untuk semak petikan asal.","Salin ke Docs, edit, kemudian guna."],
+  "Laporan hanya sebaik sumber. Dokumen lama menghasilkan laporan lama. Setiap angka semak dengan rujukan."],
+ ["❓","Quiz","#0891b2","Soalan kuiz daripada dokumen",
+  "Set soalan aneka pilihan dengan jawapan dan penerangan, dijana daripada sumber.",
+  "Kuiz 10 soalan selepas taklimat pekeliling, untuk pastikan staf faham tindakan baharu.",
+  ["Studio › Quiz › tetapkan bilangan soalan dan tahap.","Tulis fokus: 'tarikh kuat kuasa dan tanggungjawab'.","Jawab sendiri dahulu; buang soalan yang mengelirukan.","Salin ke Google Forms (butang ✦ Help me create) untuk diedar."],
+  "Soalan mengikut isi dokumen, bukan amalan sebenar di pejabat. Semak setiap jawapan sebelum jadikan ujian rasmi."],
+ ["📋","Data Table","#2563eb","Ekstrak data ke jadual",
+  "Menarik maklumat berstruktur daripada sumber ke dalam jadual: tarikh, tindakan, pegawai, syarat.",
+  "Senarai semua tindakan dan tarikh akhir daripada 4 minit mesyuarat dalam satu jadual.",
+  ["Studio › Data Table.","Nyatakan lajur: 'Tindakan | Pegawai | Tarikh akhir | Sumber'.","Semak baris yang kosong: maklumat mungkin tiada dalam sumber.","Eksport ke Google Sheets untuk susulan."],
+  "Minit mesyuarat ialah data 🟡 Kuning: buang nama individu dahulu, atau guna akaun @kemas.gov.my."],
+ ["🖼️","Slide Deck","#db2777","Deck slaid terus daripada sumber",
+  "Deck pembentangan yang dijana terus daripada dokumen dalam notebook, dengan rujukan sumber.",
+  "Deck taklimat 8 slaid daripada garis panduan program, untuk mesyuarat penyelia.",
+  ["Studio › Slide Deck › nyatakan audiens dan bilangan slaid.","Semak setiap slaid dengan rujukan sumber.","Eksport, kemudian cantikkan dalam Gamma atau Slides jika perlu."],
+  "Beza dengan Gamma: NotebookLM menjana daripada sumber yang disahkan; Gamma menjana daripada teks yang anda tampal. Untuk fakta, mulakan di sini."],
+ ["🧠","Mind Map","#7c3aed","Peta minda interaktif dokumen",
+  "Peta minda yang menyusun tema dan subtema sumber; klik mana-mana nod untuk bertanya tentang bahagian itu.",
+  "Memahami struktur garis panduan 60 muka dalam 5 minit sebelum membacanya.",
+  ["Studio › Mind Map.","Kembangkan nod satu demi satu; klik nod untuk soalan automatik.","Muat turun sebagai imej untuk nota sendiri."],
+  "Peta minda menunjukkan apa yang ada dalam dokumen, bukan apa yang penting untuk anda. Tentukan sendiri keutamaan."],
+ ["🃏","Flashcards","#ea580c","Kad imbas untuk ulang kaji",
+  "Kad soalan dan jawapan untuk menghafal istilah, tarikh dan definisi daripada sumber.",
+  "Ulang kaji istilah dan syarat baharu dalam pekeliling sebelum sesi penerangan kepada ibu bapa.",
+  ["Studio › Flashcards › tetapkan bilangan kad.","Fokus: 'istilah dan definisi sahaja'.","Ulang 3 kali; tandakan kad yang sukar."],
+  "Sesuai untuk hafalan, bukan pemahaman. Untuk 'kenapa', tanya dalam Chat dengan rujukan."],
+ ["📊","Infographic","#ea580c","Infografik satu muka",
+  "Infografik visual yang meringkaskan isi utama sumber dalam satu muka.",
+  "Ringkasan visual program untuk ditampal di papan kenyataan pejabat daerah.",
+  ["Studio › Infographic › pilih gaya dan orientasi.","Nyatakan 3 hingga 5 isi utama yang mesti ada.","Semak setiap angka dan ejaan; jana semula jika salah."],
+  "Jangan guna infografik janaan AI untuk media sosial rasmi tanpa semakan Unit Komunikasi. Tiada logo rasmi janaan AI."]];
+function studioTip(i){const s=STUDIO[i];return `<div class="row" style="gap:12px;align-items:center;margin-bottom:8px"><span style="font-size:34px">${s[0]}</span><div><div class="t22 b" style="color:${s[2]}">${s[1]}</div><div class="t14 muted">${s[3]}</div></div></div>
+  <div class="t16 lh"><b>Apa:</b> ${s[4]}</div>
+  <div class="bub ya t16" style="padding:8px 12px"><b>Contoh KEMAS:</b> ${s[5]}</div>
+  <div class="h4" style="margin-top:4px">Langkah</div>${steps(s[6],"t15")}
+  <div class="bub no t15" style="padding:8px 12px;margin-top:auto"><b>Awas:</b> ${s[7]}</div>`}
+pcard("KC","M5 · Studio: 9 fungsi NotebookLM",3,()=>`
+  ${cardHd("Modul 5 · NotebookLM (Gemini Notebook)","Studio: 9 fungsi, satu set sumber",3,plate("KLIK KOTAK UNTUK TIPS"))}
+  <div class="body row" style="gap:18px;min-height:0">
+    <div class="col" style="flex:1.05;gap:12px;min-width:0;min-height:0">
+      <div class="g3" style="gap:12px;flex:1;grid-auto-rows:1fr;min-height:0">${STUDIO.map((s,i)=>`<button type="button" class="card ps col stbtn${i===0?" on":""}" data-st="${i}" style="gap:6px;align-items:flex-start;justify-content:center;text-align:left;border:2px solid ${s[2]};border-left:10px solid ${s[2]};background:linear-gradient(160deg,${s[2]}44,${s[2]}1a);cursor:pointer;padding:12px 14px"><div class="row" style="gap:10px;align-items:center"><span style="font-size:34px">${s[0]}</span><b class="t19" style="color:${s[2]}">${s[1]}</b></div><div class="t14 lh">${s[3]}</div></button>`).join("")}</div>
+      <div class="well ps t15 lh"><b class="acc">Satu peraturan untuk semua 9:</b> output dijana daripada sumber dalam notebook sahaja. Sumber awam atau rekaan sahaja; dokumen 🟡 Kuning hanya dalam akaun @kemas.gov.my tanpa nama individu.</div>
+    </div>
+    <div class="card p col" id="sttip" style="flex:1;gap:8px;min-width:0;border-top:5px solid ${STUDIO[0][2]}">${studioTip(0)}</div>
+  </div>`);
+addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-st]");if(!b)return;const i=+b.dataset.st;const sl=b.closest(".slide");sl.querySelectorAll(".stbtn").forEach(x=>x.classList.toggle("on",x===b));const t=sl.querySelector("#sttip");if(t){t.innerHTML=studioTip(i);t.style.borderTopColor=STUDIO[i][2]}});
 pcard("KC","Aktiviti 5.1: Sahkan draf dengan notebook",12,()=>`
   ${cardHd("Modul 5 · NotebookLM (Gemini Notebook)","Aktiviti 5.1: Sahkan draf dengan notebook",12)}
   <div class="body row" style="gap:22px">
