@@ -119,7 +119,9 @@ h1{font:700 42px/1.02 var(--hd);text-transform:uppercase;letter-spacing:.8px;col
 .inp{display:block;width:100%;padding:9px 11px;background:var(--inp);border:1px solid var(--ln2);color:var(--ink);font-size:15px;line-height:1.45;outline:none;border-radius:0;resize:vertical}
 .inp::placeholder{color:var(--fnt);opacity:.85}
 .inp:focus{border-color:var(--ttl);box-shadow:0 0 0 3px rgba(255,210,63,.18)}
-.chips{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.chips{display:grid;grid-template-columns:repeat(var(--cols,3),minmax(0,1fr));grid-auto-rows:1fr;gap:6px;margin-top:8px}
+.chips .chip{display:flex;align-items:center;justify-content:center;text-align:center;min-height:38px;padding:6px 8px;font-size:12.5px;line-height:1.25}
+
 .chips+.inp{margin-top:8px}
 .chip{border:1px solid var(--ln2);background:transparent;padding:5px 9px;font-size:12.5px;line-height:1.3;cursor:pointer;color:var(--mut);text-align:left}
 .chip:hover{border-color:var(--ttl);color:var(--ink)}
@@ -494,6 +496,55 @@ sumber:{ic:"📚",n:"Sumber",d:"Soal jawab dokumen (NotebookLM)",nv:"",tools:[TO
     B.push(L1("X","PERATURAN SUMBER","SOURCE RULES",p.map(t=>({c:"X",k:"pro",t})),bm));
     return B}}
 };
+
+/* ===== tambahan pilihan pantas (grid simetri) ===== */
+(function(){const C=c;const A={
+ _AUD:[C("penduduk kampung dan Ketua Kampung","villagers and the village head","Penduduk & Ketua Kampung"),C("pelajar lepasan sekolah dan belia","school leavers and youth","Lepasan sekolah & belia"),C("agensi rakan dan pihak berkuasa tempatan","partner agencies and local authorities","Agensi rakan")],
+ _NADA:[C("santai tetapi profesional","relaxed but professional","Santai profesional")],
+ _LATAR:[C("bengkel kelas jahitan KEMAS","a KEMAS sewing class workshop","Bengkel jahitan"),C("pejabat KEMAS daerah","a district KEMAS office","Pejabat KEMAS")],
+ _CAHAYA:[C("cahaya semula jadi dari tingkap","natural window light","Cahaya tingkap"),C("suasana malam dengan lampu hangat","a night scene with warm lights","Malam, lampu hangat")],
+ teks:{P:[C("setiausaha mesyuarat yang teliti","a meticulous meeting secretary","Setiausaha mesyuarat"),C("penulis ucapan rasmi","an official speechwriter","Penulis ucapan"),C("perancang program komuniti","a community programme planner","Perancang program")],
+  T:[C("Sediakan kertas cadangan ringkas","Prepare a short proposal paper","Kertas cadangan"),C("Tulis e-mel makluman kepada rakan sekerja","Write an information e-mail to colleagues","E-mel makluman")],
+  K:[C("Kursus Jangka Pendek (Jahitan) untuk pelajar lepasan sekolah, suri rumah dan sesiapa sahaja yang berminat","a short sewing course for school leavers, homemakers and anyone interested","Kursus jangka pendek"),C("Hari Keluarga Komuniti KEMAS di dewan serbaguna kampung","a KEMAS Community Family Day at the village multipurpose hall","Hari Keluarga Komuniti"),C("Program gotong-royong perdana bersama penduduk kampung","a major community clean-up (gotong-royong) with villagers","Gotong-royong perdana")],
+  F:[C("kertas cadangan dengan latar belakang, objektif, kos dan cadangan","a proposal paper with background, objectives, cost and recommendation","Kertas cadangan"),C("teks ucapan dengan pembukaan, isi dan penutup","a speech with an opening, body and closing","Teks ucapan")],
+  pjg:[C("satu perenggan sahaja","a single paragraph only","1 perenggan")],
+  kek:[C("Gunakan ejaan dan istilah DBP","Use DBP spelling and terminology","Ejaan DBP")]},
+ imej:{P:[C("artis digital","a digital artist","Artis digital"),C("pereka infografik","an infographic designer","Pereka infografik")],
+  T:[C("peserta kelas memasak di dapur komuniti","participants in a cooking class at a community kitchen","Kelas memasak"),C("keluarga beriadah pada Hari Keluarga Komuniti","families enjoying a Community Family Day","Hari Keluarga")],
+  K:[C("banner program untuk acara komuniti","a programme banner for a community event","Banner program")],
+  komp:[C("subjek simetri di tengah bingkai","centred, symmetrical framing","Simetri tengah")],
+  warna:[C("biru gelap dan emas","navy and gold","Biru gelap & emas"),C("merah dan putih","red and white","Merah & putih")],
+  nisbah:[C("2:3 (cetakan poster)","2:3 (print poster)","2:3")],
+  elk:[C("terlalu banyak elemen dalam satu imej","too many elements in one image","Terlalu sesak")]},
+ video:{P:[C("pembuat kandungan TikTok","a TikTok content creator","Pembuat TikTok"),C("penerbit video korporat","a corporate video producer","Video korporat")],
+  T:[C("peserta kelas memasak menghidangkan hasil masakan","cooking class participants serving their dishes","Kelas memasak"),C("keluarga beriadah di padang pada Hari Keluarga","families playing on the field at Family Day","Hari Keluarga")],
+  K:[C("video ucapan tahniah graduasi TABIKA","a TABIKA graduation congratulations video","Graduasi TABIKA"),C("video hebahan kursus jangka pendek","a short course announcement video","Hebahan kursus")],
+  F:[C("gaya vlog santai","casual vlog style","Vlog santai"),C("gerak perlahan yang dramatik","dramatic slow motion","Gerak perlahan")],
+  kamera:[C("syot pusing mengelilingi subjek","orbit shot around the subject","Pusing subjek")],
+  audio:[C("bunyi alam semula jadi","natural ambient sounds","Bunyi alam"),C("muzik tradisional Melayu yang lembut","soft traditional Malay music","Muzik tradisional")],
+  elk:[C("pakaian yang tidak sopan","immodest clothing","Pakaian tidak sopan"),C("warna yang terlalu terang","oversaturated colours","Warna melampau")]},
+ slaid:{P:[C("pereka grafik persembahan","a presentation graphic designer","Pereka persembahan"),C("pegawai perhubungan awam","a public relations officer","Pegawai PR")],
+  T:[C("Kertas cadangan Kursus Jangka Pendek (Jahitan)","a proposal for a short sewing course","Cadangan kursus jahitan"),C("Laporan Hari Keluarga Komuniti","a Community Family Day report","Laporan Hari Keluarga")],
+  K:[C("Mesyuarat bersama agensi rakan","a meeting with partner agencies","Agensi rakan"),C("Pembentangan kepada Pengarah Negeri","a presentation to the State Director","Pengarah Negeri")],
+  F:[C("5 slaid: ringkasan eksekutif","5 slides: executive summary","5 slaid · ringkasan"),C("12 slaid: laporan penuh","12 slides: full report","12 slaid · laporan"),C("1 slaid: infografik","1 slide: infographic","1 slaid · infografik")],
+  gaya:[C("gelap dan moden","dark and modern","Gelap moden"),C("pastel lembut","soft pastels","Pastel"),C("tradisional bermotif batik","traditional with batik motifs","Motif batik")],
+  elemen:[C("garis masa","timeline","Garis masa")],
+  kek:[C("Gunakan ejaan dan istilah DBP","Use DBP spelling and terminology","Ejaan DBP"),C("Saiz fon besar supaya mudah dibaca dari jauh","Use large fonts readable from a distance","Fon besar")]},
+ audio:{P:[C("hos podcast komuniti","a community podcast host","Hos podcast"),C("pakar pembangunan komuniti","a community development expert","Pakar komuniti"),C("jurulatih kemahiran","a skills trainer","Jurulatih kemahiran")],
+  T:[C("Terangkan kesan kepada ibu bapa","Explain the impact on parents","Kesan kepada ibu bapa"),C("Bincangkan cabaran pelaksanaan","Discuss implementation challenges","Cabaran pelaksanaan"),C("Ringkaskan dalam bahasa mudah","Summarise in simple language","Bahasa mudah")],
+  K:[C("Laporan Tahunan KEMAS","the KEMAS Annual Report","Laporan Tahunan"),C("modul kursus jangka pendek","a short course module","Modul kursus"),C("minit mesyuarat bulanan","monthly meeting minutes","Minit mesyuarat")],
+  ctoh:[C("kelas kemahiran untuk suri rumah","skills classes for homemakers","Suri rumah")]},
+ sumber:{P:[C("pegawai audit dalaman","an internal audit officer","Juruaudit dalaman"),C("penyelia program komuniti","a community programme supervisor","Penyelia program"),C("editor dokumen rasmi","an official document editor","Editor dokumen")],
+  T:[C("Senaraikan tarikh dan tindakan penting","List key dates and actions","Tarikh & tindakan"),C("Kenal pasti percanggahan antara dokumen","Identify contradictions between documents","Cari percanggahan")],
+  K:[C("Laporan Tahunan KEMAS","the KEMAS Annual Report","Laporan Tahunan"),C("modul kursus jangka pendek","a short course module","Modul kursus"),C("minit mesyuarat bulanan","monthly meeting minutes","Minit mesyuarat")],
+  F:[C("soalan lazim (FAQ)","an FAQ list","Soalan lazim"),C("garis masa peristiwa","a timeline of events","Garis masa"),C("peta minda dalam bentuk senarai","a mind map in list form","Peta minda")],
+  kek:[C("Nyatakan nombor muka surat sumber","State the source page numbers","Nombor muka surat"),C("Jangan reka fakta, nama atau angka","Do not invent facts, names or figures"),C("Tandakan maklumat yang tiada sebagai [ISI]","Mark any missing information as [FILL IN]")]}};
+ const key=x=>(x.l||x.b).toLowerCase();
+ const push=(arr,list)=>{if(!arr)return;for(const it of list)if(!arr.some(a=>key(a)===key(it)||a.b===it.b))arr.push(it)};
+ push(AUD,A._AUD);push(NADA,A._NADA);push(LATAR,A._LATAR);push(CAHAYA,A._CAHAYA);
+ for(const t of Object.keys(TY)){const add=A[t];if(!add)continue;for(const f of Object.keys(add)){const tgt=TY[t].core[f]||(TY[t].x.find(x=>x.id===f)||{});if(tgt.ch)push(tgt.ch,add[f])}}
+})();
+
 const ORDER=["teks","imej","video","slaid","audio","sumber"];
 
 /* terjemahan butiran contoh (supaya versi English lengkap) */
@@ -569,9 +620,9 @@ const words=s=>s.split(/\s+/).filter(Boolean).length;
 /* ===== paparan ===== */
 function renderTypes(){$("#types").innerHTML=ORDER.map(t=>{const d=TY[t];return `<button type="button" class="tile" data-t="${t}" aria-pressed="${t===S.t}"><span class="ic" aria-hidden="true">${d.ic}</span><span class="nm">${d.n}</span><span class="ds">${d.d}</span></button>`}).join("")}
 function fieldHTML(t,id,f,cc){const multi=!!f.multi,iid=multi?id+"_x":id,v=esc((S.v[t]||{})[iid]||""),ph=esc(multi?(f.ph||"Lain-lain (pilihan)"):(f.ph||""));
-  const chips=(f.ch||[]).map((ch,i)=>`<button type="button" class="chip" data-fid="${id}" data-i="${i}" aria-pressed="false" title="${esc(ch.b)}">${esc(ch.l||ch.b)}</button>`).join("");
+  const nch=(f.ch||[]).length,cols=nch<=3?Math.max(nch,1):(nch%3===0?3:(nch%2===0?2:3));const chips=(f.ch||[]).map((ch,i)=>{const t=ch.l||ch.b;return `<button type="button" class="chip" data-fid="${id}" data-i="${i}" aria-pressed="false" title="${esc(ch.b)}">${esc(t.charAt(0).toUpperCase()+t.slice(1))}</button>`}).join("");
   const inp=f.area&&!multi?`<textarea class="inp" id="f-${iid}" data-f="${iid}" rows="2" placeholder="${ph}">${v}</textarea>`:`<input class="inp" id="f-${iid}" data-f="${iid}" type="text" autocomplete="off" placeholder="${ph}" value="${v}">`;
-  return `<div class="fld" data-c="${cc}" data-k="${id}"><div class="fh">${cc!=="X"?`<span class="bd" data-c="${cc}" aria-hidden="true">${cc}</span>`:""}<label class="lb" for="f-${iid}">${esc(f.lb)}</label>${f.q?`<span class="q">${esc(f.q)}</span>`:""}${f.w?`<span class="pts">+${f.w}</span>`:""}</div>${multi?`<div class="chips">${chips}</div>${inp}`:inp+(chips?`<div class="chips">${chips}</div>`:"")}</div>`}
+  return `<div class="fld" data-c="${cc}" data-k="${id}"><div class="fh">${cc!=="X"?`<span class="bd" data-c="${cc}" aria-hidden="true">${cc}</span>`:""}<label class="lb" for="f-${iid}">${esc(f.lb)}</label>${f.q?`<span class="q">${esc(f.q)}</span>`:""}${f.w?`<span class="pts">+${f.w}</span>`:""}</div>${multi?`<div class="chips" style="--cols:${cols}">${chips}</div>${inp}`:inp+(chips?`<div class="chips" style="--cols:${cols}">${chips}</div>`:"")}</div>`}
 function proHTML(t){const d=TY[t];if(!d.pro)return "";return `<div class="fld" data-c="X" data-k="pro"><div class="fh"><span class="lb">Arahan pro</span><span class="q">${esc(d.pro.q||"Disiplin tambahan untuk jawapan AI")}</span><span class="pts">+${d.pro.max}</span></div><div class="pro">${d.pro.ch.map((ch,i)=>`<label class="sw"><input type="checkbox" data-pro="${i}" ${(S.p[t]||[]).includes(i)?"checked":""}><span>${esc(ch.b)}</span></label>`).join("")}</div></div>`}
 function renderFields(){const t=S.t,d=TY[t];
   $("#core").innerHTML=["P","T","K","F"].map(k=>fieldHTML(t,k,d.core[k],k)).join("");
