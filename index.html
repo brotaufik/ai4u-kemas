@@ -1235,14 +1235,14 @@ const UCF=[["1","Nama use case","Satu ayat: kata kerja + output","Draf laporan b
  ["6","Prompt standard","Prompt PTKF yang disimpan dan diberi versi","Prompt Laporan TABIKA v1.0 dalam Projects"],
  ["7","Semakan manusia","Siapa menyemak dan apa yang disemak","Penyelia semak setiap angka dan nada sebelum hantar"],
  ["8","Metrik kejayaan","Ukuran sebelum dan selepas","2 jam → 40 minit · 0 kesilapan fakta"]];
-pcard("KA","M1 · Use case: kunci AI yang konsisten",4,()=>`
-  ${cardHd("Modul 1 · Etika & Tadbir Urus","Use case: kunci AI yang konsisten",4,plate("SATU TUGASAN · SATU CARA · SATU STANDARD"))}
+pcard("KA","M1 · Use case: AI kekal bila ada sebab",4,()=>`
+  ${cardHd("Modul 1 · Etika & Tadbir Urus","Use case: AI kekal bila ada sebab",4,plate("SEBAB · KEPERLUAN · MANFAAT"))}
   <div class="body row" style="gap:18px">
     <div class="col" style="flex:0 0 380px;gap:12px">
-      <div class="bub no lh" style="font-size:16.5px"><b>Tanpa use case</b>, setiap pegawai guna AI dengan cara sendiri: prompt berbeza, data tidak terkawal, hasil tidak seragam, tiada siapa menyemak, dan manfaat tidak dapat diukur.</div>
-      <div class="bub ya lh" style="font-size:16.5px"><b>Dengan use case</b>, satu tugasan dibuat dengan satu cara yang dipersetujui: prompt standard, warna data ditetapkan, penyemak dinamakan dan masa dijimatkan boleh dibuktikan.</div>
-      <div class="well ps t15 lh"><b class="acc">Ujian konsisten:</b> jika dua pegawai menjalankan use case yang sama, hasilnya patut serupa dari segi format, nada dan ketepatan. Jika tidak, prompt standard belum cukup jelas.</div>
-      ${facNote("Kaitkan dengan Aktiviti 0.1 dan Ikrar 30 hari: tugasan berulang setiap peserta ialah calon use case pertama. Minta peserta isi medan 1, 2 dan 8 sekarang; selebihnya diisi semasa Modul 3.")}
+      <div class="bub no lh" style="font-size:16px"><b>Guna santai:</b> cari restoran sedap, tempat menarik, soalan rawak. Seronok sekejap, tetapi tiada sebab untuk kembali esok. Penggunaan <b>tidak sustain</b>.</div>
+      <div class="bub ya lh" style="font-size:16px"><b>Guna bersebab:</b> ada tugasan, ada keperluan, ada manfaat yang dirasai setiap minggu. Bila AI menyelesaikan masalah kerja sebenar, penggunaan <b>berterusan</b>.</div>
+      <div class="well ps col" style="gap:6px"><b class="acc t15">Ujian 3 soalan sebelum guna AI</b>${[["❓","Sebab","Masalah apa yang saya mahu selesaikan?"],["🔁","Keperluan","Adakah tugasan ini berulang dalam kerja saya?"],["📈","Manfaat","Apa yang boleh diukur: masa, kualiti atau ketepatan?"]].map(x=>`<div class="row t15" style="gap:8px;align-items:baseline"><span>${x[0]}</span><span><b>${x[1]}:</b> ${x[2]}</span></div>`).join("")}</div>
+      ${facNote("Tanya peserta: siapa guna AI minggu lepas, dan untuk apa? Asingkan jawapan santai dan jawapan kerja. Tugasan berulang setiap peserta ialah calon use case pertama. Minta peserta isi medan 1, 2 dan 8 sekarang; selebihnya diisi semasa Modul 3.")}
     </div>
     <div class="card ps col" style="flex:1;gap:0;min-width:0">
       <div class="row" style="justify-content:space-between;align-items:center;margin-bottom:6px"><div class="h4">Kad Use Case · 8 medan</div><span class="tagc acc">CONTOH KEMAS</span></div>
