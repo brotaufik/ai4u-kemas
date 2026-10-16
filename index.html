@@ -1464,22 +1464,23 @@ pcard("KG","Aktiviti 4.1: Gmail & Calendar",7,()=>`
   ${cardHd(KGH,"Aktiviti 4.1: Jemputan dan acara dalam 7 minit",7,plate("HANDS-ON · @KEMAS.GOV.MY"))}
   <div class="body row" style="gap:18px">
     <div class="col" style="flex:0 0 360px;gap:12px">${PROG}
-      ${box("Tandakan apabila siap",[pchk("ws1","E-mel jemputan didraf dan dihantar kepada diri sendiri"),pchk("ws2","Acara dicipta dalam Calendar dengan peringatan"),pchk("ws3","Ringkasan 3 poin untuk WhatsApp siap")].join(""))}
-      <div class="bub no t15"><b>Latihan:</b> hantar kepada diri sendiri sahaja.</div></div>
+      ${box("Tandakan apabila siap",[pchk("ws1","E-mel jemputan didraf dan dihantar kepada diri sendiri"),pchk("ws2","Draf disemak dalam Gmail sebelum Send (bukan Gemini yang hantar)"),pchk("ws3","Acara dicipta dalam Calendar dengan notifikasi"),pchk("ws4","Ringkasan 3 poin untuk WhatsApp siap")].join(""))}</div>
     <div class="col" style="flex:1;gap:8px;min-width:0">
       <div class="h4">Langkah 1 · Gmail › Tulis › ✦ Help me write</div>
       ${code("Tulis e-mel jemputan rasmi kepada Ketua Kampung Contoh untuk\nProgram Hari Keluarga Komuniti KEMAS pada Sabtu, 14 November\n2026, 8.00 pagi hingga 12.30 tengah hari di Dewan Serbaguna\nKampung Contoh. Mohon bantuan menghebahkan kepada penduduk.\nNada mesra tetapi rasmi, maksimum 150 patah perkataan.",true)}
       <div class="h4">Langkah 2 · Calendar › panel ✦ Gemini</div>
-      ${code("Cipta acara 'Program Hari Keluarga Komuniti KEMAS' pada Sabtu,\n14 November 2026, 8.00 pagi hingga 12.30 tengah hari, lokasi\nDewan Serbaguna Kampung Contoh. Tetapkan peringatan 1 hari sebelum.",true)}
+      ${code("Cipta acara 'Program Hari Keluarga Komuniti KEMAS' pada Sabtu,\n14 November 2026, 8.00 pagi hingga 12.30 tengah hari, lokasi\nDewan Serbaguna Kampung Contoh. Tetapkan notifikasi 1 hari sebelum.",true)}
       <div class="h4">Langkah 3 · Buka e-mel tadi › panel ✦ Gemini</div>
       ${code("Ringkaskan e-mel ini kepada 3 poin pendek untuk hebahan\ndalam kumpulan WhatsApp penduduk.",true)}
+      <div class="bub no t15"><b>Gemini tidak menghantar e-mel.</b> Ia cipta draf dalam Gmail; anda klik kad Gmail atau buka Drafts, semak, kemudian <b>Send</b>. Latihan: hantar kepada diri sendiri sahaja.</div>
+      ${facNote("Contoh hidup A2 Copilot: AI draf, pegawai hantar. Laluan paling mudah untuk peserta baharu ialah Help me write di dalam Gmail sendiri (satu skrin). Di gemini.google.com, kad Gmail yang muncul ialah draf, bukan e-mel yang dihantar. Calendar berbeza: Gemini cipta acara terus selepas disahkan; guna perkataan notifikasi, bukan peringatan, supaya ia tidak dijadikan Google Task.")}
     </div>
   </div>`,{bk:1});
 pcard("KG","Aktiviti 4.2: Forms & Drive",8,()=>`
   ${cardHd(KGH,"Aktiviti 4.2: Borang dan folder program",8,plate("HANDS-ON · @KEMAS.GOV.MY"))}
   <div class="body row" style="gap:18px">
     <div class="col" style="flex:0 0 360px;gap:12px">${PROG}
-      ${box("Tandakan apabila siap",[pchk("ws4","Borang pendaftaran dijana dan disemak"),pchk("ws5","Folder Drive dicipta, borang dipindahkan"),pchk("ws6","Folder dikongsi secara Terhad, bukan 'Sesiapa yang ada pautan'"),pchk("ws7","Bonus: respons borang diringkaskan dalam Sheets")].join(""))}</div>
+      ${box("Tandakan apabila siap",[pchk("wf1","Borang pendaftaran dijana dan disemak"),pchk("wf2","Folder Drive dicipta, borang dipindahkan"),pchk("wf3","Folder dikongsi secara Terhad, bukan 'Sesiapa yang ada pautan'"),pchk("wf4","Bonus: respons borang diringkaskan dalam Sheets")].join(""))}</div>
     <div class="col" style="flex:1;gap:8px;min-width:0">
       <div class="h4">Langkah 1 · forms.google.com › Borang kosong › ✦ Help me create</div>
       ${code("Cipta borang pendaftaran peserta Program Hari Keluarga Komuniti\nKEMAS. Medan: nama ketua keluarga, kampung, bilangan ahli\nkeluarga, kategori umur anak (6 tahun ke bawah, 7 hingga 12,\n13 ke atas), aktiviti yang diminati, keperluan makanan khas.\nJangan minta nombor kad pengenalan atau alamat penuh.",true)}
