@@ -494,6 +494,15 @@ button.modgo:focus-visible{outline:3px solid #FFD23F;outline-offset:2px}
 #slides .ses.dk{position:relative;display:flex;align-items:center;justify-content:flex-start;padding:12px 6px 4px;height:var(--dkrow);overflow:visible}
 #slides .ses.dk .nm{font-size:11.5px;line-height:1.2;display:block;-webkit-line-clamp:unset;overflow:visible;padding-right:0;overflow-wrap:normal;word-break:normal}
 #slides .ses.dk .fc{position:absolute;top:3px;right:5px;font-size:10px;line-height:1}
+
+/* patch31: kotak semak jelas */
+#slides .chk .bx{width:26px;height:26px;border:2.5px solid #FFD23F;box-shadow:0 0 0 1px rgba(255,210,63,.3),0 0 10px rgba(255,210,63,.35);border-radius:7px}
+#slides .chk input:checked+.bx{border-color:#FFD23F;background:linear-gradient(180deg,#22c55e,#15803d);box-shadow:0 0 10px rgba(34,197,94,.6)}
+:root[data-theme="light"] #slides .chk .bx{border-color:#d99a00;background:#fff;box-shadow:0 0 0 1px rgba(217,154,0,.35),0 0 8px rgba(217,154,0,.3)}
+:root[data-theme="light"] #slides .chk input:checked+.bx{border-color:#15803d}
+/* patch31: prompt lebih besar; fitCode() kecilkan hanya jika melimpah */
+#slides .code pre{font-size:20px;line-height:1.5}
+#slides .code.sm pre{font-size:19px;line-height:1.45}
 </style>
 </head>
 <body>
@@ -4812,8 +4821,12 @@ function step(d){const TR=trackIdx();const p=TR.indexOf(cur);const n=TR[Math.max
 function go(i){cur=Math.max(0,Math.min(SL.length-1,i));try{document.querySelectorAll("video.vid").forEach(v=>{if(!v.paused)v.pause()})}catch(e){}if(SL[cur].tr!==st.track){st.track=SL[cur].tr;buildSide();renderLinks()}st["cur"+st.track]=cur;if(TM.i!==cur&&TM.h){clearInterval(TM.h);TM.run=false}$$(".slide").forEach(s=>s.classList.toggle("on",+s.dataset.i===cur));
   const k=SL[cur].k, grp=SL.map((x,j)=>[x,j]).filter(([x])=>x.k===k);
   $("#dots").innerHTML=grp.map(([x,j])=>`<i class="${j===cur?"on":""}" data-i="${j}" title="${j+1}. ${esc(x.t)}"></i>`).join("");
-  {const TR=trackIdx();$("#ctr").textContent=(TR.indexOf(cur)+1)+" / "+TR.length;} markSide(); st.cur=cur; save();
+  {const TR=trackIdx();$("#ctr").textContent=(TR.indexOf(cur)+1)+" / "+TR.length;} markSide(); st.cur=cur; save(); fitCode();
   }
+function fitCode(){const s=document.querySelector(".slide.on");if(!s)return;const pres=[...s.querySelectorAll(".code pre")];if(!pres.length)return;pres.forEach(p=>p.style.fontSize="");
+  const ov=()=>{if(s.scrollHeight>s.clientHeight+1)return true;for(const e of s.querySelectorAll(".body,.card,.well"))if(e.scrollHeight>e.clientHeight+1)return true;return false};
+  let f=parseFloat(getComputedStyle(pres[0]).fontSize)||20,n=0;while(ov()&&f>14&&n<8){f-=1;n++;pres.forEach(p=>p.style.fontSize=f+"px")}}
+window.__fitCode=fitCode;
 function goSec(k){const i=SL.findIndex(x=>x.k===k);if(i>=0)go(i)}
 $("#prev").onclick=()=>step(-1);$("#next").onclick=()=>step(1);$("#home").onclick=()=>go(trackIdx()[0]);
 $$(".trk").forEach(b=>b.onclick=()=>setTrack(b.dataset.trk));
