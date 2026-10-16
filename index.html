@@ -1047,6 +1047,31 @@ pcard("K1","Aktiviti 0.1: Tugas berulang saya",4,()=>`
       ${hantar("Borang Jawapan Kursus › Aktiviti 0.1")}</div>
   </div>`);
 const DIAG=["Saya pernah menggunakan AI untuk mendraf atau meringkas kandungan kerja.","Saya tahu data jabatan yang tidak boleh dimasukkan ke dalam alat AI awam.","Saya pernah menyemak fakta dalam jawapan AI sebelum menggunakannya.","Unit saya mempunyai garis panduan bertulis tentang penggunaan AI.","Saya boleh menerangkan perbezaan AI generatif dengan carian Google kepada rakan sekerja."];
+pcard("K1","Use case: kunci AI yang konsisten",4,()=>`
+  ${cardHd("Mula di sini","Use case: kunci AI yang konsisten",4,plate("TUGAS BERULANG → AMALAN STANDARD"))}
+  <div class="body col" style="gap:14px">
+    <div class="bub ya t18"><b>Use case</b> ialah satu tugasan kerja berulang yang <b>ditetapkan cara AI membantu</b>: input apa, prompt mana, output bagaimana, siapa menyemak dan bagaimana kejayaan diukur. Tanpa use case, AI digunakan ikut mood. Dengan use case, AI digunakan ikut <b>standard</b>.</div>
+    <div class="row" style="gap:18px;flex:1;min-height:0">
+      <div class="col" style="flex:1;gap:8px"><div class="h4">Kenapa wajib ada use case</div>
+        ${keT(["Tanpa use case","Dengan use case"],[
+          ["Prompt berbeza setiap kali, hasil turun naik","Prompt standard disimpan, kualiti seragam"],
+          ["Tiada siapa tahu data apa dimasukkan","Tahap data ditetapkan awal: 🟢 atau 🟡 sahaja"],
+          ["Penjimatan masa tidak dapat dibuktikan","Metrik sebelum dan selepas direkod"],
+          ["Ilmu hilang apabila pegawai bertukar","Boleh dikongsi dan diwarisi oleh unit"]],"font-size:16px")}</div>
+      <div class="col" style="flex:1.25;gap:8px"><div class="h4">Kanvas use case · contoh KEMAS</div>
+        ${keT(["Elemen","Laporan bulanan aktiviti TABIKA"],[
+          ["1 · Nama &amp; pemilik","Laporan bulanan aktiviti TABIKA · PPPAK"],
+          ["2 · Pencetus","Setiap hujung bulan"],
+          ["3 · Input &amp; tahap data","Catatan aktiviti, kehadiran agregat · 🟡 tanpa nama murid"],
+          ["4 · Alat AI","ChatGPT Projects (draf) + NotebookLM (semak)"],
+          ["5 · Prompt standard","PTKF yang disimpan dalam Project “Laporan TABIKA”"],
+          ["6 · Output","Laporan 1 muka ikut templat daerah"],
+          ["7 · Semakan manusia","Penyelia semak angka dan fakta sebelum dihantar"],
+          ["8 · Metrik","Masa penyediaan dan bilangan pembetulan (sebelum vs selepas)"]],"font-size:15px")}</div>
+    </div>
+    <div class="chev">${[["1 · Pilih","Satu tugas berulang, data 🟢/🟡"],["2 · Uji","Cuba 3 kali, baiki prompt"],["3 · Standardkan","Simpan prompt dan templat"],["4 · Kongsi","Pustaka use case unit"],["5 · Ukur","30 hari: masa, kualiti, isu"]].map((x,i)=>`<div style="background:linear-gradient(180deg,${["#8b5cf6","#3b82f6","#0ea5e9","#14b8a6","#22c55e"][i]},${["#6d28d9","#2563eb","#0284c7","#0d9488","#16a34a"][i]});min-height:80px"><b>${x[0]}</b><span>${x[1]}</span></div>`).join("")}</div>
+    ${facNote("Kaitkan dengan Aktiviti 0.1: tugas berulang yang peserta pilih itulah use case pertama mereka. Di akhir kursus, use case ini menjadi asas Ikrar 30 hari. Satu use case yang dijalankan dengan konsisten lebih bernilai daripada sepuluh percubaan rawak.")}
+  </div>`);
 pcard("K1","Aktiviti 0.2: Diagnostik kesediaan",3,()=>{const y=DIAG.filter((_,i)=>PK("dg"+i)==="Y").length;return `
   ${cardHd("Mula di sini","Aktiviti 0.2: Diagnostik kesediaan",3,rstBtn("dg",5))}
   <div class="body row" style="gap:22px">
