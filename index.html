@@ -823,7 +823,7 @@ const ansBtn=()=>`<button class="btn sm ${st.showAns?"on":""}" type="button" dat
 
 /* ---------- slaid ---------- */
 const SECS=[]; const SL=[];
-const BRO_K=["K0","K1","KP","KA","KB","KC","KD","KE","KF","K4","L0","L1","L2","L3","L4","L5","L6","L7"];
+const BRO_K=["K0","K1","KP","KA","KB","KG","KC","KD","KE","KF","K4","L0","L1","L2","L3","L4","L5","L6","L7"];
 function sec(k,label,sub,extra){SECS.push(Object.assign({k,label,sub,tr:BRO_K.includes(k)?"B":"U"},extra||{}))}
 function add(k,t,fn,flags){SL.push(Object.assign({k,t,fn,tr:BRO_K.includes(k)?"B":"U"},flags||{}))}
 
@@ -891,10 +891,10 @@ const PCOLS=[
  {k:"K1",t:"Mula Di Sini",c:"#8b5cf6"},
  {k:"KA",t:"Modul 1 · Etika & Tadbir Urus",c:"#ef4444"},
  {k:"KB",t:"Modul 3 · ChatGPT",c:"#10b981"},
- {k:"KC",t:"Modul 4 · NotebookLM",c:"#3b82f6"},
- {k:"KD",t:"Modul 5 · Gamma AI",c:"#f97316"},
+ {k:"KG",t:"Modul 4 · Google Workspace & Gemini",c:"#eab308"},
+ {k:"KC",t:"Modul 5 · NotebookLM",c:"#3b82f6"},
+ {k:"KD",t:"Modul 6 · Gamma AI",c:"#f97316"},
  {k:"KE",t:"Modul 2 · Prompt Engineering",c:"#ec4899"},
- {k:"KF",t:"Modul 6 · Laragon & WinSCP",c:"#14b8a6"},
  {k:"K4",t:"Penilaian & Penutup",c:"#22c55e"}
 ];
 const PCARDS=[]; // {k,t,m}
@@ -908,22 +908,22 @@ add("K0","Tajuk kursus",()=>`
       <span class="kick" style="align-self:flex-start">AI4U - AI UNTUK SEMUA · KEMAS Perak</span>
       <div class="t22 b muted" style="letter-spacing:3px;text-transform:uppercase">Kursus AI untuk kakitangan KEMAS</div>
       <div class="covt" style="font-size:88px;font-weight:900;line-height:1;letter-spacing:-.5px;margin-top:-6px">Tools AI Produktiviti,<br>Etika &amp; Tadbir Urus</div>
-      <div class="t24 muted" style="max-width:760px;line-height:1.4">ChatGPT, NotebookLM (kini Gemini Notebook) dan Gamma AI dalam satu aliran kerja tugasan KEMAS yang sebenar: dari dokumen ke pembentangan.</div>
+      <div class="t24 muted" style="max-width:760px;line-height:1.4">ChatGPT, Gemini dalam Google Workspace, NotebookLM dan Gamma AI dalam satu aliran kerja tugasan KEMAS yang sebenar: dari dokumen ke pembentangan.</div>
       <div class="row" style="gap:12px;flex-wrap:wrap"><div class="plate">📅 ISNIN, 19 OKTOBER 2026</div><div class="plate">⏰ 2.00 HINGGA 5.00 PETANG</div><div class="plate">💻 GOOGLE MEET</div></div>
     </div>
     <div class="card p" style="flex:0 0 520px;height:560px;display:flex;flex-direction:column;gap:8px">
-      <div class="h4">Etika → prompt → draf → sahkan → bentang</div>
-      ${[["🛡️","M1 · Etika & Tadbir Urus","Senarai semak etika"],["🎯","M2 · Prompt Engineering","Prompt PTKF yang disemak"],["✍️","M3 · ChatGPT","Draf laporan atau surat"],["📘","M4 · NotebookLM","Draf disahkan bersumber"],["📊","M5 · Gamma AI","Deck 8 slaid"]].map((x,i)=>`<button type="button" class="well row modgo" data-goi="${SL.findIndex(s=>s.k===["KA","KE","KB","KC","KD"][i])}" title="Pergi ke ${x[1]}" style="gap:14px;align-items:center;padding:8px 16px"><span style="font-size:28px">${x[0]}</span><div><div class="t20 b">${x[1]}</div><div class="t16 muted">Output: ${x[2]}</div></div><span class="modgo-ar">›</span></button>`).join("")}
+      <div class="h4">Etika → prompt → draf → edar → sahkan → bentang</div>
+      ${[["🛡️","M1 · Etika & Tadbir Urus","Senarai semak etika"],["🎯","M2 · Prompt Engineering","Prompt PTKF yang disemak"],["✍️","M3 · ChatGPT","Draf laporan atau surat"],["📨","M4 · Google Workspace & Gemini","E-mel, acara dan borang program"],["📘","M5 · NotebookLM","Draf disahkan bersumber"],["📊","M6 · Gamma AI","Deck 8 slaid"]].map((x,i)=>`<button type="button" class="well row modgo" data-goi="${SL.findIndex(s=>s.k===["KA","KE","KB","KG","KC","KD"][i])}" title="Pergi ke ${x[1]}" style="gap:12px;align-items:center;padding:5px 16px"><span style="font-size:28px">${x[0]}</span><div><div class="t20 b">${x[1]}</div><div class="t16 muted">Output: ${x[2]}</div></div><span class="modgo-ar">›</span></button>`).join("")}
       <div class="t16 faint" style="margin-top:auto">Fasilitator: <b>Bro Taufik</b><br>Pengarah KEMAS Negeri Sarawak</div>
     </div>
   </div>`);
 add("K0","Dashboard ilmu",()=>{
   const all=PCARDS.filter(c=>PCOLS.some(p=>p.k===c.k));
-  const core=["K1","KA","KE","KB","KC","KD","K4"];
+  const core=["K1","KA","KE","KB","KG","KC","KD","K4"];
   const mCore=all.filter(c=>core.includes(c.k)).reduce((a,c)=>a+(c.m||0),0);
   const nAkt=all.filter(c=>/^(Aktiviti|Latihan)/.test(c.t)).length;
   const nLan=all.filter(c=>c.k==="KN"||c.k==="KN2").length;
-  const kpi=[["MODUL","5","M1 hingga M5"],["KAD SESI",String(all.length-nLan),"Mula di sini hingga penutup"],["MINIT AKTIVITI",String(mCore),"Jumlah pemasa kad sesi"],["AKTIVITI","" + nAkt,"Amali dan latihan"],["NOTA LANJUTAN",String(nLan),"Bacaan selepas kursus"]];
+  const kpi=[["MODUL","5","M1 hingga M6"],["KAD SESI",String(all.length-nLan),"Mula di sini hingga penutup"],["MINIT AKTIVITI",String(mCore),"Jumlah pemasa kad sesi"],["AKTIVITI","" + nAkt,"Amali dan latihan"],["NOTA LANJUTAN",String(nLan),"Bacaan selepas kursus"]];
   const ROWS=Math.max(...PCOLS.map(col=>PCARDS.filter(c=>c.k===col.k).length));
   const cols=PCOLS.map(col=>{const cs=PCARDS.filter(c=>c.k===col.k);const tot=cs.reduce((a,c)=>a+(c.m||0),0);
     const pr=col.t.split(" · ");const KK={K1:"SESI 1",KA:"MODUL 1",KE:"MODUL 2",KB:"MODUL 3",KC:"MODUL 4",KD:"MODUL 5",K4:"SESI 2",KN:"NOTA 1",KN2:"NOTA 2"};const kick=KK[col.k]||pr[0];const ttl=pr.length>1?pr.slice(1).join(" · "):pr[0];
@@ -955,7 +955,7 @@ const FACT=(title,rows)=>`<table class="tbl" style="font-size:17px"><thead><tr><
 
 /* --- K1 MULA DI SINI --- */
 sec("K1","Mula Di Sini","2.00 – 2.15 petang",{badge:"▶"});
-const VID_CH=[[0, "Pembukaan"], [20, "Kenapa kursus ini"], [56, "Permainan Hijau · Kuning · Merah"], [95, "M1 · Etika & tadbir urus"], [127, "M2 · Prompt engineering (PTKF)"], [152, "Enjin Prompt AI4U"], [173, "M3 · ChatGPT"], [189, "M4 · NotebookLM"], [209, "M5 · Gamma AI"], [223, "Aliran kerja 3 alat"], [244, "Persediaan sebelum kursus"], [269, "Pre test, post test & ikrar"], [286, "Penutup"]];
+const VID_CH=[[0, "Pembukaan"], [20, "Kenapa kursus ini"], [56, "Permainan Hijau · Kuning · Merah"], [95, "M1 · Etika & tadbir urus"], [127, "M2 · Prompt engineering (PTKF)"], [152, "Enjin Prompt AI4U"], [173, "M3 · ChatGPT"], [189, "M5 · NotebookLM"], [209, "M6 · Gamma AI"], [223, "Aliran kerja 3 alat"], [244, "Persediaan sebelum kursus"], [269, "Pre test, post test & ikrar"], [286, "Penutup"]];
 function vidSeek(btn,t){const v=btn.closest(".slide").querySelector("video.vid");if(!v)return;v.currentTime=t;v.play().catch(()=>{})}
 pcard("K1","Video pengenalan kursus",5,()=>`
   ${cardHd("Mula di sini","Video pengenalan kursus",5,plate("5 MINIT · SARIKATA BM"))}
@@ -973,9 +973,9 @@ pcard("K1","Video pengenalan kursus",5,()=>`
 pcard("K1","Selamat datang & peta 3 jam",0,()=>`
   ${cardHd("Mula di sini","Tools AI Produktiviti, Etika &amp; Tadbir Urus",0,plate("2.00 – 5.00 PETANG"))}
   <div class="body col" style="gap:18px">
-    <div class="g4" style="grid-template-columns:repeat(5,minmax(0,1fr))">${[["🛡️","M1 · Etika & Tadbir Urus","Peraturan data, halusinasi dan matriks risiko"],["🎯","M2 · Prompt Engineering","Bina prompt jelas dengan PTKF, semak dengan VERIFY"],["✍️","M3 · ChatGPT","Tulis draf dengan kerangka PTKF dan CO-STAR"],["📘","M4 · NotebookLM","Sahkan fakta draf dengan dokumen rasmi bersumber"],["📊","M5 · Gamma AI","Tukar draf yang disahkan menjadi deck 8 slaid"]].map((x,i)=>`<button type="button" class="card p col modgo" data-goi="${SL.findIndex(s=>s.k===["KA","KE","KB","KC","KD"][i])}" title="Pergi ke ${x[1]}" style="gap:10px"><div class="ico">${x[0]}</div><div class="t22 b">${x[1]}</div><div class="t17 muted lh">${x[2]}</div><span class="t14 b modgo-go">Buka modul ›</span></button>`).join("")}</div>
-    <div class="chev">${[["2.15","M1 Etika"],["2.35","M2 Prompt"],["3.00","M3 ChatGPT"],["3.30","M4 NotebookLM"],["4.00","M5 Gamma"],["4.25","Minum petang & Asar"],["4.45","Galeri & ikrar"]].map((x,i)=>`<div style="background:linear-gradient(180deg,${["#d64545","#ec4899","#10a37f","#3b82f6","#e0702a","#64748b","#1f9d55"][i]},${["#b83232","#be185d","#0b8a6b","#2563eb","#c75e1c","#4b5563","#178548"][i]})"><b>${x[0]}</b><span>${x[1]}</span></div>`).join("")}</div>
-    <div class="bub ya t19"><b>Output akhir setiap peserta:</b> satu prompt PTKF, satu draf ChatGPT, satu draf yang disahkan dengan NotebookLM dan satu deck 8 slaid daripada tugasan KEMAS anda sendiri.</div>
+    <div class="g4" style="grid-template-columns:repeat(6,minmax(0,1fr));gap:14px">${[["🛡️","M1 · Etika & Tadbir Urus","Peraturan data, halusinasi dan matriks risiko"],["🎯","M2 · Prompt Engineering","Bina prompt jelas dengan PTKF, semak dengan VERIFY"],["✍️","M3 · ChatGPT","Tulis draf dengan kerangka PTKF dan CO-STAR"],["📨","M4 · Google Workspace & Gemini","E-mel, Calendar, Drive dan Forms dengan akaun @kemas.gov.my"],["📘","M5 · NotebookLM","Sahkan fakta draf dengan dokumen rasmi bersumber"],["📊","M6 · Gamma AI","Tukar draf yang disahkan menjadi deck 8 slaid"]].map((x,i)=>`<button type="button" class="card p col modgo" data-goi="${SL.findIndex(s=>s.k===["KA","KE","KB","KG","KC","KD"][i])}" title="Pergi ke ${x[1]}" style="gap:10px"><div class="ico">${x[0]}</div><div class="t22 b">${x[1]}</div><div class="t17 muted lh">${x[2]}</div><span class="t14 b modgo-go">Buka modul ›</span></button>`).join("")}</div>
+    <div class="chev">${[["2.15","M1 Etika"],["2.35","M2 Prompt"],["3.00","M3 ChatGPT"],["3.30","M4 Workspace"],["3.50","M5 NotebookLM"],["4.20","M6 Gamma"],["4.45","Minum & Asar"],["5.05","Galeri & ikrar"]].map((x,i)=>`<div style="background:linear-gradient(180deg,${["#d64545","#ec4899","#10a37f","#d4a00b","#3b82f6","#e0702a","#64748b","#1f9d55"][i]},${["#b83232","#be185d","#0b8a6b","#a16207","#2563eb","#c75e1c","#4b5563","#178548"][i]})"><b>${x[0]}</b><span>${x[1]}</span></div>`).join("")}</div>
+    <div class="bub ya t19"><b>Output akhir setiap peserta:</b> satu prompt PTKF, satu draf ChatGPT, satu e-mel, acara dan borang program, satu draf yang disahkan dengan NotebookLM dan satu deck 8 slaid daripada tugasan KEMAS anda sendiri.</div>
     ${facNote("Tunjuk contoh tiga output siap dahulu supaya peserta nampak sasaran. Tekankan tugasan mesti tugasan sebenar KEMAS, bukan hipotetikal.")}
   </div>`);
 const HKM=[
@@ -1416,9 +1416,67 @@ pcard("KB","M3 · Rujukan & video",0,()=>`
     ["GLOBAL","Data controls &amp; Temporary Chat","OpenAI Help Center","Panduan rasmi tetapan privasi ChatGPT.","https://help.openai.com/en/articles/7730893-data-controls-for-chatgpt"],
     ["GLOBAL","Custom GPT retirement &amp; migration FAQ","OpenAI Help Center","GPTs bersara 11 Dis 2026; cara pindah ke Plugins.","https://help.openai.com/en/articles/20001519"],
     ["MY","Garis Panduan GenAI UKM","UKM · 2026","Contoh garis panduan institusi Malaysia tentang penggunaan GenAI dan pengisytiharan.","https://www.ukm.my/spsfper/wp-content/uploads/2026/07/Lampiran-Garis-Panduan-GEN-AI-Universiti-Kebangsaan-Malaysia.pdf"]])}</div>`);
-sec("KC","Modul 4 · NotebookLM (Gemini Notebook)","3.30 – 4.00 petang",{badge:"M4"});
-pcard("KC","M4 · Fakta NotebookLM",2,()=>`
-  ${cardHd("Modul 4 · NotebookLM (Gemini Notebook)","Apa itu NotebookLM",2,plate("KEMAS KINI 2026"))}
+/* ===== M4 GOOGLE WORKSPACE & GEMINI ===== */
+sec("KG","Modul 4 · Google Workspace & Gemini","3.30 – 3.50 petang",{badge:"M4"});
+const KGH="Modul 4 · Google Workspace & Gemini";
+const WSAPP=[["✉️","Gmail","Ringkas thread panjang, draf balasan, cari e-mel lama","#ea4335"],["📅","Calendar","Cipta acara, cari slot kosong, tetapkan peringatan","#4285f4"],["📁","Drive","Cari fail, ringkas isi folder, susun bahan program","#34a853"],["📝","Docs","Draf surat, kertas ringkas dan minit","#4285f4"],["📊","Sheets","Ringkas respons borang, jana carta","#0f9d58"],["🗳️","Forms","Jana borang pendaftaran atau kuiz daripada satu arahan","#7248b9"]];
+const PROG=`<div class="card ps col" style="gap:6px;border-left:6px solid #eab308"><div class="row" style="gap:8px;align-items:center;flex-wrap:wrap"><div class="h4" style="white-space:nowrap">Senario latihan</div><span class="tagc" style="color:#1f9d55;border:1px solid #1f9d55">DATA REKAAN · 🟢 HIJAU</span></div><div class="t17 b">Program Hari Keluarga Komuniti KEMAS</div><div class="t15 lh">📅 Sabtu, 14 November 2026 · 8.00 pagi – 12.30 tengah hari<br>📍 Dewan Serbaguna Kampung Contoh<br>🎯 Sasaran 60 keluarga · senamrobik, persembahan TABIKA, gerai kesihatan</div></div>`;
+pcard("KG","M4 · Gemini dalam Google Workspace",4,()=>`
+  ${cardHd(KGH,"Gemini dalam akaun @kemas.gov.my",4,plate("SATU AKAUN · ENAM APLIKASI"))}
+  <div class="body row" style="gap:20px">
+    <div class="col" style="flex:1.15;gap:12px;min-width:0">
+      <div class="g3" style="gap:12px">${WSAPP.map(x=>`<div class="card ps col" style="gap:6px;border-top:5px solid ${x[3]}"><div class="row" style="gap:10px;align-items:center"><span style="font-size:30px">${x[0]}</span><b class="t20">${x[1]}</b></div><div class="t15 muted lh">${x[2]}</div></div>`).join("")}</div>
+      <div class="bub ya t16"><b>Kelebihan utama:</b> Gemini boleh membaca e-mel, fail dan kalendar <b>anda sendiri</b> dalam akaun kerja. ChatGPT tidak boleh. Kerja tidak perlu disalin dan ditampal antara aplikasi.</div>
+      <div class="bub no t16"><b>Peraturan data kekal:</b> akaun kerajaan membenarkan data 🟡 Kuning mengikut dasar agensi. Maklumat terperingkat 🔴 tetap dilarang, walaupun dalam akaun @kemas.gov.my.</div>
+    </div>
+    <div class="col" style="flex:1;gap:12px;min-width:0">
+      ${box("Sudah mahir ChatGPT? Ini padanannya",keT(["ChatGPT","Gemini"],[["Personalization","Saved info"],["Projects / Custom GPT","Gems"],["Muat naik fail","@Drive, @Gmail dalam prompt"],["Canvas","Canvas"],["Deep Research","Deep Research"],["Hanya dalam chatgpt.com","Panel sisi dalam Gmail, Docs, Drive, Calendar"]],"font-size:15px"))}
+      <div class="well ps t16 lh"><b class="acc">Kemahiran sama:</b> formula PTKF dari Modul 2 terus digunakan dalam Gemini. Yang berubah hanya <b>tempat</b> anda menaipnya.</div>
+      ${facNote("Pastikan semua peserta sudah log masuk akaun @kemas.gov.my dalam tab berasingan sebelum slaid seterusnya. Butang Gemini (ikon bintang ✦) berada di penjuru kanan atas Gmail, Docs dan Drive. Dalam antara muka BM, 'Help me write' dipaparkan sebagai 'Bantu saya menulis'.")}
+    </div>
+  </div>`);
+pcard("KG","Aktiviti 4.1: Gmail & Calendar",7,()=>`
+  ${cardHd(KGH,"Aktiviti 4.1: Jemputan dan acara dalam 7 minit",7,plate("HANDS-ON · @KEMAS.GOV.MY"))}
+  <div class="body row" style="gap:18px">
+    <div class="col" style="flex:0 0 360px;gap:12px">${PROG}
+      ${box("Tandakan apabila siap",[pchk("ws1","E-mel jemputan didraf dan dihantar kepada diri sendiri"),pchk("ws2","Acara dicipta dalam Calendar dengan peringatan"),pchk("ws3","Ringkasan 3 poin untuk WhatsApp siap")].join(""))}
+      <div class="bub no t15"><b>Latihan:</b> hantar kepada diri sendiri sahaja.</div></div>
+    <div class="col" style="flex:1;gap:8px;min-width:0">
+      <div class="h4">Langkah 1 · Gmail › Tulis › ✦ Help me write</div>
+      ${code("Tulis e-mel jemputan rasmi kepada Ketua Kampung Contoh untuk\nProgram Hari Keluarga Komuniti KEMAS pada Sabtu, 14 November\n2026, 8.00 pagi hingga 12.30 tengah hari di Dewan Serbaguna\nKampung Contoh. Mohon bantuan menghebahkan kepada penduduk.\nNada mesra tetapi rasmi, maksimum 150 patah perkataan.",true)}
+      <div class="h4">Langkah 2 · Calendar › panel ✦ Gemini</div>
+      ${code("Cipta acara 'Program Hari Keluarga Komuniti KEMAS' pada Sabtu,\n14 November 2026, 8.00 pagi hingga 12.30 tengah hari, lokasi\nDewan Serbaguna Kampung Contoh. Tetapkan peringatan 1 hari sebelum.",true)}
+      <div class="h4">Langkah 3 · Buka e-mel tadi › panel ✦ Gemini</div>
+      ${code("Ringkaskan e-mel ini kepada 3 poin pendek untuk hebahan\ndalam kumpulan WhatsApp penduduk.",true)}
+    </div>
+  </div>`,{bk:1});
+pcard("KG","Aktiviti 4.2: Forms & Drive",8,()=>`
+  ${cardHd(KGH,"Aktiviti 4.2: Borang dan folder program",8,plate("HANDS-ON · @KEMAS.GOV.MY"))}
+  <div class="body row" style="gap:18px">
+    <div class="col" style="flex:0 0 360px;gap:12px">${PROG}
+      ${box("Tandakan apabila siap",[pchk("ws4","Borang pendaftaran dijana dan disemak"),pchk("ws5","Folder Drive dicipta, borang dipindahkan"),pchk("ws6","Folder dikongsi secara Terhad, bukan 'Sesiapa yang ada pautan'"),pchk("ws7","Bonus: respons borang diringkaskan dalam Sheets")].join(""))}</div>
+    <div class="col" style="flex:1;gap:8px;min-width:0">
+      <div class="h4">Langkah 1 · forms.google.com › Borang kosong › ✦ Help me create</div>
+      ${code("Cipta borang pendaftaran peserta Program Hari Keluarga Komuniti\nKEMAS. Medan: nama ketua keluarga, kampung, bilangan ahli\nkeluarga, kategori umur anak (6 tahun ke bawah, 7 hingga 12,\n13 ke atas), aktiviti yang diminati, keperluan makanan khas.\nJangan minta nombor kad pengenalan atau alamat penuh.",true)}
+      <div class="h4">Langkah 2 · Drive › Folder baharu › ✦ Gemini</div>
+      ${code("Cipta folder 'Program Hari Keluarga 2026' dan pindahkan borang ke dalamnya.\nKemudian tanya Gemini: Senaraikan fail dalam folder ini dan\ncadangkan nama fail yang konsisten untuk semua bahan program.",true)}
+      <div class="h4">Langkah 3 · Bonus: Respons › Pautan ke Sheets › ✦ Gemini</div>
+      ${code("Ringkaskan respons pendaftaran: jumlah keluarga, jumlah ahli,\npecahan kategori umur anak dan keperluan makanan khas.",true)}
+    </div>
+  </div>`,{bk:1});
+pcard("KG","M4 · Semak sebelum hantar",1,()=>`
+  ${cardHd(KGH,"Semak sebelum hantar: AI draf, pegawai hantar",1)}
+  <div class="body row" style="gap:20px">
+    <div class="col" style="flex:1.2;gap:10px">${box("Senarai semak Workspace",[pchk("wc1","Penerima e-mel betul; tiada pihak luar dalam salinan"),pchk("wc2","Tarikh, masa dan lokasi sama dalam e-mel, Calendar dan borang"),pchk("wc3","Borang tidak meminta No. KP, alamat penuh atau gambar kanak-kanak"),pchk("wc4","Perkongsian Drive: Terhad kepada orang yang dinamakan"),pchk("wc5","Nada dan fakta e-mel disemak sebelum hantar")].join(""))}</div>
+    <div class="col" style="flex:1;gap:12px">
+      <div class="bub ya t17"><b>Hasil Modul 4:</b> satu e-mel jemputan, satu acara Calendar, satu borang pendaftaran dan satu folder program yang tersusun. Semua dalam akaun kerja anda.</div>
+      <div class="bub no t17"><b>Ingat:</b> Gemini boleh membaca e-mel dan fail anda. Jangan minta ia meringkaskan e-mel atau fail bertaraf SULIT.</div>
+      ${facNote("Seterusnya Modul 5: dokumen dalam folder Drive ini boleh terus dijadikan sumber NotebookLM untuk menyemak fakta.")}
+    </div>
+  </div>`);
+sec("KC","Modul 5 · NotebookLM (Gemini Notebook)","3.50 – 4.20 petang",{badge:"M5"});
+pcard("KC","M5 · Fakta NotebookLM",2,()=>`
+  ${cardHd("Modul 5 · NotebookLM (Gemini Notebook)","Apa itu NotebookLM",2,plate("KEMAS KINI 2026"))}
   <div class="body col" style="gap:14px">${FACT("Perkara",[
     ["Nama","<b>Gemini Notebook</b> (dulu NotebookLM). Google mengumumkan nama baharu pada <b>16 Julai 2026</b>; pautan lama dan notebook sedia ada masih berfungsi. Alamat notebooklm.google.com masih digunakan."],
     ["Ekosistem","Kekal produk berasingan untuk penyelidikan, kini boleh disegerakkan dengan app Gemini."],
@@ -1428,16 +1486,16 @@ pcard("KC","M4 · Fakta NotebookLM",2,()=>`
     ["Ciri utama","Audio Overview (2024), Video Overview (2025), infografik dan slaid (Nov 2025), jadual data (Dis 2025), flashcard."],
     ["Akses","Akaun Google dengan umur yang telah disahkan. Data tidak dikongsi, menurut Soalan Lazim rasmi."]])}
     <div class="bub ya t17"><b>Nilai untuk KEMAS:</b> alat terbaik untuk mengesahkan fakta draf dengan pekeliling dan garis panduan rasmi sebelum dokumen keluar.</div></div>`);
-pcard("KC","M4 · Demo: NotebookLM",8,()=>`
-  ${cardHd("Modul 4 · NotebookLM (Gemini Notebook)","Demo: sahkan fakta dengan NotebookLM",8)}
+pcard("KC","M5 · Demo: NotebookLM",8,()=>`
+  ${cardHd("Modul 5 · NotebookLM (Gemini Notebook)","Demo: sahkan fakta dengan NotebookLM",8)}
   <div class="body row" style="gap:22px">
     ${box("Langkah demonstrasi",steps(["Buka <b>notebooklm.google.com</b> dan cipta notebook baharu.","Muat naik 3 dokumen awam KEMAS (PDF).","Tanya soalan; tunjuk <b>nombor rujukan</b> yang dipautkan kepada petikan asal.","Jana <b>Audio Overview</b> dan <b>Study guide</b>.","Tanya soalan yang jawapannya tiada dalam dokumen; lihat respons."],"t18"),"flex:1.3")}
     <div class="col" style="flex:1;gap:16px">${box("Kenapa NotebookLM",`<div class="t17 lh">Menjawab <b>hanya</b> berdasarkan dokumen yang anda muat naik dan menunjukkan sumbernya. Risiko halusinasi lebih rendah berbanding sembang terbuka.</div>`)}
       <div class="bub no t16"><b>Had:</b> kualiti jawapan bergantung pada kualiti dokumen. Dokumen lama menghasilkan jawapan lama.</div>
       ${facNote("Guna draf ChatGPT dari Modul 3 sebagai bahan demo: tunjuk satu fakta yang disahkan dan satu yang dibetulkan.")}</div>
   </div>`);
-pcard("KC","M4 · Audio Overview dalam BM",4,()=>`
-  ${cardHd("Modul 4 · NotebookLM (Gemini Notebook)","Audio Overview dalam Bahasa Melayu",4,plate("BAHASA MELAYU DISOKONG"))}
+pcard("KC","M5 · Audio Overview dalam BM",4,()=>`
+  ${cardHd("Modul 5 · NotebookLM (Gemini Notebook)","Audio Overview dalam Bahasa Melayu",4,plate("BAHASA MELAYU DISOKONG"))}
   <div class="body row" style="gap:22px">
     ${box("Tetapkan bahasa sebelum jana",steps(["Buka panel <b>Studio</b> di sebelah kanan notebook.","Pada kad <b>Audio Overview</b>, klik <b>Customize</b> (ikon pensel).","Pilih bahasa output: <b>Bahasa Melayu</b>. Bahasa lalai mengikut tetapan akaun Google anda.","Pilih format, tulis fokus ringkas, kemudian klik <b>Generate</b>."],"t17")+`<div class="t15 muted lh">Pilihan <b>Longer</b> dan mod <b>Interactive</b> hanya tersedia dalam bahasa Inggeris.</div>`,"flex:1")}
     <div class="col" style="flex:1.15;gap:14px">${keT(["Format","Bila digunakan"],[
@@ -1448,10 +1506,10 @@ pcard("KC","M4 · Audio Overview dalam BM",4,()=>`
       <div class="bub ya t16"><b>Idea KEMAS:</b> jana The Brief daripada pekeliling baharu, kongsikan kepada staf sebagai taklimat audio 2 minit.</div>
       ${facNote("Demo The Brief sahaja (±1 minit menjana). Deep Dive mengambil masa lebih lama.")}</div>
   </div>`);
-pcard("KC","Aktiviti 4.1: Sahkan draf dengan notebook",15,()=>`
-  ${cardHd("Modul 4 · NotebookLM (Gemini Notebook)","Aktiviti 4.1: Sahkan draf dengan notebook",15)}
+pcard("KC","Aktiviti 5.1: Sahkan draf dengan notebook",15,()=>`
+  ${cardHd("Modul 5 · NotebookLM (Gemini Notebook)","Aktiviti 5.1: Sahkan draf dengan notebook",15)}
   <div class="body row" style="gap:22px">
-    <div class="col" style="flex:1.2;gap:14px">${box("Apa yang perlu dilakukan",steps(["Cipta notebook bernama ikut tugasan Aktiviti 0.1.","Muat naik 3 hingga 5 dokumen awam yang berkaitan.","Senaraikan fakta, angka dan rujukan dalam draf ChatGPT anda (Modul 3).","Tanya NotebookLM untuk mengesahkan setiap fakta; catat nombor rujukan.","Betulkan atau buang butiran draf yang tidak dapat disahkan.","Uji notebook anda dengan tiga soalan (Aktiviti 4.2)."],"t17"))}
+    <div class="col" style="flex:1.2;gap:14px">${box("Apa yang perlu dilakukan",steps(["Cipta notebook bernama ikut tugasan Aktiviti 0.1.","Muat naik 3 hingga 5 dokumen awam yang berkaitan.","Senaraikan fakta, angka dan rujukan dalam draf ChatGPT anda (Modul 3).","Tanya NotebookLM untuk mengesahkan setiap fakta; catat nombor rujukan.","Betulkan atau buang butiran draf yang tidak dapat disahkan.","Uji notebook anda dengan tiga soalan (Aktiviti 5.2)."],"t17"))}
       <div class="bub no t16"><b>Peraturan:</b> dokumen awam atau rekaan sahaja. Tiada senarai nama atau data peserta program.</div><div>${lbtn("pek","Buka pek dokumen latihan")}</div></div>
     <div class="card ps col" style="flex:1;gap:10px"><div class="h4">Rekod saya</div><div class="gform" style="grid-template-columns:120px 1fr">
       <label for="pk-n1">Notebook</label>${pinp("n1","Nama notebook")}
@@ -1459,31 +1517,31 @@ pcard("KC","Aktiviti 4.1: Sahkan draf dengan notebook",15,()=>`
       <label for="pk-n3">Fakta 1</label>${pinp("n3","Fakta dalam draf: sah / dibetulkan")}
       <label for="pk-n4">Fakta 2</label>${pinp("n4","Fakta dalam draf: sah / dibetulkan")}
       <label for="pk-n5">Fakta 3</label>${pinp("n5","Fakta dalam draf: sah / dibetulkan")}</div>
-      ${hantar("Borang Jawapan Kursus › Aktiviti 4.1")}</div>
+      ${hantar("Borang Jawapan Kursus › Aktiviti 5.1")}</div>
   </div>`);
 const TESTS=[["Ujian 1 · Ketepatan","Soalan yang jawapannya JELAS ADA dalam dokumen. Lulus jika tepat dan merujuk sumber yang betul."],["Ujian 2 · Sintesis","Soalan yang memerlukan gabungan DUA dokumen. Lulus jika kedua-dua sumber digabung dengan betul."],["Ujian 3 · Kejujuran","Soalan yang jawapannya TIADA dalam dokumen. Lulus hanya jika AI mengaku maklumat tiada."]];
-pcard("KC","Aktiviti 4.2: Uji dengan tiga soalan",10,()=>`
-  ${cardHd("Modul 4 · NotebookLM (Gemini Notebook)","Aktiviti 4.2: Uji notebook dengan tiga soalan",10,rstBtn("ts,tq",3))}
+pcard("KC","Aktiviti 5.2: Uji dengan tiga soalan",10,()=>`
+  ${cardHd("Modul 5 · NotebookLM (Gemini Notebook)","Aktiviti 5.2: Uji notebook dengan tiga soalan",10,rstBtn("ts,tq",3))}
   <div class="body col" style="gap:14px">
     <div class="g3" style="flex:1">${TESTS.map((t,i)=>`<div class="card ps col" style="gap:10px"><div class="row" style="justify-content:space-between;align-items:center"><b class="t19">${t[0]}</b>${pseg("ts"+i,[["L","Lulus"],["G","Gagal"]])}</div><div class="t16 muted lh">${t[1]}</div>${pinp("tq"+i,"Soalan yang saya tanya")}</div>`).join("")}</div>
     <div class="bub ya t17"><b>Ujian 3 paling penting.</b> Alat yang mereka-reka jawapan apabila maklumat tiada tidak sesuai untuk dokumen rasmi tanpa semakan.</div>
     <div class="t14 faint" style="font-size:12.5px">Kaedah Uji 3 soalan diadaptasi daripada modul PAIC-M04, UPSI 2026, dengan kebenaran pensyarah.</div>
-    ${hantar("Borang Jawapan Kursus › Aktiviti 4.2: tulis tiga soalan dan keputusan setiap satu")}
+    ${hantar("Borang Jawapan Kursus › Aktiviti 5.2: tulis tiga soalan dan keputusan setiap satu")}
   </div>`);
 
 /* --- K3 PART 2 --- */
-pcard("KC","M4 · Rujukan & video",0,()=>`
-  ${cardHd("Modul 4 · NotebookLM (Gemini Notebook)","Rujukan &amp; video pilihan",0,plate("UNTUK BACAAN LANJUT"))}
+pcard("KC","M5 · Rujukan & video",0,()=>`
+  ${cardHd("Modul 5 · NotebookLM (Gemini Notebook)","Rujukan &amp; video pilihan",0,plate("UNTUK BACAAN LANJUT"))}
   <div class="body">${RES([
     ["GLOBAL","Soalan Lazim NotebookLM","Google Support · rasmi","Had sumber, akses dan privasi terkini.","https://support.google.com/notebooklm/answer/16269187"],
     ["VIDEO","NotebookLM full tutorial","Kevin Stratvert · 2025","Tutorial video langkah demi langkah untuk pemula.","https://kevinstratvert.com/2025/01/24/notebooklms-new-secrets-to-supercharging-your-success-full-tutorial-2025/"],
-    ["GLOBAL","Buka NotebookLM","Google","Ruang kerja untuk amali Aktiviti 4.1 dan 4.2.","https://notebooklm.google.com"],
+    ["GLOBAL","Buka NotebookLM","Google","Ruang kerja untuk amali Aktiviti 5.1 dan 4.2.","https://notebooklm.google.com"],
     ["MY","AI Untuk Rakyat","MyDIGITAL · percuma","Asas AI dalam BM untuk peserta yang perlukan pengukuhan.","https://ai.gov.my"],
     ["VIDEO","Kenali NotebookLM","Cikgu Muktasim · YouTube · BM","Pengenalan NotebookLM dalam Bahasa Melayu.","https://www.youtube.com/watch?v=JZB6j4yL_rA"],
     ["GLOBAL","Generate Audio Overview","Google Help · rasmi","Empat format audio, pilihan panjang dan senarai bahasa yang disokong (termasuk Melayu).","https://support.google.com/notebooklm/answer/16212820"]])}</div>`);
-sec("KD","Modul 5 · Gamma AI","4.00 – 4.25 petang",{badge:"M5"});
-pcard("KD","M5 · Fakta Gamma AI",2,()=>`
-  ${cardHd("Modul 5 · Gamma AI","Apa yang Gamma AI boleh buat",2,plate("KEMAS KINI 2026"))}
+sec("KD","Modul 6 · Gamma AI","4.20 – 4.45 petang",{badge:"M6"});
+pcard("KD","M6 · Fakta Gamma AI",2,()=>`
+  ${cardHd("Modul 6 · Gamma AI","Apa yang Gamma AI boleh buat",2,plate("KEMAS KINI 2026"))}
   <div class="body col" style="gap:14px">${FACT("Perkara",[
     ["Tiga cara mula","Taip topik (prompt), <b>tampal teks</b> atau draf, atau muat naik dokumen sedia ada."],
     ["Kelajuan","Deck lengkap dijana dalam kira-kira 30 hingga 60 saat."],
@@ -1491,15 +1549,15 @@ pcard("KD","M5 · Fakta Gamma AI",2,()=>`
     ["Eksport","Cetak melalui pelayar (Ctrl+P › Save as PDF) untuk PDF tanpa badge. Pilihan lain: PDF (bertera air pada pelan percuma), PowerPoint (PPTX) dan PNG bagi setiap kad."],
     ["Pelan percuma","400 kredit AI sekali sahaja, tanpa kad kredit. Satu deck menggunakan sebahagian kredit."]])}
     <div class="bub no t17"><b>Untuk peserta KEMAS:</b> guna "Paste in text" dengan draf yang telah disahkan supaya Gamma tidak menambah fakta baharu.</div></div>`);
-pcard("KD","M5 · Demo: Gamma",6,()=>`
-  ${cardHd("Modul 5 · Gamma AI","Demo: dari draf ke deck dengan Gamma",6)}
+pcard("KD","M6 · Demo: Gamma",6,()=>`
+  ${cardHd("Modul 6 · Gamma AI","Demo: dari draf ke deck dengan Gamma",6)}
   <div class="body row" style="gap:22px">
     ${box("Langkah demonstrasi",steps(["Buka <b>gamma.app</b> › Create new › <b>Paste in text</b>.","Tampal draf yang telah disahkan dengan NotebookLM.","Tetapkan 8 kad, bahasa Melayu, gaya formal.","Pilih tema dan warna yang sesuai dengan jenama KEMAS.","Semak setiap slaid, kemudian <b>Export</b> ke PDF atau PowerPoint."],"t18"),"flex:1.3")}
     <div class="col" style="flex:1;gap:16px"><div class="bub no t17"><b>Awas:</b> imej janaan AI boleh mengandungi teks atau logo cacat. Jangan guna jata kerajaan yang dijana AI.</div>
       ${facNote("Pelan percuma Gamma mempunyai had kredit. Minta peserta menjana satu deck sahaja.")}</div>
   </div>`);
-pcard("KD","M5 · Jimat kredit & imej selamat",4,()=>`
-  ${cardHd("Modul 5 · Gamma AI","Jimat kredit &amp; imej selamat",4,plate("WAJIB SEBELUM AMALI"))}
+pcard("KD","M6 · Jimat kredit & imej selamat",4,()=>`
+  ${cardHd("Modul 6 · Gamma AI","Jimat kredit &amp; imej selamat",4,plate("WAJIB SEBELUM AMALI"))}
   <div class="body col" style="gap:16px">
     <div class="g2" style="gap:18px">
       ${box("💳 Jimat kredit",`<div class="t16 lh" style="margin-bottom:6px"><b>400 kredit</b> semasa daftar. Pada pelan Free, kredit <b>tidak diisi semula</b> (+200 bagi setiap rakan yang dirujuk).</div>`+steps(["Siapkan outline dalam ChatGPT dahulu, kemudian <b>Paste in text</b>.","Semak outline dengan teliti sebelum klik <b>Generate</b>.","Baiki dengan suntingan manual atau <b>restyle</b>, bukan jana semula seluruh deck.","Satu deck sahaja semasa amali."],"t16"))}
@@ -1510,8 +1568,8 @@ pcard("KD","M5 · Jimat kredit & imej selamat",4,()=>`
       <div class="bub ya t16" style="flex:1"><b>Eksport tanpa badge:</b> pelan Free meletakkan badge "Made by Gamma" pada eksport PDF. Guna <b>Ctrl+P › Save as PDF</b> daripada pelayar sebagai alternatif.</div>
     </div>
   </div>`);
-pcard("KD","Aktiviti 5.1: Draf ke deck 8 slaid",18,()=>`
-  ${cardHd("Modul 5 · Gamma AI","Aktiviti 5.1: Draf ke deck 8 slaid",18)}
+pcard("KD","Aktiviti 6.1: Draf ke deck 8 slaid",18,()=>`
+  ${cardHd("Modul 6 · Gamma AI","Aktiviti 6.1: Draf ke deck 8 slaid",18)}
   <div class="body row" style="gap:22px">
     <div class="col" style="flex:1.1;gap:12px"><div class="h4">Templat arahan Gamma</div>${code("Hasilkan pembentangan 8 slaid dalam Bahasa Melayu formal untuk [audiens].\nObjektif: [objektif pembentangan].\nMesej utama: [satu ayat].\nStruktur: tajuk, latar belakang, 3 penemuan, isu, cadangan tindakan, penutup dengan seruan tindakan.\nGuna hanya kandungan teks yang ditampal. Jangan tambah angka baharu.",true)}<div class="h4 okc">Langkah 2 · Sunting dengan Gamma Agent</div>${code("Ringkaskan slaid 3 kepada 4 poin sahaja dan tukar\ntajuknya kepada bentuk soalan.",true)}<div class="t15 muted">Gamma Agent menyunting deck dengan arahan bahasa biasa. Semak semula slaid selepas setiap suntingan.</div></div>
     <div class="card ps col" style="flex:1;gap:10px"><div class="h4">Storyline saya</div><div class="gform" style="grid-template-columns:120px 1fr">
@@ -1520,23 +1578,23 @@ pcard("KD","Aktiviti 5.1: Draf ke deck 8 slaid",18,()=>`
       <label for="pk-g3">Mesej utama</label>${pinp("g3","Satu ayat")}
       <label for="pk-g4">Seruan tindakan</label>${pinp("g4","Tindakan yang diminta")}
       <label for="pk-g5">Pautan deck</label>${pinp("g5","Pautan Gamma anda")}</div>
-      ${hantar("Borang Jawapan Kursus › Aktiviti 5.1: pautan deck")}</div>
+      ${hantar("Borang Jawapan Kursus › Aktiviti 6.1: pautan deck")}</div>
   </div>`);
-pcard("KD","Aktiviti 5.2: Semak deck sebelum bentang",6,()=>`
-  ${cardHd("Modul 5 · Gamma AI","Aktiviti 5.2: Semak deck sebelum bentang",6)}
+pcard("KD","Aktiviti 6.2: Semak deck sebelum bentang",6,()=>`
+  ${cardHd("Modul 6 · Gamma AI","Aktiviti 6.2: Semak deck sebelum bentang",6)}
   <div class="body row" style="gap:22px">
     ${box("Senarai semak deck",["Setiap angka dalam slaid sama dengan draf yang disemak","Tiada imej janaan AI yang mengandungi teks atau logo cacat","Tiada wajah kanak-kanak atau individu tanpa kebenaran","Jenama, warna dan nama jabatan betul","Mesej utama muncul dalam slaid pertama dan terakhir","Setiap slaid tidak melebihi 6 baris teks"].map((x,i)=>pchk("dk"+i,x)).join(""),"flex:1.3")}
     <div class="col" style="flex:1;gap:16px"><div class="bub ya t18"><b>Ingat:</b> deck yang cantik tetapi salah fakta lebih berbahaya daripada deck ringkas yang tepat.</div>
       ${facNote("Pilih tiga deck terbaik untuk sesi galeri semasa peserta membuat semakan.")}</div>
   </div>`);
 
-pcard("KD","M5 · Rujukan & video",0,()=>`
-  ${cardHd("Modul 5 · Gamma AI","Rujukan &amp; panduan pilihan",0,plate("UNTUK BACAAN LANJUT"))}
+pcard("KD","M6 · Rujukan & video",0,()=>`
+  ${cardHd("Modul 6 · Gamma AI","Rujukan &amp; panduan pilihan",0,plate("UNTUK BACAAN LANJUT"))}
   <div class="body">${RES([
     ["GLOBAL","Turn a text prompt into a presentation","Gamma · panduan rasmi","Langkah asas, tetapan tema dan eksport.","https://gamma.app/explore/content/guides/gamma-turn-text-prompt-into-presentation"],
     ["GLOBAL","Outline ke deck dalam beberapa minit","Gamma · panduan rasmi","Cara menukar rangka teks kepada deck berstruktur.","https://gamma.app/explore/content/guides/turn-your-text-outline-into-a-fully-structured-presentation-ready-deck-in-minutes-with-gamma"],
     ["GLOBAL","Eksport selain pautan langsung","Gamma · panduan rasmi","Pilihan eksport PDF dan PowerPoint untuk mesyuarat.","https://gamma.app/explore/content/guides/best-ai-presentation-tools-export-beyond-live-link"],
-    ["GLOBAL","Buka Gamma","gamma.app","Ruang kerja untuk amali Aktiviti 5.1 dan 5.2.","https://gamma.app"],
+    ["GLOBAL","Buka Gamma","gamma.app","Ruang kerja untuk amali Aktiviti 6.1 dan 5.2.","https://gamma.app"],
     ["VIDEO","Gamma AI Tutorial","Husna Amira · YouTube · BM","Panduan pemula Gamma dalam Bahasa Melayu.","https://www.youtube.com/watch?v=5Z5DeNSwQQA"],
     ["GLOBAL","How AI credits work","Gamma Help Center · rasmi","Cara kredit digunakan pada pelan Free dan pelan berbayar.","https://help.gamma.app/en/articles/7834324"]])}</div>`);
 /* --- KE MODUL 5 · PROMPT ENGINEERING --- */
@@ -4654,7 +4712,7 @@ pcard("KE","M2 · Laluan belajar selepas kursus",0,()=>{
     <div class="well ps col" style="gap:4px"><div class="t16 b">🛡️ Dasar (semua tahap)</div><div class="row" style="gap:24px;flex-wrap:wrap">${[["GPAISA (JDN)","BM","https://www.jdn.gov.my/garis-panduan-pengadaptasian-kecerdasan-buatan-ai-sektor-awam/"],["AIGE (MOSTI)","EN","https://mastic.mosti.gov.my/publication/the-national-guidelines-on-ai-governance-ethics/"],["AI Playbook for UK Government","EN","https://www.gov.uk/government/publications/ai-playbook-for-the-uk-government"]].map(r=>`<div style="flex:1;min-width:220px">${L(...r)}</div>`).join("")}</div></div>
     <div class="t14 muted lh">Video BM dihasilkan oleh pencipta kandungan bebas, bukan sumber rasmi. Google Prompting Essentials berbayar selepas tempoh percubaan; semak tawaran biasiswa sebelum mendaftar.</div>
   </div>`});
-{const KEEP=["K0","K1","KP","KA","KE","KB","KC","KD","K4","KN","KN2"];
+{const KEEP=["K0","K1","KP","KA","KE","KB","KG","KC","KD","K4","KN","KN2"];
  const CORE=["M2 · Apa itu Prompt Engineering","M2 · Kenapa prompt gagal","M2 · Nota: Kerangka PTKF","M2 · Satu idea, banyak nama","Aktiviti 2.1: Baiki prompt kabur","M2 · Rubrik skor prompt","M2 · Enjin Prompt AI4U","Aktiviti 2.2: Semak dengan VERIFY"];
  SL.forEach(s=>{if(s.k==="KE"&&!CORE.includes(s.t)){s.k="KN";s.tr="B";s.t=s.t.replace(/^M2 · /,"Lanjutan · ")}});
  PCARDS.forEach(c=>{if(c.k==="KE"&&!CORE.includes(c.t)){c.k="KN";c.t=c.t.replace(/^M2 · /,"Lanjutan · ")}});
