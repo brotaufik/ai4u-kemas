@@ -484,6 +484,16 @@ button.modgo:focus-visible{outline:3px solid #FFD23F;outline-offset:2px}
 .hkg .seg input:checked+span{background:#fff7cc!important;box-shadow:0 0 0 3px #f5b301 inset,0 2px 4px var(--sh2)!important;transform:scale(1.08)}
 .stars.big{font-size:44px;gap:4px}
 .t21{font-size:21px}.t28{font-size:28px;line-height:1.2}.t32{font-size:32px;line-height:1.2}
+
+/* patch24: papan dashboard simetri, teks penuh */
+#slides .dk-wrap{flex:1;min-height:0;overflow-y:auto;overflow-x:hidden;padding-right:4px;--dkrow:70px}
+#slides .dk-grid{flex:none;align-items:start;gap:5px}
+#slides .dkcol{padding:9px 5px;gap:5px}
+#slides .dk-t{white-space:normal;height:36px;line-height:18px;font-size:13px;overflow:visible;text-overflow:clip;display:flex;align-items:flex-start}
+#slides .dk-list{flex:none;gap:5px}
+#slides .ses.dk{position:relative;display:flex;align-items:center;justify-content:flex-start;padding:12px 6px 4px;height:var(--dkrow);overflow:visible}
+#slides .ses.dk .nm{font-size:11.5px;line-height:1.2;display:block;-webkit-line-clamp:unset;overflow:visible;padding-right:0;overflow-wrap:normal;word-break:normal}
+#slides .ses.dk .fc{position:absolute;top:3px;right:5px;font-size:10px;line-height:1}
 </style>
 </head>
 <body>
@@ -923,21 +933,21 @@ add("K0","Dashboard ilmu",()=>{
   const mCore=all.filter(c=>core.includes(c.k)).reduce((a,c)=>a+(c.m||0),0);
   const nAkt=all.filter(c=>/^(Aktiviti|Latihan)/.test(c.t)).length;
   const nLan=all.filter(c=>c.k==="KN"||c.k==="KN2").length;
-  const kpi=[["MODUL","5","M1 hingga M6"],["KAD SESI",String(all.length-nLan),"Mula di sini hingga penutup"],["MINIT AKTIVITI",String(mCore),"Jumlah pemasa kad sesi"],["AKTIVITI","" + nAkt,"Amali dan latihan"],["NOTA LANJUTAN",String(nLan),"Bacaan selepas kursus"]];
+  const kpi=[["MODUL","6","M1 hingga M6"],["KAD SESI",String(all.length-nLan),"Mula di sini hingga penutup"],["MINIT AKTIVITI",String(mCore),"Jumlah pemasa kad sesi"],["AKTIVITI","" + nAkt,"Amali dan latihan"],["NOTA LANJUTAN",String(nLan),"Bacaan selepas kursus"]];
   const ROWS=Math.max(...PCOLS.map(col=>PCARDS.filter(c=>c.k===col.k).length));
   const cols=PCOLS.map(col=>{const cs=PCARDS.filter(c=>c.k===col.k);const tot=cs.reduce((a,c)=>a+(c.m||0),0);
-    const pr=col.t.split(" · ");const KK={K1:"SESI 1",KA:"MODUL 1",KE:"MODUL 2",KB:"MODUL 3",KC:"MODUL 4",KD:"MODUL 5",K4:"SESI 2",KN:"NOTA 1",KN2:"NOTA 2"};const kick=KK[col.k]||pr[0];const ttl=pr.length>1?pr.slice(1).join(" · "):pr[0];
+    const pr=col.t.split(" · ");const KK={K1:"SESI 1",KA:"MODUL 1",KE:"MODUL 2",KB:"MODUL 3",KG:"MODUL 4",KC:"MODUL 5",KD:"MODUL 6",K4:"SESI 2",KN:"NOTA 1",KN2:"NOTA 2"};const kick=KK[col.k]||pr[0];const ttl=pr.length>1?pr.slice(1).join(" · "):pr[0];
     const items=cs.map(c=>{const i=SL.findIndex(x=>x.k===c.k&&x.t===c.t);return `<button class="ses dk" type="button" data-goi="${i}"><span class="nm">${esc(c.t.replace(/^M\d · /,"").replace(/^Lanjutan · /,""))}</span><span class="fc">${c.m?c.m+"′":""}</span></button>`});
     while(items.length<ROWS)items.push(`<div class="dk-empty"></div>`);
     return `<div class="card dkcol" style="border-top:4px solid ${col.c}">
       <div class="dk-k">${esc(kick)}</div>
       <div class="dk-t">${esc(ttl)}</div>
       <div class="dk-m">${cs.length} KAD${tot?` · ${tot} MIN`:""}</div>
-      <div class="dk-list" style="grid-template-rows:repeat(${ROWS},1fr)">${items.join("")}</div></div>`}).join("");
+      <div class="dk-list" style="grid-template-rows:repeat(${ROWS},var(--dkrow))">${items.join("")}</div></div>`}).join("");
   return `${hd("AI4U - AI UNTUK SEMUA","Dashboard ilmu",plate("ISNIN 19 OKT 2026 · 2.00 – 5.00 PETANG · GOOGLE MEET"))}
   <div class="body col" style="gap:12px;min-height:0">
     <div class="dk-kpi">${kpi.map(k=>`<div class="card dk-tile"><div class="dk-v">${k[1]}</div><div class="col" style="gap:0"><div class="dk-l">${k[0]}</div><div class="dk-s">${k[2]}</div></div></div>`).join("")}</div>
-    <div class="dk-grid" style="grid-template-columns:repeat(${PCOLS.length},minmax(0,1fr))">${cols}</div>
+    <div class="dk-wrap"><div class="dk-grid" style="grid-template-columns:repeat(${PCOLS.length},minmax(0,1fr))">${cols}</div></div>
   </div>`},{dyn:1});
 add("K0","Tetapan fasilitator & pautan",()=>`
   ${hd("Untuk fasilitator","Tetapan pautan &amp; mod mengajar",plate("DISIMPAN DALAM BROWSER INI"))}
