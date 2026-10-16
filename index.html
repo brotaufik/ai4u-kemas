@@ -2264,7 +2264,7 @@ pcard("L4","Kiraan ROI yang jujur",15,()=>`
 
 /* ---------- L5 · SESI 4 MAKMAL 2 ---------- */
 sec("L5","S2 · Sesi 4 · Makmal 2","2.00 – 3.15 petang",{badge:"S4"});
-const PRS=[["P","Peranan","Siapa ejen ini dan untuk siapa ia bekerja","Anda pembantu analisis kepada Penolong Pegawai Pembangunan Masyarakat, Pejabat KEMAS Daerah Hilir Perak."],["R","Rujukan","Sumber yang dibenarkan, dan hanya itu","Guna HANYA fail yang dimuat naik dalam Project ini."],["O","Output","Format tepat dengan had panjang","Jadual ringkas + 5 poin, maksimum 200 patah perkataan, BM rasmi."],["S","Sekatan","Apa yang TIDAK boleh dilakukan","Jangan reka angka, nama, tarikh atau nombor pekeliling. Jangan beri keputusan muktamad."],["E","Eskalasi","Bila mesti berhenti dan bertanya","Jika maklumat bercanggah atau tiada, berhenti dan nyatakan apa yang diperlukan."],["S","Semakan","Cara melaporkan andaian dan keyakinan","Akhiri setiap jawapan dengan: Andaian, Tahap keyakinan (Tinggi/Sederhana/Rendah), Perkara untuk [SEMAK]."]];
+const PRS=[["P","Peranan","Siapa ejen ini dan untuk siapa ia bekerja","Anda pembantu analisis kepada Penyelia Pendidikan Kemahiran, Pejabat KEMAS Daerah Hilir Perak."],["R","Rujukan","Sumber yang dibenarkan, dan hanya itu","Guna HANYA fail yang dimuat naik dalam Project ini."],["O","Output","Format tepat dengan had panjang","Jadual ringkas + 5 poin, maksimum 200 patah perkataan, BM rasmi."],["S","Sekatan","Apa yang TIDAK boleh dilakukan","Jangan reka angka, nama, tarikh atau nombor pekeliling. Jangan beri keputusan muktamad."],["E","Eskalasi","Bila mesti berhenti dan bertanya","Jika maklumat bercanggah atau tiada, berhenti dan nyatakan apa yang diperlukan."],["S","Semakan","Cara melaporkan andaian dan keyakinan","Akhiri setiap jawapan dengan: Andaian, Tahap keyakinan (Tinggi/Sederhana/Rendah), Perkara untuk [SEMAK]."]];
 pcard("L5","Rangka arahan sistem P-R-O-S-E-S",10,()=>`
   ${H2("Sesi 4 · Makmal 2","Rangka arahan sistem P-R-O-S-E-S",10)}
   <div class="body col" style="gap:10px">${PRS.map((x,i)=>`<div class="card ps row" style="gap:16px;align-items:center;padding:10px 16px;${i>=3?"outline:2px solid var(--accent);":""}"><span class="num" style="width:42px;height:42px;font-size:20px;flex:none">${x[0]}</span><b class="t21" style="flex:0 0 140px">${x[1]}</b><span class="t19 muted" style="flex:1">${x[2]}</span></div>`).join("")}
@@ -2324,7 +2324,7 @@ pcard("L6","Aktiviti S5.1: Daftar ejen saya",10,()=>`
   <div class="body row" style="gap:22px">
     <div class="card ps col" style="flex:1.3;gap:8px"><div class="gform" style="grid-template-columns:190px 1fr">
       <label for="pk-dj1">Nama ejen</label>${pinp("dj1","Contoh: Ejen Laporan Kehadiran TABIKA")}
-      <label for="pk-dj2">Pemilik (jawatan)</label>${pinp("dj2","Contoh: Penolong Pegawai Pembangunan Masyarakat")}
+      <label for="pk-dj2">Pemilik (jawatan)</label>${pinp("dj2","Contoh: Penyelia Pendidikan Kemahiran")}
       <label for="pk-dj3">Tujuan</label>${pinp("dj3","Satu ayat")}
       <label for="pk-dj4">Data dibenarkan</label>${pinp("dj4","Fail dan sumber; tahap klasifikasi")}
       <label for="pk-dj5">Alat &amp; capaian</label>${pinp("dj5","Baca sahaja / baca-tulis")}
@@ -4675,8 +4675,8 @@ pcard("KE","Aktiviti 2.1: Baiki prompt kabur",7,()=>`
       ${box("Langkah",steps(["Pilih satu prompt di atas.","Tambah empat elemen PTKF di sebelah kanan.","Salin ke ChatGPT dan bandingkan dengan jawapan prompt asal."],"t17"))}
     </div>
     <div class="card ps col" style="flex:1.2;gap:10px"><div class="h4">Prompt PTKF saya</div>
-      <div class="gform" style="grid-template-columns:120px 1fr;gap:10px"><label>P · Peranan</label>${pinp("bkP","Anda Penolong Pegawai Pembangunan Masyarakat…")}<label>T · Tugas</label>${pinp("bkT","Draf surat jemputan / ringkasan / hebahan…")}<label>K · Konteks</label>${pinp("bkK","Program apa, bila, di mana, untuk siapa")}<label>F · Format</label>${pinp("bkF","BM rasmi, 1 muka surat / 5 poin / 120 perkataan")}</div>
-      <div class="bub ya t16" style="margin-top:auto"><b>Contoh siap:</b> "Anda Penolong Pegawai Pembangunan Masyarakat, Pejabat KEMAS Daerah Hilir Perak. Draf hebahan Program Keluarga Sihat pada 2 Nov, 9 pagi, di Dewan Orang Ramai, untuk ibu bapa TABIKA. Nada mesra, maksimum 100 perkataan, 3 hashtag."</div>
+      <div class="gform" style="grid-template-columns:120px 1fr;gap:10px"><label>P · Peranan</label>${pinp("bkP","Anda Penyelia Pendidikan Kemahiran KEMAS…")}<label>T · Tugas</label>${pinp("bkT","Draf surat jemputan / ringkasan / hebahan…")}<label>K · Konteks</label>${pinp("bkK","Program apa, bila, di mana, untuk siapa")}<label>F · Format</label>${pinp("bkF","BM rasmi, 1 muka surat / 5 poin / 120 perkataan")}</div>
+      <div class="bub ya t16" style="margin-top:auto"><b>Contoh siap:</b> "Anda Penyelia Pendidikan Kemahiran KEMAS. Draf hebahan Program Kursus Jangka Pendek (Jahitan) pada 2 Nov, 9 pagi, di Dewan Orang Ramai, untuk pelajar lepasan sekolah, suri rumah dan sesiapa sahaja yang berminat. Nada mesra, maksimum 100 perkataan, 3 hashtag."</div>
     </div>
   </div>`);
 pcard("KE","Sumber GitHub untuk belajar sendiri",0,()=>`
@@ -4693,7 +4693,7 @@ pcard("KE","M2 · Galeri Prompt Makeover KEMAS",0,()=>`
   ${cardHd(KEH,"Galeri Prompt Makeover KEMAS",0,plate("SEBELUM › SELEPAS"))}
   <div class="body"><div class="g2" style="gap:14px 18px">${[
     ["📄 Laporan program TABIKA","Buat laporan program TABIKA.","Anda Pendidik Masyarakat TABIKA KEMAS, Daerah Hilir Perak. Sediakan laporan ringkas Hari Sukan TABIKA, 12 Okt 2026, Padang Bagan Datuk. Data: 45 murid, 60 ibu bapa, 8 acara, kos RM1,200. Format: objektif, pelaksanaan, pencapaian, isu, cadangan. BM rasmi, 1 muka surat."],
-    ["✉️ Surat jemputan","Tulis surat jemputan.","Anda Penolong Pegawai Pembangunan Masyarakat, Pejabat KEMAS Daerah Hilir Perak. Draf surat jemputan rasmi kepada Penghulu Mukim untuk merasmikan Karnival Keluarga KEMAS, 8 Nov 2026, 9 pagi, Dewan Orang Ramai Hutan Melintang. Format surat rasmi kerajaan, 3 perenggan, ruang tandatangan."],
+    ["✉️ Surat jemputan","Tulis surat jemputan.","Anda Penyelia Kanan, Pejabat KEMAS Daerah Hilir Perak. Draf surat jemputan rasmi kepada Penghulu Mukim untuk merasmikan Karnival Keluarga KEMAS, 8 Nov 2026, 9 pagi, Dewan Orang Ramai Hutan Melintang. Format surat rasmi kerajaan, 3 perenggan, ruang tandatangan."],
     ["📊 Rangka deck Gamma","Buat slaid tentang KEMAS.","Anda Penolong Pegawai Pendidikan Awal Kanak-Kanak (PPPAK), Pejabat KEMAS Daerah Hilir Perak. Sediakan rangka 8 slaid taklimat ibu bapa baharu TABIKA 2027. Satu mesej setiap slaid, maksimum 5 baris, BM mesra. Format: Slaid N, tajuk dan 3 poin. Slaid akhir: hubungi kami."],
     ["📘 Ringkasan pekeliling","Ringkaskan dokumen ni.","Berdasarkan sumber yang dimuat naik sahaja, ringkaskan pekeliling ini kepada 5 tindakan untuk Pendidik Masyarakat TABIKA. Nyatakan tarikh kuat kuasa dan perenggan rujukan. Jika tiada maklumat, tulis: tidak dinyatakan dalam sumber."]
   ].map(x=>`<div class="card ps col" style="gap:8px"><div class="t18 b">${x[0]}</div><div class="bub no t15" style="padding:8px 12px"><b>Sebelum:</b> “${x[1]}”</div>${code(x[2],true)}</div>`).join("")}</div></div>`);
