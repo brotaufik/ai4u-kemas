@@ -56,6 +56,10 @@ input[type=text]:focus,select:focus,textarea:focus{outline:2px solid var(--acc2)
 .banner.r{background:color-mix(in srgb,var(--bad) 16%,transparent);border-color:var(--bad)}
 .banner.i{background:color-mix(in srgb,var(--acc2) 12%,transparent);border-color:var(--acc2)}
 .out{margin-top:14px}
+.outgrid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.outgrid .panel h2 b{width:auto;padding:0 6px}
+.btn.wide{width:100%;justify-content:center;margin-top:6px}
+#hint{color:var(--bad);font-weight:700}
 .outbox{background:var(--panel2);border:1px solid var(--line);border-radius:12px;padding:14px;font-size:15.5px;line-height:1.65;min-height:110px;white-space:pre-wrap}
 .outbox.empty{color:var(--muted);font-style:italic}
 .meta{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;color:var(--muted);font-size:12.5px;margin:6px 2px}
@@ -77,7 +81,7 @@ footer{margin:26px 0 10px;color:var(--muted);font-size:12.5px;text-align:center;
 .embed #portalLink,.embed #themeBtn{display:none}
 .embed .wrap{padding:10px}
 .embed header{padding-top:0}
-@media (max-width:1000px){.fgrid{grid-template-columns:repeat(5,minmax(0,1fr))}.cols{grid-template-columns:1fr 1fr}}
+@media (max-width:1000px){.fgrid{grid-template-columns:repeat(5,minmax(0,1fr))}.cols{grid-template-columns:1fr 1fr}.outgrid{grid-template-columns:1fr}}
 @media (max-width:680px){.fgrid{grid-template-columns:repeat(3,minmax(0,1fr))}.cols{grid-template-columns:1fr}.brand h1{font-size:20px}}
 </style>
 </head>
@@ -86,13 +90,9 @@ footer{margin:26px 0 10px;color:var(--muted);font-size:12.5px;text-align:center;
 <header>
   <div class="brand">
     <h1>NotebookLM Prompt Generator <span>by Bro</span></h1>
-    <p>Jana prompt untuk 9 fungsi Studio NotebookLM · Kursus AI4U KEMAS</p>
+    <p>Prompt BM dan English untuk 9 fungsi Studio NotebookLM · Kursus AI4U KEMAS</p>
   </div>
   <div class="hbtns">
-    <div class="seg" role="group" aria-label="Bahasa prompt">
-      <button type="button" data-lang="bm" aria-pressed="true">BM</button>
-      <button type="button" data-lang="en" aria-pressed="false">EN</button>
-    </div>
     <button type="button" class="btn" id="themeBtn" aria-label="Tukar tema">🌓 Tema</button>
     <a class="btn" href="https://notebooklm.google.com" target="_blank" rel="noopener">Buka NotebookLM ↗</a>
     <a class="btn" id="portalLink" href="../index.html">← Portal AI4U</a>
@@ -132,14 +132,25 @@ footer{margin:26px 0 10px;color:var(--muted);font-size:12.5px;text-align:center;
   </section>
 </div>
 
-<section class="panel out">
-  <h2><b>✦</b> Prompt yang dijana</h2>
-  <div class="outbox empty" id="outbox" aria-live="polite"></div>
-  <div class="meta"><span id="wc"></span><span id="hint"></span></div>
+<section class="out">
+  <div class="outgrid">
+    <div class="panel">
+      <h2><b>BM</b> PROMPT BM</h2>
+      <div class="outbox" id="outBM" aria-live="polite"></div>
+      <div class="meta"><span id="wcBM"></span></div>
+      <button type="button" class="btn pri wide" id="copyBM">📋 Copy Prompt BM</button>
+    </div>
+    <div class="panel">
+      <h2><b>EN</b> ENGLISH PROMPT</h2>
+      <div class="outbox" id="outEN" aria-live="polite"></div>
+      <div class="meta"><span id="wcEN"></span></div>
+      <button type="button" class="btn pri wide" id="copyEN">📋 Copy English Prompt</button>
+    </div>
+  </div>
+  <div class="meta"><span id="hint"></span></div>
   <div id="fnNote"></div>
   <div class="actions">
-    <button type="button" class="btn" id="shuffleBtn">🔀 Shuffle</button>
-    <button type="button" class="btn pri grow" id="copyBtn">📋 Copy prompt</button>
+    <button type="button" class="btn grow" id="shuffleBtn">🔀 Shuffle ayat</button>
     <button type="button" class="btn" id="resetBtn">↺ Reset</button>
   </div>
 </section>
@@ -316,10 +327,11 @@ function renderB(){const F=FUNCS.find(f=>f.id===S.fn);$("fnTitle").textContent=F
 function renderC(){const F=FUNCS.find(f=>f.id===S.fn);$("panelC").classList.toggle("hidden",!F.vis);const h=$("visFields");h.innerHTML="";
  VIS.forEach(d=>{const w=document.createElement("div");w.className="field";w.innerHTML=`<span class="flabel">${d.l}</span><div class="chips"></div>`;chipGroup(w.querySelector(".chips"),d.o,S.vis[d.k],i=>{S.vis[d.k]=i;renderC();update()},{optional:!!d.opt});h.appendChild(w)});
  $("temaBanner").innerHTML=(S.vis.tema!=null&&TEMA[S.vis.tema]&&TEMA[S.vis.tema][1])?'<div class="banner y">⚠️ Watak berhak cipta. Jangan guna untuk bahan rasmi, hebahan awam atau media sosial KEMAS. Untuk latihan dan bahan dalaman sahaja.</div>':""}
-function update(){const r=gen(S);const ob=$("outbox");
- if(r.missing.length){ob.textContent=r.text;ob.classList.remove("empty");$("hint").textContent="Isi: "+r.missing.join(", ")}else{ob.textContent=r.text;ob.classList.remove("empty");$("hint").textContent=r.data?"":"Pilih warna data sumber"}
- $("wc").textContent=r.words+" patah perkataan";$("copyBtn").disabled=!r.canCopy;
- document.querySelectorAll("[data-lang]").forEach(b=>b.setAttribute("aria-pressed",S.lang===b.dataset.lang?"true":"false"))}
+function update(){const rb=gen(Object.assign({},S,{lang:"bm"})),re=gen(Object.assign({},S,{lang:"en"}));
+ $("outBM").textContent=rb.text;$("outEN").textContent=re.text;
+ $("wcBM").textContent=rb.words+" patah perkataan";$("wcEN").textContent=re.words+" words";
+ $("hint").textContent=rb.missing.length?"Isi dahulu: "+rb.missing.join(", "):(rb.data?"":"Pilih warna data sumber sebelum Copy");
+ $("copyBM").disabled=!rb.canCopy;$("copyEN").disabled=!re.canCopy}
 function renderSaved(){const L=lsGet(KEY,[]);const h=$("slist");h.innerHTML="";if(!L.length){h.innerHTML='<li><em>Tiada prompt tersimpan.</em></li>';return}
  L.forEach((it,i)=>{const li=document.createElement("li");const F=FUNCS.find(f=>f.id===it.state.fn)||{ic:""};li.innerHTML=`<span>${F.ic} <b></b></span><em>${new Date(it.t).toLocaleDateString("ms-MY")}</em>`;li.querySelector("b").textContent=it.name;
   const lo=document.createElement("button");lo.className="btn mini";lo.textContent="Muat";lo.onclick=()=>{S=Object.assign(defaults(),JSON.parse(JSON.stringify(it.state)));renderAll();toast("Dimuat: "+it.name)};
@@ -332,9 +344,9 @@ function bind(){
  $("masalah").oninput=e=>{S.masalah=e.target.value;update()};$("audCustom").oninput=e=>{S.audCustom=e.target.value;update()};$("fokus").oninput=e=>{S.fokus=e.target.value;update()};
  $("nada").onchange=e=>{S.nada=+e.target.value;update()};
  document.querySelectorAll("#datab button").forEach(b=>b.onclick=()=>{S.data=b.dataset.v;renderA();update()});
- document.querySelectorAll("[data-lang]").forEach(b=>b.onclick=()=>{S.lang=b.dataset.lang;update()});
- $("shuffleBtn").onclick=()=>{shuffle();update();toast("Variasi ayat ditukar")};
- $("copyBtn").onclick=async()=>{const r=gen(S);if(!r.canCopy)return;toast(await copyText(r.text)?"Prompt disalin":"Gagal salin, sila salin manual")};
+  $("shuffleBtn").onclick=()=>{shuffle();update();toast("Variasi ayat ditukar")};
+ const doCopy=async L=>{const r=gen(Object.assign({},S,{lang:L}));if(!r.canCopy)return;toast(await copyText(r.text)?(L==="bm"?"Prompt BM disalin":"English prompt copied"):"Gagal salin, sila salin manual")};
+ $("copyBM").onclick=()=>doCopy("bm");$("copyEN").onclick=()=>doCopy("en");
  $("resetBtn").onclick=()=>{S=defaults();renderAll();toast("Semua pilihan direset")};
  $("saveBtn").onclick=()=>{const name=$("saveName").value.trim()||("Prompt "+new Date().toLocaleString("ms-MY"));const A=lsGet(KEY,[]);A.unshift({name,t:Date.now(),state:JSON.parse(JSON.stringify(S))});toast(lsSet(KEY,A)?"Disimpan":"Tidak dapat simpan dalam browser ini");$("saveName").value="";renderSaved()};
  $("exportBtn").onclick=()=>{const blob=new Blob([JSON.stringify(lsGet(KEY,[]),null,2)],{type:"application/json"});const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="nlm-prompts-ai4u.json";a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000)};
