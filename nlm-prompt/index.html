@@ -32,6 +32,7 @@ header{display:flex;align-items:center;justify-content:space-between;gap:12px;fl
 .ftile .ic{font-size:24px}
 .ftile[aria-pressed="true"]{border-color:var(--fc);background:color-mix(in srgb,var(--fc) 22%,var(--panel));box-shadow:0 0 0 2px var(--fc)}
 .cols{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.cols.two{grid-template-columns:repeat(2,minmax(0,1fr))}
 .panel{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px;box-shadow:var(--shadow);min-width:0}
 .panel h2{margin:0 0 10px;font-size:15px;display:flex;align-items:center;gap:8px}
 .panel h2 b{display:inline-grid;place-items:center;width:22px;height:22px;border-radius:6px;background:var(--acc);color:#111827;font-size:12px}
@@ -56,6 +57,15 @@ input[type=text]:focus,select:focus,textarea:focus{outline:2px solid var(--acc2)
 .banner.r{background:color-mix(in srgb,var(--bad) 16%,transparent);border-color:var(--bad)}
 .banner.i{background:color-mix(in srgb,var(--acc2) 12%,transparent);border-color:var(--acc2)}
 .out{margin-top:14px}
+.subh{display:flex;align-items:center;gap:6px;font:800 11.5px "Plus Jakarta Sans",system-ui,sans-serif;letter-spacing:.8px;text-transform:uppercase;color:var(--acc2);margin:4px 0 8px;padding-bottom:5px;border-bottom:1px dashed var(--line)}
+.subh.p2{margin-top:14px}
+.step1{margin-bottom:14px}
+.uilist{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;list-style:none;margin:0;padding:0}
+.uilist li{background:var(--panel2);border:1px solid var(--line);border-left:4px solid var(--acc2);border-radius:10px;padding:8px 10px;font-size:13.5px;line-height:1.35}
+.uilist li span{display:block;color:var(--muted);font-size:12px;font-weight:600}
+.uilist li b{font-size:14.5px}
+.boxname{margin:0 0 10px;padding:10px 14px;border-radius:12px;background:color-mix(in srgb,var(--acc) 14%,var(--panel));border:1px solid var(--acc);font-size:14px}
+.boxname b{font-style:italic}
 .outgrid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
 .outgrid .panel h2 b{width:auto;padding:0 6px}
 .btn.wide{width:100%;justify-content:center;margin-top:6px}
@@ -82,8 +92,8 @@ footer{margin:26px 0 10px;color:var(--muted);font-size:12.5px;text-align:center;
 .embed header{justify-content:flex-end}
 .embed .wrap{padding:10px}
 .embed header{padding-top:0}
-@media (max-width:1000px){.fgrid{grid-template-columns:repeat(5,minmax(0,1fr))}.cols{grid-template-columns:1fr 1fr}.outgrid{grid-template-columns:1fr}}
-@media (max-width:680px){.fgrid{grid-template-columns:repeat(3,minmax(0,1fr))}.cols{grid-template-columns:1fr}.brand h1{font-size:20px}}
+@media (max-width:1000px){.uilist{grid-template-columns:1fr 1fr}.fgrid{grid-template-columns:repeat(5,minmax(0,1fr))}.cols{grid-template-columns:1fr 1fr}.outgrid{grid-template-columns:1fr}}
+@media (max-width:680px){.fgrid{grid-template-columns:repeat(3,minmax(0,1fr))}.cols,.cols.two{grid-template-columns:1fr}.uilist{grid-template-columns:1fr}.brand h1{font-size:20px}}
 </style>
 </head>
 <body>
@@ -91,7 +101,7 @@ footer{margin:26px 0 10px;color:var(--muted);font-size:12.5px;text-align:center;
 <header>
   <div class="brand">
     <h1>NotebookLM Prompt Generator <span>by Bro</span></h1>
-    <p>Prompt BM dan English untuk 9 fungsi Studio NotebookLM · Kursus AI4U KEMAS</p>
+    <p>Tetapan UI + prompt BM dan English untuk 9 fungsi Studio NotebookLM · Kursus AI4U KEMAS</p>
   </div>
   <div class="hbtns">
     <button type="button" class="btn" id="themeBtn" aria-label="Tukar tema">🌓 Tema</button>
@@ -127,13 +137,18 @@ footer{margin:26px 0 10px;color:var(--muted);font-size:12.5px;text-align:center;
   </section>
 
   <section class="panel" id="panelC">
-    <h2><b>C</b> Visual Style</h2>
+    <h2><b>C</b> Visual dalam prompt</h2>
     <div id="visFields"></div>
     <div id="temaBanner"></div>
   </section>
 </div>
 
 <section class="out">
+  <div class="panel step1">
+    <h2><b>1</b> LANGKAH 1 · Klik tetapan ini dalam NotebookLM</h2>
+    <ul class="uilist" id="uiList"></ul>
+  </div>
+  <div class="boxname">✍️ <b style="font-style:normal">LANGKAH 2</b> · Copy satu prompt dan tampal dalam kotak <b id="boxName"></b></div>
   <div class="outgrid">
     <div class="panel">
       <h2><b>BM</b> PROMPT BM</h2>
@@ -189,57 +204,67 @@ const LATAR=[["TIADA",null,null],["White","putih","white"],["Light Grey","kelabu
 const FON=[["TIADA",null,null],["Modern Sans-serif","sans-serif moden","modern sans-serif"],["Classic Serif","serif klasik","classic serif"],["Rounded","rounded","rounded, friendly"],["Handwritten","handwritten","handwritten"],["Bold Display","bold display","bold display"],["Monospace","monospace","monospace"],["Crayon","crayon","crayon"],["Marker","marker","marker"],["Elegant Script","elegant script","elegant script"],["Slab Serif","slab serif","strong slab serif"],["Clean Geometric","clean geometric","clean geometric"]];
 const MOTIF=[["TIADA",null,null],["Corak batik","corak batik","batik patterns"],["Motif Sarawak","motif tradisional Sarawak","traditional Sarawak motifs"],["Suasana kampung","suasana kampung","a Malaysian village setting"],["Kelas TABIKA","suasana kelas TABIKA","a TABIKA classroom setting"],["Bandar moden Malaysia","bandar moden Malaysia","a modern Malaysian cityscape"],["Songket","corak songket","songket patterns"],["Wau dan gasing","wau dan gasing","wau kites and gasing tops"],["Rumah panjang","rumah panjang Sarawak","Sarawak longhouses"],["Anyaman mengkuang","corak anyaman mengkuang","mengkuang weaving patterns"],["Sawah padi","pemandangan sawah padi","paddy field scenery"],["Hutan hujan tropika","hutan hujan tropika","a tropical rainforest"]];
 const TEMA=[["TIADA",null,null],["Upin Ipin","Upin Ipin","Upin Ipin"],["BoBoiBoy","BoBoiBoy","BoBoiBoy"],["Ejen Ali","Ejen Ali","Ejen Ali"],["Mechamato","Mechamato","Mechamato"],["Didi & Friends","Didi & Friends","Didi & Friends"],["Pada Zaman Dahulu","Pada Zaman Dahulu","Pada Zaman Dahulu"],["Marvel","Marvel Superheroes","Marvel superheroes"],["Disney","Disney","Disney"],["Studio Ghibli","Studio Ghibli","Studio Ghibli"],["Lego","Lego","Lego"],["Minecraft","Minecraft","Minecraft"],["Pokémon","Pokémon","Pokémon"],["Hello Kitty","Hello Kitty","Hello Kitty"],["Doraemon","Doraemon","Doraemon"]];
+const VSTYLE=[["Auto-select"],["Kawaii"],["Clay"],["Sketch Note"],["Anime"]];
 const ORI=[["Landscape","landscape","landscape"],["Portrait","portrait","portrait"]];
-const TAHAP=[["Easy","easy","easy"],["Medium","medium","medium"],["Hard","hard","hard"]];
+const TAHAP=[["Easy"],["Medium"],["Hard"]];
 const N=a=>a.map(x=>[String(x),String(x),String(x)]);
-
+const LANG=[["Bahasa Melayu"],["English"]];
+const NUMQ=[["Fewer"],["Standard"],["More"]];
+const IMG=[["Include Images"],["Text Only"]];
+// ui:true = butang dalam UI NotebookLM (Langkah 1). Tanpa ui = isi prompt (Langkah 2).
+const UL={ui:true,k:"lang",l:"Choose language",o:LANG};
 const FUNCS=[
- {id:"audio",ic:"🎧",name:"Audio Overview",c:"#2563eb",vis:false,nbm:"satu Audio Overview",nen:"Audio Overview",
-  fields:[{k:"format",l:"Format",t:"chips",o:[["Deep Dive","dalam format Deep Dive","as a deep-dive discussion"],["Brief","dalam format Brief","as a brief summary"],["Critique","dalam format Critique","as a critique"],["Debate","dalam format Debate","as a debate"]]},
-          {k:"len",l:"Length",t:"chips",o:[["Shorter","dengan length Shorter","with a shorter length"],["Default","dengan length Default","with the default length"],["Longer","dengan length Longer","with a longer length"]],d:1},
+ {id:"audio",ic:"🎧",name:"Audio Overview",c:"#2563eb",box:"What should the AI hosts focus on in this episode?",nbm:"Episod ini",nen:"This episode",
+  fields:[{ui:true,k:"format",l:"Format",o:[["Deep Dive"],["Brief"],["Critique"],["Debate"]]},UL,
+          {ui:true,k:"len",l:"Length",o:[["Short"],["Default"]],d:1},
           {k:"must",l:"Perkara mesti disebut",t:"text",ph:"Contoh: tarikh tutup permohonan dan syarat umur"}]},
- {id:"video",ic:"🎬",name:"Video Overview",c:"#16a34a",vis:true,nbm:"satu Video Overview",nen:"Video Overview",
-  fields:[{k:"format",l:"Format",t:"chips",o:[["Explainer","dalam format Explainer","as an explainer"],["Brief","dalam format Brief","as a brief"]]},
-          {k:"msg",l:"Bilangan key message",t:"chips",o:N([3,4,5])}]},
- {id:"reports",ic:"📑",name:"Reports",c:"#db2777",vis:false,nbm:"satu laporan",nen:"report",
-  fields:[{k:"jenis",l:"Report Type",t:"chips",o:[["Briefing Doc","Briefing Doc","a briefing doc"],["Study Guide","Study Guide","a study guide"],["FAQ","FAQ","an FAQ"],["Timeline","Timeline","a timeline"],["Executive Summary","Executive Summary","an executive summary"],["Custom","format custom","a custom format"]]},
-          {k:"pjg",l:"Max Length",t:"chips",o:[["1 page","tidak melebihi 1 page","no longer than one page"],["2 pages","tidak melebihi 2 pages","no longer than two pages"]]},
+ {id:"video",ic:"🎬",name:"Video Overview",c:"#16a34a",box:"Custom topic",nbm:"Video ini",nen:"This video",
+  fields:[{ui:true,k:"format",l:"Format",o:[["Cinematic"],["Short"],["Explainer"]],d:2},UL,
+          {k:"msg",l:"Bilangan key message",o:N([3,4,5])},
+          {k:"must",l:"Perkara mesti ditunjukkan",t:"text",ph:"Contoh: langkah pendaftaran dan dokumen wajib"}]},
+ {id:"reports",ic:"📑",name:"Reports",c:"#db2777",box:"Kotak arahan template (klik ✏️)",nbm:"Laporan ini",nen:"This report",ownLang:true,
+  fields:[{ui:true,k:"format",l:"Format",o:[["Document"],["Interactive"]]},
+          {ui:true,k:"tpl",l:"Template",o:[["Create Your Own"],["Briefing Doc"],["Study Guide"],["Blog Post"]]},
+          {k:"pjg",l:"Max Length",o:[["1 page","tidak melebihi 1 page","no longer than one page"],["2 pages","tidak melebihi 2 pages","no longer than two pages"]]},
           {k:"sek",l:"Sections",t:"text",ph:"Contoh: latar belakang, isu, cadangan, tindakan"}]},
- {id:"quiz",ic:"❓",name:"Quiz",c:"#0891b2",vis:false,nbm:"satu kuiz",nen:"quiz",
-  fields:[{k:"n",l:"Bilangan soalan",t:"chips",o:N([5,10,15]),d:1},
-          {k:"tahap",l:"Difficulty",t:"chips",o:TAHAP,d:1},
+ {id:"quiz",ic:"❓",name:"Quiz",c:"#0891b2",box:"What should the topic be?",nbm:"Kuiz ini",nen:"This quiz",
+  fields:[{ui:true,k:"n",l:"Number of Questions",o:NUMQ,d:1},{ui:true,k:"tahap",l:"Level of Difficulty",o:TAHAP,d:1},
+          {ui:true,k:"img",l:"Include Images",o:IMG,d:1},
+          {ui:true,k:"qt",l:"Question Types",o:[["Multiple Choice"],["Multiple Select"],["Fill in the Blank"],["Short Answer"]],multi:true,d:[0],cols:2},UL,
           {k:"topik",l:"Hadkan kepada topik",t:"text",ph:"Contoh: tarikh kuat kuasa dan tanggungjawab pegawai"}]},
- {id:"table",ic:"📋",name:"Data Table",c:"#3b82f6",vis:false,nbm:"satu Data Table",nen:"data table",
-  fields:[{k:"lajur",l:"Columns (pisahkan dengan koma)",t:"text",ph:"Contoh: Tindakan, Pegawai, Tarikh akhir, Sumber"},
-          {k:"susun",l:"Sort rows by",t:"text",ph:"Contoh: tarikh akhir paling awal"}]},
- {id:"slides",ic:"🖼️",name:"Slide Deck",c:"#c026d3",vis:true,nbm:"satu slide deck",nen:"slide deck",
-  fields:[{k:"ori",l:"Orientation",t:"chips",o:ORI},
-          {k:"n",l:"Bilangan slaid",t:"chips",o:N([4,8,10,12,16,20]),d:1},
-          {k:"satu",l:"One key message per slide",t:"chips",o:[["Ya","ya","yes"],["Tidak","tidak","no"]]}]},
- {id:"mindmap",ic:"🧠",name:"Mind Map",c:"#7c3aed",vis:false,nbm:"satu Mind Map",nen:"mind map",
-  fields:[{k:"pusat",l:"Central Node",t:"text",ph:"Contoh: Garis Panduan Program TABIKA 2027"},
-          {k:"aras",l:"Branch Depth",t:"chips",o:[["2 levels","2","2"],["3 levels","3","3"]]}]},
- {id:"flash",ic:"🃏",name:"Flashcards",c:"#ea580c",vis:false,nbm:"satu set Flashcards",nen:"set of flashcards",
-  fields:[{k:"n",l:"Bilangan kad",t:"chips",o:N([10,20,30])},
-          {k:"tahap",l:"Difficulty",t:"chips",o:TAHAP,d:1},
-          {k:"fokus",l:"Card Focus",t:"chips",o:[["Terms","istilah dan definisi","terms and definitions"],["Dates","tarikh penting","key dates"],["Procedures","langkah prosedur","procedural steps"]]}]},
- {id:"info",ic:"📊",name:"Infographic",c:"#f59e0b",vis:true,nbm:"satu infografik",nen:"infographic",
-  fields:[{k:"layout",l:"Layout",t:"chips",o:[["Single Column","single column","a single column"],["2 Columns","2 columns","two columns"],["3 Columns","3 columns","three columns"],["Grid 2x2","grid 2x2","a 2x2 grid"],["Grid 3x3","grid 3x3","a 3x3 grid"],["Bento","bento","a bento layout"],["Freeform","freeform","a freeform layout"],["Timeline","timeline","a timeline layout"],["Flowchart","flowchart","a flowchart layout"]]},
-          {k:"ori",l:"Orientation",t:"chips",o:ORI,d:1}]}
+ {id:"table",ic:"📋",name:"Data Table",c:"#3b82f6",box:"Describe the data table you want to create",nbm:"Data table ini",nen:"This data table",
+  fields:[UL,{k:"lajur",l:"Columns (pisahkan dengan koma)",t:"text",ph:"Contoh: Tindakan, Pegawai, Tarikh akhir, Sumber"},
+          {k:"susun",l:"Group / sort rows by",t:"text",ph:"Contoh: daerah, kemudian tarikh akhir"}]},
+ {id:"slides",ic:"🖼️",name:"Slide Deck",c:"#c026d3",box:"Describe the slide deck you want to create",nbm:"Slide deck ini",nen:"This slide deck",vis:["gaya","palet","latar","fon","motif","tema"],
+  fields:[{ui:true,k:"format",l:"Format",o:[["Detailed Deck"],["Presenter Slides"]]},UL,
+          {ui:true,k:"len",l:"Length",o:[["Short"],["Default"]],d:1},
+          {k:"n",l:"Anggaran bilangan slaid",o:N([4,8,10,12,16,20]),d:1},
+          {k:"outline",l:"Outline (pisahkan dengan koma)",t:"text",ph:"Contoh: latar belakang, syarat, proses, tarikh penting"},
+          {k:"satu",l:"One key message per slide",o:[["Ya"],["Tidak"]]}]},
+ {id:"mindmap",ic:"🧠",name:"Mind Map",c:"#7c3aed",box:"What should the topic be?",nbm:"Mind map ini",nen:"This mind map",
+  fields:[UL,{k:"pusat",l:"Central Node",t:"text",ph:"Contoh: Garis Panduan Program TABIKA 2027"},
+          {k:"aras",l:"Branch Depth",o:[["2 levels","2","2"],["3 levels","3","3"]]}]},
+ {id:"flash",ic:"🃏",name:"Flashcards",c:"#ea580c",box:"What should the topic be?",nbm:"Set flashcards ini",nen:"This flashcard set",
+  fields:[{ui:true,k:"n",l:"Number of Cards",o:NUMQ,d:1},{ui:true,k:"tahap",l:"Level of Difficulty",o:TAHAP,d:1},
+          {ui:true,k:"img",l:"Include Images",o:IMG,d:1},UL,
+          {k:"fokus",l:"Card Focus",o:[["Terms","istilah dan definisi","terms and definitions"],["Dates","tarikh penting","key dates"],["Procedures","langkah prosedur","procedural steps"]]}]},
+ {id:"info",ic:"📊",name:"Infographic",c:"#f59e0b",box:"Describe the infographic you want to create",nbm:"Infografik ini",nen:"This infographic",vis:["palet","latar","fon","motif","tema"],
+  fields:[UL,{ui:true,k:"ori",l:"Orientation",o:[["Landscape"],["Portrait"],["Square"]],d:1},
+          {ui:true,k:"vstyle",l:"Visual style",o:VSTYLE,cols:3},
+          {ui:true,k:"detail",l:"Level of detail",o:[["Concise"],["Standard"],["Detailed"]],d:1},
+          {k:"layout",l:"Layout",o:[["Single Column","single column","a single column"],["2 Columns","2 columns","two columns"],["3 Columns","3 columns","three columns"],["Grid 2x2","grid 2x2","a 2x2 grid"],["Grid 3x3","grid 3x3","a 3x3 grid"],["Bento","bento","a bento layout"],["Freeform","freeform","a freeform layout"],["Timeline","timeline","a timeline layout"],["Flowchart","flowchart","a flowchart layout"]]}]}
 ];
 const VIS=[{k:"gaya",l:"Style",o:GAYA},{k:"palet",l:"Colour Palette",o:PALET},{k:"latar",l:"Background",o:LATAR},{k:"fon",l:"Font",o:FON},{k:"motif",l:"Motif tempatan",o:MOTIF},{k:"tema",l:"Tema watak",o:TEMA}];
 
 /* ===== Kolam variasi (teks asal AI4U) ===== */
 const POOL={
- verb:{bm:["Hasilkan","Sediakan","Bina","Jana"],en:["Create","Produce","Generate","Prepare"]},
- link:{bm:["untuk tujuan berikut:","dengan matlamat berikut:","bagi mencapai tujuan ini:","yang dihasilkan untuk tujuan ini:"],en:["for the following purpose:","with this goal:","to achieve this aim:","aimed at the following purpose:"]},
+ link:{bm:["dihasilkan untuk tujuan berikut:","bertujuan untuk","disediakan bagi","dibina untuk"],en:["is for the following purpose:","serves this goal:","is created with this aim:","supports this purpose:"]},
  aud:{bm:["Audiens sasaran ialah {a}.","Ia ditujukan kepada {a}.","Tulis untuk {a}.","Audiens utama: {a}."],en:["The target audience is {a}.","It is aimed at {a}.","Write for {a}.","Primary audience: {a}."]},
  fokus:{bm:["Fokus pada {f}.","Beri tumpuan kepada {f}.","Tekankan {f}.","Utamakan {f}."],en:["Focus on {f}.","Concentrate on {f}.","Emphasise {f}.","Prioritise {f}."]},
  vis:{bm:["Gunakan","Terapkan","Pilih","Gayakan dengan"],en:["Use","Apply","Go for","Style it with"]},
  nada:{bm:["Kekalkan tone {n} sepanjang output.","Sampaikan dengan tone {n}.","Tone keseluruhan: {n}.","Guna tone {n}."],en:["Keep {art} {n} tone throughout.","Deliver it in {art} {n} tone.","Overall tone: {n}.","Use {art} {n} tone."]},
  lang:{bm:["Tulis semua teks dalam Bahasa Melayu standard.","Gunakan Bahasa Melayu yang mudah difahami.","Hasilkan output dalam Bahasa Melayu.","Semua teks mesti dalam Bahasa Melayu."],en:["Write all text in English.","Use clear, plain English.","Produce the output in English.","All text must be in English."]},
- src:{bm:["Gunakan hanya maklumat daripada sumber dalam notebook ini dan nyatakan rujukan bagi setiap angka.","Bergantung sepenuhnya pada sumber dalam notebook ini; jangan tambah fakta luar.","Pastikan setiap fakta dan angka boleh dikesan kembali kepada sumber dalam notebook ini.","Jangan reka maklumat; ambil semua fakta daripada sumber yang dimuat naik sahaja."],en:["Use only information from the sources in this notebook and cite the source for every figure.","Rely entirely on the sources in this notebook; do not add outside facts.","Make sure every fact and figure can be traced back to the sources in this notebook.","Do not invent information; take every fact from the uploaded sources only."]},
- close:{bm:["Pastikan hasilnya jelas dan mudah difahami oleh audiens.","Utamakan kejelasan berbanding kepadatan maklumat.","Hasil akhir mesti kemas dan sedia untuk disemak.","Pastikan mesej utama mudah diingati."],en:["Make sure the result is clear and easy for the audience to understand.","Prioritise clarity over density.","The final result must be tidy and ready for review.","Make the key message easy to remember."]}
+ src:{bm:["Gunakan hanya maklumat daripada sumber dalam notebook ini.","Bergantung sepenuhnya pada sumber dalam notebook ini; jangan tambah fakta luar.","Pastikan setiap fakta boleh dikesan kembali kepada sumber dalam notebook ini.","Jangan reka maklumat; ambil semua fakta daripada sumber yang dimuat naik sahaja."],en:["Use only information from the sources in this notebook.","Rely entirely on the sources in this notebook; do not add outside facts.","Make sure every fact can be traced back to the sources in this notebook.","Do not invent information; take every fact from the uploaded sources only."]}
 };
 const SLOTS=Object.keys(POOL);
 
@@ -251,51 +276,53 @@ function fill(t,o){return t.replace(/\{(\w+)\}/g,(m,k)=>o[k]!=null?o[k]:"")}
 function tidy(t){return t.replace(/\s+([,.;:])/g,"$1").replace(/,\s*,+/g,",").replace(/\.\s*\./g,".").replace(/\s{2,}/g," ").replace(/\s+\./g,".").trim()}
 function hasDoubleComma(t){return/,\s*,/.test(t)||/\.\s*\./.test(t)||/\s,/.test(t)||/\(\s*\)/.test(t)}
 const pick=(arr,i)=>arr[((i%arr.length)+arr.length)%arr.length];
-const optVal=(opts,i,L)=>{const o=opts[i];return o?((L==="en"?o[2]:o[1])||""):""};
+const optVal=(opts,i,L)=>{const o=opts[i];if(!o)return"";if(o.length===1)return o[0];return(L==="en"?o[2]:o[1])||""};
+const listSplit=(s,L)=>joinList(String(s).split(/\s*,\s*/),L);
 
 /* ===== Penjana (pure) ===== */
+function fieldVal(F,fv,k){const fd=F.fields.find(x=>x.k===k);if(!fd)return null;if(fd.k==="lang"&&fd.ui)return fv.lang!=null?fv.lang:0;if(fd.t==="text")return clean(fv[k]);return fv[k]!=null?fv[k]:(fd.d!=null?fd.d:0)}
 function gen(S){
  const L=S.lang==="en"?"en":"bm";const F=FUNCS.find(f=>f.id===S.fn)||FUNCS[0];const v=S.v||{};const P=k=>pick(POOL[k][L],v[k]||0);
  const fv=(S.f&&S.f[F.id])||{};const out=[];const warn=[];
  const masalah=clean(S.masalah);
- // audiens
  const audList=(S.aud||[]).map(i=>optVal(AUD,i,L)).concat(clean(S.audCustom)?[clean(S.audCustom)]:[]);
  const missing=[];if(!masalah)missing.push("Tujuan");if(!audList.length)missing.push("Audiens");
- // pembuka
- const noun=L==="en"?(art(F.nen)+" "+F.nen):F.nbm;
- out.push(masalah?`${P("verb")} ${noun} ${P("link")} ${masalah}.`:`${P("verb")} ${noun}.`);
+ // Langkah 1: tetapan UI NotebookLM
+ const ui=F.fields.filter(fd=>fd.ui).map(fd=>{const val=fieldVal(F,fv,fd.k);const txt=fd.multi?((Array.isArray(val)?val:(fd.d||[])).map(i=>fd.o[i]&&fd.o[i][0]).filter(Boolean).join(", ")||"(pilih sekurang-kurangnya satu)"):(fd.o[val]?fd.o[val][0]:"");return[fd.l,txt]});
+ ui.push(["Sources","tanda sumber berkaitan sahaja"]);
+ // Langkah 2: prompt kotak teks
+ const noun=L==="en"?F.nen:F.nbm;
+ out.push(`${noun} ${P("link")} ${masalah||(L==="en"?"[fill in purpose]":"[isi tujuan]")}.`);
  if(audList.length)out.push(fill(P("aud"),{a:joinList(audList,L)}));
  if(clean(S.fokus))out.push(fill(P("fokus"),{f:clean(S.fokus)}));
- // butiran fungsi
- const g=(k)=>{const fd=F.fields.find(x=>x.k===k);if(!fd)return"";if(fd.t==="text")return clean(fv[k]);const i=fv[k]!=null?fv[k]:(fd.d||0);return optVal(fd.o,i,L)};
+ const g=k=>{const fd=F.fields.find(x=>x.k===k);if(!fd)return"";const val=fieldVal(F,fv,k);if(fd.t==="text")return val;return optVal(fd.o,val,L)};
+ const en=L==="en";
  const D={
-  audio(){const a=[g("format"),g("len")].filter(Boolean);if(a.length)out.push(L==="en"?`Present it ${a.join(" ")}.`:`Bentangkan ${a.join(" ")}.`);if(g("must"))out.push(L==="en"?`Make sure to cover: ${g("must")}.`:`Pastikan perkara ini disebut: ${g("must")}.`)},
-  video(){if(g("format"))out.push(L==="en"?`Present it ${g("format")}.`:`Bentangkan ${g("format")}.`);if(g("msg"))out.push(L==="en"?`Deliver only ${g("msg")} key messages.`:`Sampaikan ${g("msg")} key message sahaja.`)},
-  reports(){const j=g("jenis"),p=g("pjg");if(j||p)out.push(L==="en"?`Format it as ${j}${p?", "+p:""}.`:`Format: ${j}${p?", "+p:""}.`);if(g("sek"))out.push(L==="en"?`Use these sections: ${joinList(g("sek").split(/\s*,\s*/),L)}.`:`Gunakan sections berikut: ${joinList(g("sek").split(/\s*,\s*/),L)}.`)},
-  quiz(){out.push(L==="en"?`Include ${g("n")} multiple-choice questions at ${art(g("tahap"))} ${g("tahap")} difficulty level, each with the answer and an explanation.`:`Sediakan ${g("n")} soalan multiple-choice pada difficulty ${g("tahap")}, setiap satu dengan jawapan dan penerangan.`);if(g("topik"))out.push(L==="en"?`Limit the questions to: ${g("topik")}.`:`Hadkan soalan kepada topik: ${g("topik")}.`)},
-  table(){if(g("lajur"))out.push(L==="en"?`Use these columns: ${joinList(g("lajur").split(/\s*,\s*/),L)}.`:`Gunakan columns berikut: ${joinList(g("lajur").split(/\s*,\s*/),L)}.`);if(g("susun"))out.push(L==="en"?`Sort the rows by ${g("susun")}.`:`Susun baris mengikut ${g("susun")}.`);out.push(L==="en"?"Leave a cell blank if the information is not in the sources.":"Biarkan sel kosong jika maklumat tiada dalam sumber.")},
-  slides(){out.push(L==="en"?`Make ${g("n")} slides in ${g("ori")} orientation.`:`Deck ini mengandungi ${g("n")} slaid dalam orientation ${g("ori")}.`);if((fv.satu||0)===0)out.push(L==="en"?"Keep one key message per slide.":"Satu key message setiap slaid.")},
-  mindmap(){if(g("pusat"))out.push(L==="en"?`Use "${g("pusat")}" as the central node.`:`Jadikan "${g("pusat")}" sebagai central node.`);out.push(L==="en"?`Branch out to ${g("aras")} levels.`:`Susun branch sehingga ${g("aras")} level.`)},
-  flash(){out.push(L==="en"?`Create ${g("n")} cards at ${art(g("tahap"))} ${g("tahap")} level focusing on ${g("fokus")}.`:`Sediakan ${g("n")} flashcard pada difficulty ${g("tahap")} yang memberi fokus kepada ${g("fokus")}.`)},
-  info(){out.push(L==="en"?`Lay it out in ${g("layout")}, in ${g("ori")} orientation.`:`Layout: ${g("layout")}, orientation ${g("ori")}.`)}
+  audio(){if(g("must"))out.push(en?`Make sure the hosts cover: ${g("must")}.`:`Pastikan hos menyebut: ${g("must")}.`)},
+  video(){out.push(en?`Deliver only ${g("msg")} key messages.`:`Sampaikan ${g("msg")} key message sahaja.`);if(g("must"))out.push(en?`Make sure the video shows: ${g("must")}.`:`Pastikan video menunjukkan: ${g("must")}.`)},
+  reports(){out.push(en?`Keep it ${g("pjg")}.`:`Panjang laporan ${g("pjg")}.`);if(g("sek"))out.push(en?`Use these sections: ${listSplit(g("sek"),L)}.`:`Gunakan sections berikut: ${listSplit(g("sek"),L)}.`)},
+  quiz(){if(g("topik"))out.push(en?`Limit the questions to: ${g("topik")}.`:`Hadkan soalan kepada topik: ${g("topik")}.`);out.push(en?"Include a short explanation for every answer.":"Sertakan penerangan ringkas bagi setiap jawapan.")},
+  table(){if(g("lajur"))out.push(en?`Use these columns: ${listSplit(g("lajur"),L)}.`:`Gunakan columns berikut: ${listSplit(g("lajur"),L)}.`);if(g("susun"))out.push(en?`Group or sort the rows by ${g("susun")}.`:`Kumpul atau susun baris mengikut ${g("susun")}.`);out.push(en?"Leave a cell blank if the information is not in the sources.":"Biarkan sel kosong jika maklumat tiada dalam sumber.")},
+  slides(){out.push(en?`Aim for about ${g("n")} slides.`:`Sasarkan lebih kurang ${g("n")} slaid.`);if(g("outline"))out.push(en?`Follow this outline: ${listSplit(g("outline"),L)}.`:`Ikut outline ini: ${listSplit(g("outline"),L)}.`);if((fv.satu||0)===0)out.push(en?"Keep one key message per slide.":"Satu key message setiap slaid.")},
+  mindmap(){if(g("pusat"))out.push(en?`Use "${g("pusat")}" as the central node.`:`Jadikan "${g("pusat")}" sebagai central node.`);out.push(en?`Branch out to ${g("aras")} levels.`:`Susun branch sehingga ${g("aras")} level.`)},
+  flash(){out.push(en?`Focus the cards on ${g("fokus")}.`:`Fokuskan kad kepada ${g("fokus")}.`)},
+  info(){out.push(en?`Lay it out in ${g("layout")}.`:`Layout: ${g("layout")}.`)}
  };
  D[F.id]();
- // visual
- if(F.vis){const V=S.vis||{};const gv=k=>{const d=VIS.find(x=>x.k===k);return V[k]==null?"":optVal(d.o,V[k],L)};
-  const parts=L==="en"?[gv("gaya")&&`${art(gv("gaya"))} ${gv("gaya")} visual style`,gv("palet")&&`${art(gv("palet"))} ${gv("palet")} palette`,gv("fon")&&`${gv("fon")} typography`,gv("latar")&&`${art(gv("latar"))} ${gv("latar")} background`]
-                     :[gv("gaya")&&`visual style ${gv("gaya")}`,gv("palet")&&`colour palette ${gv("palet")}`,gv("fon")&&`font ${gv("fon")}`,gv("latar")&&`background ${gv("latar")}`];
+ if(F.vis){const V=S.vis||{};const has=k=>F.vis.includes(k);const gv=k=>{if(!has(k))return"";const d=VIS.find(x=>x.k===k);return V[k]==null?"":optVal(d.o,V[k],L)};
+  const parts=en?[gv("gaya")&&`${art(gv("gaya"))} ${gv("gaya")} visual style`,gv("palet")&&`${art(gv("palet"))} ${gv("palet")} palette`,gv("fon")&&`${gv("fon")} typography`,gv("latar")&&`${art(gv("latar"))} ${gv("latar")} background`]
+                :[gv("gaya")&&`visual style ${gv("gaya")}`,gv("palet")&&`colour palette ${gv("palet")}`,gv("fon")&&`font ${gv("fon")}`,gv("latar")&&`background ${gv("latar")}`];
   const pv=joinList(parts.filter(Boolean),L);if(pv)out.push(`${P("vis")} ${pv}.`);
-  if(gv("motif"))out.push(L==="en"?`Include ${gv("motif")}.`:`Masukkan unsur ${gv("motif")}.`);
-  if(gv("tema")){out.push(L==="en"?`Take visual inspiration from ${gv("tema")}.`:`Ambil inspirasi visual daripada ${gv("tema")}.`);warn.push("tema")}}
- // nada, bahasa, semakan sumber, penutup
+  if(gv("motif"))out.push(en?`Include ${gv("motif")}.`:`Masukkan unsur ${gv("motif")}.`);
+  if(gv("tema")){out.push(en?`Take visual inspiration from ${gv("tema")}.`:`Ambil inspirasi visual daripada ${gv("tema")}.`);warn.push("tema")}}
  const n=optVal(NADA,S.nada||0,L);out.push(fill(P("nada"),{n,art:art(n)}));
- out.push(P("lang"));out.push(P("src"));out.push(P("close"));
+ if(F.ownLang)out.push(P("lang"));
+ out.push(P("src"));
  let text=tidy(out.join(" "));
- // huruf besar pertama ayat
  text=text.replace(/(^|[.!?]\s+)([a-z])/g,(m,a,b)=>a+b.toUpperCase());
  const words=text.split(/\s+/).filter(Boolean).length;
  const data=S.data||null;
- return{text,words,missing,data,warn,canCopy:!missing.length&&data&&data!=="r"};
+ return{text,words,missing,data,warn,ui,box:F.box,canCopy:!missing.length&&data&&data!=="r"};
 }
 
 /* ===== Keadaan ===== */
@@ -320,16 +347,20 @@ function renderA(){chipGroup($("audChips"),AUD,S.aud,v=>{S.aud=v;renderA();updat
  document.querySelectorAll("#datab button").forEach(b=>b.setAttribute("aria-pressed",S.data===b.dataset.v?"true":"false"));
  const db=$("dataBanner");db.innerHTML=S.data==="y"?'<div class="banner y">🟡 Guna akaun @kemas.gov.my sahaja. Buang nama individu sebelum muat naik sumber.</div>':S.data==="r"?'<div class="banner r">🔴 Data Merah tidak boleh dimasukkan ke NotebookLM. Butang Copy dinyahaktifkan.</div>':""}
 function renderB(){const F=FUNCS.find(f=>f.id===S.fn);$("fnTitle").textContent=F.ic+" "+F.name;const h=$("fnFields");h.innerHTML="";S.f[F.id]=S.f[F.id]||{};const fv=S.f[F.id];
- F.fields.forEach(fd=>{const w=document.createElement("div");w.className="field";
+ const mk=(fd)=>{const w=document.createElement("div");w.className="field";
   if(fd.t==="text"){w.innerHTML=`<label>${fd.l}</label><input type="text" placeholder="${fd.ph||""}">`;const inp=w.querySelector("input");inp.value=fv[fd.k]||"";inp.oninput=()=>{fv[fd.k]=inp.value;update()}}
-  else{w.innerHTML=`<span class="flabel">${fd.l}</span><div class="chips"></div>`;const cur=fv[fd.k]!=null?fv[fd.k]:(fd.d||0);chipGroup(w.querySelector(".chips"),fd.o,cur,i=>{fv[fd.k]=i;renderB();update()})}
-  h.appendChild(w)});
- $("fnNote").innerHTML=F.id==="mindmap"?'<div class="banner i">🧠 Mind Map tiada kotak arahan sendiri. Tampal prompt ini dalam <b>Chat</b> NotebookLM, kemudian klik Mind Map.</div>':""}
-function renderC(){const F=FUNCS.find(f=>f.id===S.fn);$("panelC").classList.toggle("hidden",!F.vis);const h=$("visFields");h.innerHTML="";
- VIS.forEach(d=>{const w=document.createElement("div");w.className="field";w.innerHTML=`<span class="flabel">${d.l}</span><div class="chips"></div>`;chipGroup(w.querySelector(".chips"),d.o,S.vis[d.k],i=>{S.vis[d.k]=i;renderC();update()},{optional:!!d.opt});h.appendChild(w)});
+  else{w.innerHTML=`<span class="flabel">${fd.l}</span><div class="chips"></div>`;const cur=fv[fd.k]!=null?fv[fd.k]:(fd.d!=null?fd.d:0);chipGroup(w.querySelector(".chips"),fd.o,cur,i=>{fv[fd.k]=i;renderB();update()},{multi:!!fd.multi,cols:fd.cols||3})}
+  h.appendChild(w)};
+ const uiF=F.fields.filter(f=>f.ui),pF=F.fields.filter(f=>!f.ui);
+ if(uiF.length){const t=document.createElement("div");t.className="subh";t.textContent="⚙️ Tetapan dalam NotebookLM";h.appendChild(t);uiF.forEach(mk)}
+ const t2=document.createElement("div");t2.className="subh"+(uiF.length?" p2":"");t2.textContent="✍️ Isi dalam prompt";h.appendChild(t2);pF.forEach(mk);
+ const notes={reports:'📑 Pilih template, klik ikon <b>✏️</b> pada template itu, kemudian tampal prompt dalam kotak arahan.',video:'🎬 Di bawah <i>What should the video focus on?</i>, pilih <b>Custom topic</b> dan tampal prompt.',info:'📊 Visual style, orientation dan level of detail dipilih dengan butang. Prompt hanya membawa layout, warna, font dan motif.'};
+ $("fnNote").innerHTML=notes[F.id]?'<div class="banner i">'+notes[F.id]+'</div>':""}
+function renderC(){const F=FUNCS.find(f=>f.id===S.fn);$("panelC").classList.toggle("hidden",!F.vis);document.querySelector(".cols").classList.toggle("two",!F.vis);const h=$("visFields");h.innerHTML="";
+ VIS.filter(d=>F.vis&&F.vis.includes(d.k)).forEach(d=>{const w=document.createElement("div");w.className="field";w.innerHTML=`<span class="flabel">${d.l}</span><div class="chips"></div>`;chipGroup(w.querySelector(".chips"),d.o,S.vis[d.k],i=>{S.vis[d.k]=i;renderC();update()},{optional:!!d.opt});h.appendChild(w)});
  $("temaBanner").innerHTML=(S.vis.tema!=null&&TEMA[S.vis.tema]&&TEMA[S.vis.tema][1])?'<div class="banner y">⚠️ Watak berhak cipta. Jangan guna untuk bahan rasmi, hebahan awam atau media sosial KEMAS. Untuk latihan dan bahan dalaman sahaja.</div>':""}
 function update(){const rb=gen(Object.assign({},S,{lang:"bm"})),re=gen(Object.assign({},S,{lang:"en"}));
- $("outBM").textContent=rb.text;$("outEN").textContent=re.text;
+ $("outBM").textContent=rb.text;$("boxName").textContent="“"+rb.box+"”";const ul=$("uiList");ul.innerHTML="";rb.ui.forEach(([k,val])=>{const li=document.createElement("li");li.innerHTML="<span></span><b></b>";li.children[0].textContent="☐ "+k;li.children[1].textContent=val;ul.appendChild(li)});$("outEN").textContent=re.text;
  $("wcBM").textContent=rb.words+" patah perkataan";$("wcEN").textContent=re.words+" words";
  $("hint").textContent=rb.missing.length?"Isi dahulu: "+rb.missing.join(", "):(rb.data?"":"Pilih warna data sumber sebelum Copy");
  $("copyBM").disabled=!rb.canCopy;$("copyEN").disabled=!re.canCopy}
