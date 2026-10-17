@@ -1,0 +1,346 @@
+<!doctype html>
+<html lang="ms">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>NotebookLM Prompt Generator by Bro</title>
+<meta name="description" content="Jana prompt untuk 9 fungsi Studio NotebookLM dalam Bahasa Melayu atau English. Kursus AI4U KEMAS.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0b1020;--panel:#121a33;--panel2:#18223f;--line:#26325a;--text:#e8ecf8;--muted:#9aa6c7;--acc:#FFD23F;--acc2:#5ff0f0;--ok:#22c55e;--warn:#f59e0b;--bad:#ef4444;--chip:#1c2850;--chipOn:#FFD23F;--chipOnText:#111827;--shadow:0 10px 30px rgba(0,0,0,.35)}
+:root[data-theme="light"]{--bg:#f4f6fb;--panel:#ffffff;--panel2:#f8fafc;--line:#dbe2ef;--text:#111827;--muted:#4b5563;--acc:#b45309;--acc2:#0e7490;--chip:#eef2f8;--chipOn:#1F3864;--chipOnText:#ffffff;--shadow:0 8px 24px rgba(30,41,59,.08)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font:15px/1.5 "Plus Jakarta Sans",system-ui,-apple-system,"Segoe UI",sans-serif}
+a{color:var(--acc2)}
+.wrap{max-width:1200px;margin:0 auto;padding:16px}
+header{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:8px 0 14px}
+.brand h1{margin:0;font-size:24px;font-weight:800;letter-spacing:-.3px}
+.brand h1 span{color:var(--acc)}
+.brand p{margin:2px 0 0;color:var(--muted);font-size:13.5px}
+.hbtns{display:flex;gap:8px;flex-wrap:wrap}
+.btn{border:1px solid var(--line);background:var(--panel);color:var(--text);padding:9px 14px;border-radius:10px;font:600 14px/1 "Plus Jakarta Sans",system-ui,sans-serif;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:6px}
+.btn:hover{border-color:var(--acc)}
+.btn.pri{background:var(--acc);color:#111827;border-color:var(--acc)}
+:root[data-theme="light"] .btn.pri{color:#fff}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:10px;overflow:hidden}
+.seg button{border:0;background:var(--panel);color:var(--muted);padding:9px 12px;font:700 13px "Plus Jakarta Sans",system-ui,sans-serif;cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--chipOn);color:var(--chipOnText)}
+.fgrid{display:grid;grid-template-columns:repeat(9,minmax(0,1fr));gap:8px;margin-bottom:14px}
+.ftile{border:2px solid var(--line);background:var(--panel);color:var(--text);border-radius:12px;padding:10px 6px;cursor:pointer;text-align:center;font:700 12.5px/1.25 "Plus Jakarta Sans",system-ui,sans-serif;display:flex;flex-direction:column;align-items:center;gap:4px}
+.ftile .ic{font-size:24px}
+.ftile[aria-pressed="true"]{border-color:var(--fc);background:color-mix(in srgb,var(--fc) 22%,var(--panel));box-shadow:0 0 0 2px var(--fc)}
+.cols{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px;box-shadow:var(--shadow);min-width:0}
+.panel h2{margin:0 0 10px;font-size:15px;display:flex;align-items:center;gap:8px}
+.panel h2 b{display:inline-grid;place-items:center;width:22px;height:22px;border-radius:6px;background:var(--acc);color:#111827;font-size:12px}
+:root[data-theme="light"] .panel h2 b{color:#fff}
+.field{margin-bottom:12px}
+.field label,.flabel{display:block;font-weight:700;font-size:13px;margin-bottom:5px}
+.field label i,.flabel i{font-style:normal;color:var(--bad)}
+.field small{color:var(--muted);font-size:12px}
+input[type=text],select,textarea{width:100%;background:var(--panel2);color:var(--text);border:1px solid var(--line);border-radius:9px;padding:9px 10px;font:14px "Plus Jakarta Sans",system-ui,sans-serif}
+input[type=text]:focus,select:focus,textarea:focus{outline:2px solid var(--acc2);border-color:transparent}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{border:1px solid var(--line);background:var(--chip);color:var(--text);border-radius:999px;padding:5px 11px;font:600 12.5px "Plus Jakarta Sans",system-ui,sans-serif;cursor:pointer}
+.chip[aria-pressed="true"]{background:var(--chipOn);color:var(--chipOnText);border-color:var(--chipOn)}
+.datab{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
+.datab button{border:2px solid var(--line);background:var(--panel2);color:var(--text);border-radius:10px;padding:8px 4px;font:700 12.5px "Plus Jakarta Sans",system-ui,sans-serif;cursor:pointer}
+.datab button[aria-pressed="true"][data-v="g"]{border-color:var(--ok);background:color-mix(in srgb,var(--ok) 20%,var(--panel2))}
+.datab button[aria-pressed="true"][data-v="y"]{border-color:var(--warn);background:color-mix(in srgb,var(--warn) 22%,var(--panel2))}
+.datab button[aria-pressed="true"][data-v="r"]{border-color:var(--bad);background:color-mix(in srgb,var(--bad) 22%,var(--panel2))}
+.banner{border-radius:10px;padding:9px 12px;font-size:13px;margin-top:8px;border-left:5px solid}
+.banner.y{background:color-mix(in srgb,var(--warn) 16%,transparent);border-color:var(--warn)}
+.banner.r{background:color-mix(in srgb,var(--bad) 16%,transparent);border-color:var(--bad)}
+.banner.i{background:color-mix(in srgb,var(--acc2) 12%,transparent);border-color:var(--acc2)}
+.out{margin-top:14px}
+.outbox{background:var(--panel2);border:1px solid var(--line);border-radius:12px;padding:14px;font-size:15.5px;line-height:1.65;min-height:110px;white-space:pre-wrap}
+.outbox.empty{color:var(--muted);font-style:italic}
+.meta{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;color:var(--muted);font-size:12.5px;margin:6px 2px}
+.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+.actions .grow{flex:1;justify-content:center}
+.saved{margin-top:14px}
+.saverow{display:flex;gap:8px;flex-wrap:wrap}
+.saverow input{flex:1;min-width:180px}
+.slist{list-style:none;margin:10px 0 0;padding:0;display:grid;gap:6px}
+.slist li{display:flex;align-items:center;gap:8px;background:var(--panel2);border:1px solid var(--line);border-radius:10px;padding:8px 10px;font-size:13.5px}
+.slist li span{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.slist li em{color:var(--muted);font-style:normal;font-size:12px}
+.mini{padding:5px 9px;font-size:12.5px;border-radius:8px}
+footer{margin:26px 0 10px;color:var(--muted);font-size:12.5px;text-align:center;line-height:1.6}
+.toast{position:fixed;left:50%;bottom:22px;transform:translateX(-50%);background:var(--acc);color:#111827;padding:10px 16px;border-radius:10px;font-weight:700;opacity:0;transition:opacity .2s;pointer-events:none}
+:root[data-theme="light"] .toast{color:#fff}
+.toast.on{opacity:1}
+.hidden{display:none!important}
+@media (max-width:1000px){.fgrid{grid-template-columns:repeat(5,minmax(0,1fr))}.cols{grid-template-columns:1fr 1fr}}
+@media (max-width:680px){.fgrid{grid-template-columns:repeat(3,minmax(0,1fr))}.cols{grid-template-columns:1fr}.brand h1{font-size:20px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <div class="brand">
+    <h1>NotebookLM Prompt Generator <span>by Bro</span></h1>
+    <p>Jana prompt untuk 9 fungsi Studio NotebookLM · Kursus AI4U KEMAS</p>
+  </div>
+  <div class="hbtns">
+    <div class="seg" role="group" aria-label="Bahasa prompt">
+      <button type="button" data-lang="bm" aria-pressed="true">BM</button>
+      <button type="button" data-lang="en" aria-pressed="false">EN</button>
+    </div>
+    <button type="button" class="btn" id="themeBtn" aria-label="Tukar tema">🌓 Tema</button>
+    <a class="btn" href="https://notebooklm.google.com" target="_blank" rel="noopener">Buka NotebookLM ↗</a>
+    <a class="btn" href="../">← Portal AI4U</a>
+  </div>
+</header>
+
+<div class="fgrid" id="fgrid" role="group" aria-label="Fungsi Studio"></div>
+
+<div class="cols">
+  <section class="panel" id="panelA">
+    <h2><b>A</b> Konteks</h2>
+    <div class="field"><label for="masalah">Masalah / tujuan <i>*</i></label>
+      <input type="text" id="masalah" placeholder="Contoh: ibu bapa tak faham syarat pendaftaran TABIKA 2027">
+      <small>Mula dengan masalah, bukan dengan AI.</small></div>
+    <div class="field"><span class="flabel">Audiens <i>*</i></span>
+      <div class="chips" id="audChips"></div>
+      <input type="text" id="audCustom" placeholder="Atau taip audiens lain" style="margin-top:6px"></div>
+    <div class="field"><label for="fokus">Fokus kandungan</label>
+      <input type="text" id="fokus" placeholder="Contoh: tarikh, syarat dan dokumen yang perlu dibawa"></div>
+    <div class="field"><label for="nada">Nada <i>*</i></label><select id="nada"></select></div>
+    <div class="field"><span class="flabel">Warna data sumber <i>*</i></span>
+      <div class="datab" id="datab" role="group" aria-label="Warna data">
+        <button type="button" data-v="g">🟢 Hijau</button><button type="button" data-v="y">🟡 Kuning</button><button type="button" data-v="r">🔴 Merah</button>
+      </div>
+      <div id="dataBanner"></div></div>
+  </section>
+
+  <section class="panel" id="panelB">
+    <h2><b>B</b> <span id="fnTitle">Butiran</span></h2>
+    <div id="fnFields"></div>
+  </section>
+
+  <section class="panel" id="panelC">
+    <h2><b>C</b> Gaya visual</h2>
+    <div id="visFields"></div>
+    <div id="temaBanner"></div>
+  </section>
+</div>
+
+<section class="panel out">
+  <h2><b>✦</b> Prompt yang dijana</h2>
+  <div class="outbox empty" id="outbox" aria-live="polite"></div>
+  <div class="meta"><span id="wc"></span><span id="hint"></span></div>
+  <div id="fnNote"></div>
+  <div class="actions">
+    <button type="button" class="btn" id="shuffleBtn">🔀 Shuffle</button>
+    <button type="button" class="btn pri grow" id="copyBtn">📋 Copy prompt</button>
+    <button type="button" class="btn" id="resetBtn">↺ Reset</button>
+  </div>
+</section>
+
+<section class="panel saved">
+  <h2><b>💾</b> Prompt tersimpan</h2>
+  <div class="saverow">
+    <input type="text" id="saveName" placeholder="Nama prompt, contoh: Infografik TABIKA 2027">
+    <button type="button" class="btn" id="saveBtn">Save</button>
+    <button type="button" class="btn" id="exportBtn">Eksport JSON</button>
+    <label class="btn" for="importFile">Import JSON</label><input type="file" id="importFile" accept="application/json" class="hidden">
+  </div>
+  <small style="color:var(--muted);display:block;margin-top:6px">Disimpan dalam browser ini sahaja. Kosongkan cache = hilang. Guna Eksport untuk simpanan kekal.</small>
+  <ul class="slist" id="slist"></ul>
+</section>
+
+<footer>
+  Diilhamkan oleh <a href="https://nlmprompts.keeman.app/" target="_blank" rel="noopener"><i>NotebookLM Prompt Generator</i></a> oleh Kee Man, CC BY 4.0.<br>
+  Versi ini ditulis semula sepenuhnya untuk kursus AI4U KEMAS, dengan 9 fungsi Studio, konteks KEMAS dan semakan data.<br>
+  Alat ini tidak berkaitan dengan Google. Tiada data dihantar keluar daripada browser anda.
+</footer>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+(function(){
+"use strict";
+/* ================= DATA ================= */
+// pilihan: [label UI, frasa BM, frasa EN]
+const AUD=[["Ibu bapa TABIKA","ibu bapa murid TABIKA","parents of TABIKA pupils"],["PPPAK","Penolong Pegawai Pendidikan Awal Kanak-Kanak (PPPAK)","early childhood education officers (PPPAK)"],["Pendidik Masyarakat","Pendidik Masyarakat TABIKA dan TASKA","TABIKA and TASKA community educators"],["Penyelia daerah","penyelia peringkat daerah","district supervisors"],["Pengurusan","pengurusan atasan","senior management"],["Peserta kursus kemahiran","peserta kursus kemahiran KEMAS","KEMAS skills course participants"],["Komuniti umum","komuniti umum","the general community"],["Murid prasekolah","murid prasekolah","preschool children"]];
+const NADA=[["Formal","formal","formal"],["Mesra","mesra","friendly"],["Mendidik","mendidik","educational"],["Ringkas dan padat","ringkas dan padat","concise"],["Bercerita","bercerita","storytelling"],["Memujuk","memujuk","persuasive"],["Teknikal","teknikal","technical"]];
+const GAYA=[["Profesional","profesional","professional"],["Korporat","korporat","corporate"],["Minimalis","minimalis","minimalist"],["Akademik","akademik","academic"],["Ilustrasi","ilustrasi","illustrated"],["Ikon rata","ikon rata (flat)","flat icon"],["Lakaran nota","lakaran nota (sketch notes)","sketch notes"],["Peta minda","peta minda","mind map"],["Blueprint","blueprint","blueprint"],["Kertas potong","kertas potong (paper cut)","paper cut"],["Retro","retro","retro"],["Futuristik","futuristik","futuristic"],["Kartun mesra kanak-kanak","kartun mesra kanak-kanak","child-friendly cartoon"],["3D","3D","3D"],["Clay","clay","clay"]];
+const PALET=[["Biru korporat KEMAS","biru korporat KEMAS","KEMAS corporate blue"],["Pastel","pastel","pastel"],["Hangat","hangat","warm"],["Sejuk","sejuk","cool"],["Monokrom","monokrom","monochrome"],["Cerah bertenaga","cerah dan bertenaga","bright and vibrant"],["Neutral","neutral","neutral"],["Watercolour","watercolour","watercolour"]];
+const LATAR=[["Putih","putih","white"],["Kelabu cair","kelabu cair","light grey"],["Gelap","gelap","dark"],["Gradien","gradien","gradient"],["Tekstur kertas","bertekstur kertas","paper-textured"],["Papan kapur","papan kapur","chalkboard"],["Papan gabus","papan gabus","cork board"]];
+const FON=[["Sans-serif moden","sans-serif moden","modern sans-serif"],["Serif klasik","serif klasik","classic serif"],["Bulat mesra","bulat dan mesra","rounded, friendly"],["Tulisan tangan","tulisan tangan","handwritten"],["Display tebal","display tebal","bold display"],["Monospace","monospace","monospace"]];
+const MOTIF=[["Corak batik","corak batik","batik patterns"],["Motif Sarawak","motif tradisional Sarawak","traditional Sarawak motifs"],["Suasana kampung","suasana kampung","a Malaysian village setting"],["Kelas TABIKA","suasana kelas TABIKA","a TABIKA classroom setting"],["Bandar moden Malaysia","bandar moden Malaysia","a modern Malaysian cityscape"]];
+const TEMA=[["Upin Ipin","Upin Ipin","Upin Ipin"],["BoBoiBoy","BoBoiBoy","BoBoiBoy"],["Ejen Ali","Ejen Ali","Ejen Ali"],["Marvel","Marvel Superheroes","Marvel superheroes"],["Disney","Disney","Disney"],["Studio Ghibli","Studio Ghibli","Studio Ghibli"],["Lego","Lego","Lego"],["Minecraft","Minecraft","Minecraft"],["Pokémon","Pokémon","Pokémon"],["Hello Kitty","Hello Kitty","Hello Kitty"]];
+const ORI=[["Landskap","landskap","landscape"],["Potret","potret","portrait"]];
+const TAHAP=[["Mudah","mudah","easy"],["Sederhana","sederhana","medium"],["Sukar","sukar","hard"]];
+const N=a=>a.map(x=>[String(x),String(x),String(x)]);
+
+const FUNCS=[
+ {id:"audio",ic:"🎧",name:"Audio Overview",c:"#2563eb",vis:false,nbm:"satu Audio Overview",nen:"Audio Overview",
+  fields:[{k:"format",l:"Format",t:"chips",o:[["Ulasan mendalam","dalam format ulasan mendalam","as a deep-dive discussion"],["Ringkas","dalam format ringkas","as a brief summary"],["Kritikan","dalam format kritikan","as a critique"],["Debat","dalam format debat","as a debate"]]},
+          {k:"len",l:"Panjang",t:"chips",o:[["Pendek","dengan durasi pendek","with a shorter length"],["Biasa","dengan durasi biasa","with the default length"],["Panjang","dengan durasi panjang","with a longer length"]],d:1},
+          {k:"must",l:"Perkara mesti disebut",t:"text",ph:"Contoh: tarikh tutup permohonan dan syarat umur"}]},
+ {id:"video",ic:"🎬",name:"Video Overview",c:"#16a34a",vis:true,nbm:"satu Video Overview",nen:"Video Overview",
+  fields:[{k:"format",l:"Format",t:"chips",o:[["Penerangan","dalam format penerangan","as an explainer"],["Ringkas","dalam format ringkas","as a brief"]]},
+          {k:"msg",l:"Bilangan mesej utama",t:"chips",o:N([3,4,5])}]},
+ {id:"reports",ic:"📑",name:"Reports",c:"#db2777",vis:false,nbm:"satu laporan",nen:"report",
+  fields:[{k:"jenis",l:"Jenis laporan",t:"chips",o:[["Briefing doc","briefing doc","a briefing doc"],["Study guide","study guide","a study guide"],["FAQ","FAQ","an FAQ"],["Garis masa","garis masa","a timeline"],["Tersuai","format tersuai","a custom format"]]},
+          {k:"pjg",l:"Panjang maksimum",t:"chips",o:[["1 muka","tidak melebihi satu muka","no longer than one page"],["2 muka","tidak melebihi dua muka","no longer than two pages"]]},
+          {k:"sek",l:"Seksyen yang diperlukan",t:"text",ph:"Contoh: latar belakang, isu, cadangan, tindakan"}]},
+ {id:"quiz",ic:"❓",name:"Quiz",c:"#0891b2",vis:false,nbm:"satu kuiz",nen:"quiz",
+  fields:[{k:"n",l:"Bilangan soalan",t:"chips",o:N([5,10,15]),d:1},
+          {k:"tahap",l:"Tahap",t:"chips",o:TAHAP,d:1},
+          {k:"topik",l:"Hadkan kepada topik",t:"text",ph:"Contoh: tarikh kuat kuasa dan tanggungjawab pegawai"}]},
+ {id:"table",ic:"📋",name:"Data Table",c:"#3b82f6",vis:false,nbm:"satu jadual data",nen:"data table",
+  fields:[{k:"lajur",l:"Lajur (pisahkan dengan koma)",t:"text",ph:"Contoh: Tindakan, Pegawai, Tarikh akhir, Sumber"},
+          {k:"susun",l:"Susun baris mengikut",t:"text",ph:"Contoh: tarikh akhir paling awal"}]},
+ {id:"slides",ic:"🖼️",name:"Slide Deck",c:"#c026d3",vis:true,nbm:"satu slide deck",nen:"slide deck",
+  fields:[{k:"ori",l:"Orientasi",t:"chips",o:ORI},
+          {k:"n",l:"Bilangan slaid",t:"chips",o:N([5,8,10,12]),d:1},
+          {k:"satu",l:"Satu mesej utama setiap slaid",t:"chips",o:[["Ya","ya","yes"],["Tidak","tidak","no"]]}]},
+ {id:"mindmap",ic:"🧠",name:"Mind Map",c:"#7c3aed",vis:false,nbm:"satu peta minda",nen:"mind map",
+  fields:[{k:"pusat",l:"Nod pusat",t:"text",ph:"Contoh: Garis Panduan Program TABIKA 2027"},
+          {k:"aras",l:"Kedalaman cabang",t:"chips",o:[["2 aras","2","2"],["3 aras","3","3"]]}]},
+ {id:"flash",ic:"🃏",name:"Flashcards",c:"#ea580c",vis:false,nbm:"satu set flashcard",nen:"set of flashcards",
+  fields:[{k:"n",l:"Bilangan kad",t:"chips",o:N([10,20,30])},
+          {k:"tahap",l:"Tahap",t:"chips",o:TAHAP,d:1},
+          {k:"fokus",l:"Fokus kad",t:"chips",o:[["Istilah","istilah dan definisi","terms and definitions"],["Tarikh","tarikh penting","key dates"],["Prosedur","langkah prosedur","procedural steps"]]}]},
+ {id:"info",ic:"📊",name:"Infographic",c:"#f59e0b",vis:true,nbm:"satu infografik",nen:"infographic",
+  fields:[{k:"layout",l:"Susun atur",t:"chips",o:[["Satu lajur","satu lajur","a single column"],["2 lajur","dua lajur","two columns"],["3 lajur","tiga lajur","three columns"],["Grid 2x2","grid 2x2","a 2x2 grid"],["Grid 3x3","grid 3x3","a 3x3 grid"],["Bento","susun atur bento","a bento layout"],["Bebas","susun atur bebas","a freeform layout"]]},
+          {k:"ori",l:"Orientasi",t:"chips",o:ORI,d:1}]}
+];
+const VIS=[{k:"gaya",l:"Gaya",o:GAYA},{k:"palet",l:"Palet warna",o:PALET},{k:"latar",l:"Latar",o:LATAR},{k:"fon",l:"Fon",o:FON},{k:"motif",l:"Motif tempatan (pilihan)",o:MOTIF,opt:true},{k:"tema",l:"Tema watak (pilihan)",o:TEMA,opt:true}];
+
+/* ===== Kolam variasi (teks asal AI4U) ===== */
+const POOL={
+ verb:{bm:["Hasilkan","Sediakan","Bina","Jana"],en:["Create","Produce","Generate","Prepare"]},
+ link:{bm:["yang membantu menyelesaikan masalah ini:","bagi menangani masalah berikut:","untuk menyelesaikan isu ini:","yang menjawab keperluan ini:"],en:["that helps solve this problem:","to address the following problem:","that tackles this issue:","that responds to this need:"]},
+ aud:{bm:["Audiens sasaran ialah {a}.","Ia ditujukan kepada {a}.","Tulis untuk {a}.","Audiens utama: {a}."],en:["The target audience is {a}.","It is aimed at {a}.","Write for {a}.","Primary audience: {a}."]},
+ fokus:{bm:["Fokus pada {f}.","Beri tumpuan kepada {f}.","Tekankan {f}.","Utamakan {f}."],en:["Focus on {f}.","Concentrate on {f}.","Emphasise {f}.","Prioritise {f}."]},
+ vis:{bm:["Gunakan","Terapkan","Pilih","Gayakan dengan"],en:["Use","Apply","Go for","Style it with"]},
+ nada:{bm:["Kekalkan nada {n} sepanjang output.","Sampaikan dengan nada {n}.","Nada keseluruhan: {n}.","Gunakan nada {n}."],en:["Keep {art} {n} tone throughout.","Deliver it in {art} {n} tone.","Overall tone: {n}.","Use {art} {n} tone."]},
+ lang:{bm:["Tulis semua teks dalam Bahasa Melayu standard.","Gunakan Bahasa Melayu yang mudah difahami.","Hasilkan output dalam Bahasa Melayu.","Semua teks mesti dalam Bahasa Melayu."],en:["Write all text in English.","Use clear, plain English.","Produce the output in English.","All text must be in English."]},
+ src:{bm:["Gunakan hanya maklumat daripada sumber dalam notebook ini dan nyatakan rujukan bagi setiap angka.","Bergantung sepenuhnya pada sumber dalam notebook ini; jangan tambah fakta luar.","Pastikan setiap fakta dan angka boleh dikesan kembali kepada sumber dalam notebook ini.","Jangan reka maklumat; ambil semua fakta daripada sumber yang dimuat naik sahaja."],en:["Use only information from the sources in this notebook and cite the source for every figure.","Rely entirely on the sources in this notebook; do not add outside facts.","Make sure every fact and figure can be traced back to the sources in this notebook.","Do not invent information; take every fact from the uploaded sources only."]},
+ close:{bm:["Pastikan hasilnya jelas dan mudah difahami oleh audiens.","Utamakan kejelasan berbanding kepadatan maklumat.","Hasil akhir mesti kemas dan sedia untuk disemak.","Pastikan mesej utama mudah diingati."],en:["Make sure the result is clear and easy for the audience to understand.","Prioritise clarity over density.","The final result must be tidy and ready for review.","Make the key message easy to remember."]}
+};
+const SLOTS=Object.keys(POOL);
+
+/* ===== Helper bahasa ===== */
+function art(w){w=String(w||"").trim().toLowerCase();if(/^(one|uni|use|usu|eu|ewe)/.test(w))return"a";if(/^(hour|honest|honou?r)/.test(w))return"an";if(/^faq/.test(w))return"an";return/^[aeiou]/.test(w)?"an":"a"}
+function joinList(arr,L){arr=arr.filter(x=>x&&String(x).trim());if(arr.length<=1)return arr[0]||"";const and=L==="en"?" and ":" dan ";return arr.slice(0,-1).join(", ")+and+arr[arr.length-1]}
+function clean(s){return String(s||"").trim().replace(/\s+/g," ").replace(/[.;:,\s]+$/,"")}
+function fill(t,o){return t.replace(/\{(\w+)\}/g,(m,k)=>o[k]!=null?o[k]:"")}
+function tidy(t){return t.replace(/\s+([,.;:])/g,"$1").replace(/,\s*,+/g,",").replace(/\.\s*\./g,".").replace(/\s{2,}/g," ").replace(/\s+\./g,".").trim()}
+function hasDoubleComma(t){return/,\s*,/.test(t)||/\.\s*\./.test(t)||/\s,/.test(t)||/\(\s*\)/.test(t)}
+const pick=(arr,i)=>arr[((i%arr.length)+arr.length)%arr.length];
+const optVal=(opts,i,L)=>{const o=opts[i];return o?(L==="en"?o[2]:o[1]):""};
+
+/* ===== Penjana (pure) ===== */
+function gen(S){
+ const L=S.lang==="en"?"en":"bm";const F=FUNCS.find(f=>f.id===S.fn)||FUNCS[0];const v=S.v||{};const P=k=>pick(POOL[k][L],v[k]||0);
+ const fv=(S.f&&S.f[F.id])||{};const out=[];const warn=[];
+ const masalah=clean(S.masalah);
+ // audiens
+ const audList=(S.aud||[]).map(i=>optVal(AUD,i,L)).concat(clean(S.audCustom)?[clean(S.audCustom)]:[]);
+ const missing=[];if(!masalah)missing.push("Masalah / tujuan");if(!audList.length)missing.push("Audiens");
+ // pembuka
+ const noun=L==="en"?(art(F.nen)+" "+F.nen):F.nbm;
+ out.push(masalah?`${P("verb")} ${noun} ${P("link")} ${masalah}.`:`${P("verb")} ${noun}.`);
+ if(audList.length)out.push(fill(P("aud"),{a:joinList(audList,L)}));
+ if(clean(S.fokus))out.push(fill(P("fokus"),{f:clean(S.fokus)}));
+ // butiran fungsi
+ const g=(k)=>{const fd=F.fields.find(x=>x.k===k);if(!fd)return"";if(fd.t==="text")return clean(fv[k]);const i=fv[k]!=null?fv[k]:(fd.d||0);return optVal(fd.o,i,L)};
+ const D={
+  audio(){const a=[g("format"),g("len")].filter(Boolean);if(a.length)out.push(L==="en"?`Present it ${a.join(" ")}.`:`Bentangkan ${a.join(" ")}.`);if(g("must"))out.push(L==="en"?`Make sure to cover: ${g("must")}.`:`Pastikan perkara ini disebut: ${g("must")}.`)},
+  video(){if(g("format"))out.push(L==="en"?`Present it ${g("format")}.`:`Bentangkan ${g("format")}.`);if(g("msg"))out.push(L==="en"?`Deliver only ${g("msg")} key messages.`:`Sampaikan ${g("msg")} mesej utama sahaja.`)},
+  reports(){const j=g("jenis"),p=g("pjg");if(j||p)out.push(L==="en"?`Format it as ${j}${p?", "+p:""}.`:`Formatnya ialah ${j}${p?", "+p:""}.`);if(g("sek"))out.push(L==="en"?`Use these sections: ${joinList(g("sek").split(/\s*,\s*/),L)}.`:`Gunakan seksyen berikut: ${joinList(g("sek").split(/\s*,\s*/),L)}.`)},
+  quiz(){out.push(L==="en"?`Include ${g("n")} multiple-choice questions at ${art(g("tahap"))} ${g("tahap")} difficulty level, each with the answer and an explanation.`:`Sediakan ${g("n")} soalan aneka pilihan pada tahap ${g("tahap")}, setiap satu dengan jawapan dan penerangan.`);if(g("topik"))out.push(L==="en"?`Limit the questions to: ${g("topik")}.`:`Hadkan soalan kepada topik: ${g("topik")}.`)},
+  table(){if(g("lajur"))out.push(L==="en"?`Use these columns: ${joinList(g("lajur").split(/\s*,\s*/),L)}.`:`Gunakan lajur berikut: ${joinList(g("lajur").split(/\s*,\s*/),L)}.`);if(g("susun"))out.push(L==="en"?`Sort the rows by ${g("susun")}.`:`Susun baris mengikut ${g("susun")}.`);out.push(L==="en"?"Leave a cell blank if the information is not in the sources.":"Biarkan sel kosong jika maklumat tiada dalam sumber.")},
+  slides(){out.push(L==="en"?`Make ${g("n")} slides in ${g("ori")} orientation.`:`Hasilkan ${g("n")} slaid dalam orientasi ${g("ori")}.`);if((fv.satu||0)===0)out.push(L==="en"?"Keep one key message per slide.":"Satu mesej utama setiap slaid.")},
+  mindmap(){if(g("pusat"))out.push(L==="en"?`Use "${g("pusat")}" as the central node.`:`Jadikan "${g("pusat")}" sebagai nod pusat.`);out.push(L==="en"?`Branch out to ${g("aras")} levels.`:`Susun cabang sehingga ${g("aras")} aras.`)},
+  flash(){out.push(L==="en"?`Create ${g("n")} cards at ${art(g("tahap"))} ${g("tahap")} level focusing on ${g("fokus")}.`:`Sediakan ${g("n")} kad pada tahap ${g("tahap")} yang memberi fokus kepada ${g("fokus")}.`)},
+  info(){out.push(L==="en"?`Lay it out in ${g("layout")}, in ${g("ori")} orientation.`:`Susun dalam ${g("layout")}, orientasi ${g("ori")}.`)}
+ };
+ D[F.id]();
+ // visual
+ if(F.vis){const V=S.vis||{};const gv=k=>{const d=VIS.find(x=>x.k===k);return V[k]==null?"":optVal(d.o,V[k],L)};
+  const parts=L==="en"?[gv("gaya")&&`${art(gv("gaya"))} ${gv("gaya")} visual style`,gv("palet")&&`${art(gv("palet"))} ${gv("palet")} palette`,gv("fon")&&`${gv("fon")} typography`,gv("latar")&&`${art(gv("latar"))} ${gv("latar")} background`]
+                     :[gv("gaya")&&`gaya visual ${gv("gaya")}`,gv("palet")&&`palet ${gv("palet")}`,gv("fon")&&`fon ${gv("fon")}`,gv("latar")&&`latar ${gv("latar")}`];
+  const pv=joinList(parts.filter(Boolean),L);if(pv)out.push(`${P("vis")} ${pv}.`);
+  if(gv("motif"))out.push(L==="en"?`Include ${gv("motif")}.`:`Masukkan unsur ${gv("motif")}.`);
+  if(gv("tema")){out.push(L==="en"?`Take visual inspiration from ${gv("tema")}.`:`Ambil inspirasi visual daripada ${gv("tema")}.`);warn.push("tema")}}
+ // nada, bahasa, semakan sumber, penutup
+ const n=optVal(NADA,S.nada||0,L);out.push(fill(P("nada"),{n,art:art(n)}));
+ out.push(P("lang"));out.push(P("src"));out.push(P("close"));
+ let text=tidy(out.join(" "));
+ // huruf besar pertama ayat
+ text=text.replace(/(^|[.!?]\s+)([a-z])/g,(m,a,b)=>a+b.toUpperCase());
+ const words=text.split(/\s+/).filter(Boolean).length;
+ const data=S.data||null;
+ return{text,words,missing,data,warn,canCopy:!missing.length&&data&&data!=="r"};
+}
+
+/* ===== Keadaan ===== */
+function defaults(){return{fn:"info",lang:"bm",masalah:"",aud:[],audCustom:"",fokus:"",nada:2,data:null,f:{},vis:{gaya:0,palet:0,latar:0,fon:0,motif:null,tema:null},v:Object.fromEntries(SLOTS.map(k=>[k,0]))}}
+let S=defaults();let lastV=null;
+function shuffle(){const prev=JSON.stringify(S.v);let tries=0;do{S.v=Object.fromEntries(SLOTS.map(k=>[k,Math.floor(Math.random()*POOL[k].bm.length)]));tries++}while(JSON.stringify(S.v)===prev&&tries<20);lastV=prev}
+
+/* ===== Storage selamat ===== */
+const KEY="ai4u-nlm-prompts";
+function lsGet(k,d){try{const v=localStorage.getItem(k);return v==null?d:JSON.parse(v)}catch(e){return d}}
+function lsSet(k,v){try{localStorage.setItem(k,JSON.stringify(v));return true}catch(e){return false}}
+
+/* ===== UI ===== */
+const $=id=>document.getElementById(id);
+function chipGroup(host,opts,sel,onPick,{multi=false,optional=false}={}){host.innerHTML="";opts.forEach((o,i)=>{const b=document.createElement("button");b.type="button";b.className="chip";b.textContent=o[0];
+ const on=multi?(sel||[]).includes(i):sel===i;b.setAttribute("aria-pressed",on?"true":"false");
+ b.onclick=()=>{if(multi){const s=new Set(sel||[]);s.has(i)?s.delete(i):s.add(i);onPick([...s].sort((a,b)=>a-b))}else{onPick(optional&&sel===i?null:i)}};host.appendChild(b)})}
+function renderFuncs(){const h=$("fgrid");h.innerHTML="";FUNCS.forEach(f=>{const b=document.createElement("button");b.type="button";b.className="ftile";b.style.setProperty("--fc",f.c);b.setAttribute("aria-pressed",S.fn===f.id?"true":"false");b.innerHTML=`<span class="ic">${f.ic}</span>${f.name}`;b.onclick=()=>{S.fn=f.id;renderAll()};h.appendChild(b)})}
+function renderA(){chipGroup($("audChips"),AUD,S.aud,v=>{S.aud=v;renderA();update()},{multi:true});
+ const sel=$("nada");if(!sel.options.length)NADA.forEach((o,i)=>sel.add(new Option(o[0],i)));sel.value=S.nada;
+ $("masalah").value=S.masalah;$("audCustom").value=S.audCustom;$("fokus").value=S.fokus;
+ document.querySelectorAll("#datab button").forEach(b=>b.setAttribute("aria-pressed",S.data===b.dataset.v?"true":"false"));
+ const db=$("dataBanner");db.innerHTML=S.data==="y"?'<div class="banner y">🟡 Guna akaun @kemas.gov.my sahaja. Buang nama individu sebelum muat naik sumber.</div>':S.data==="r"?'<div class="banner r">🔴 Data Merah tidak boleh dimasukkan ke NotebookLM. Butang Copy dinyahaktifkan.</div>':""}
+function renderB(){const F=FUNCS.find(f=>f.id===S.fn);$("fnTitle").textContent=F.ic+" "+F.name;const h=$("fnFields");h.innerHTML="";S.f[F.id]=S.f[F.id]||{};const fv=S.f[F.id];
+ F.fields.forEach(fd=>{const w=document.createElement("div");w.className="field";
+  if(fd.t==="text"){w.innerHTML=`<label>${fd.l}</label><input type="text" placeholder="${fd.ph||""}">`;const inp=w.querySelector("input");inp.value=fv[fd.k]||"";inp.oninput=()=>{fv[fd.k]=inp.value;update()}}
+  else{w.innerHTML=`<span class="flabel">${fd.l}</span><div class="chips"></div>`;const cur=fv[fd.k]!=null?fv[fd.k]:(fd.d||0);chipGroup(w.querySelector(".chips"),fd.o,cur,i=>{fv[fd.k]=i;renderB();update()})}
+  h.appendChild(w)});
+ $("fnNote").innerHTML=F.id==="mindmap"?'<div class="banner i">🧠 Mind Map tiada kotak arahan sendiri. Tampal prompt ini dalam <b>Chat</b> NotebookLM, kemudian klik Mind Map.</div>':""}
+function renderC(){const F=FUNCS.find(f=>f.id===S.fn);$("panelC").classList.toggle("hidden",!F.vis);const h=$("visFields");h.innerHTML="";
+ VIS.forEach(d=>{const w=document.createElement("div");w.className="field";w.innerHTML=`<span class="flabel">${d.l}</span><div class="chips"></div>`;chipGroup(w.querySelector(".chips"),d.o,S.vis[d.k],i=>{S.vis[d.k]=i;renderC();update()},{optional:!!d.opt});h.appendChild(w)});
+ $("temaBanner").innerHTML=S.vis.tema!=null?'<div class="banner y">⚠️ Watak berhak cipta. Jangan guna untuk bahan rasmi, hebahan awam atau media sosial KEMAS. Untuk latihan dan bahan dalaman sahaja.</div>':""}
+function update(){const r=gen(S);const ob=$("outbox");
+ if(r.missing.length){ob.textContent=r.text;ob.classList.remove("empty");$("hint").textContent="Isi: "+r.missing.join(", ")}else{ob.textContent=r.text;ob.classList.remove("empty");$("hint").textContent=r.data?"":"Pilih warna data sumber"}
+ $("wc").textContent=r.words+" patah perkataan";$("copyBtn").disabled=!r.canCopy;
+ document.querySelectorAll("[data-lang]").forEach(b=>b.setAttribute("aria-pressed",S.lang===b.dataset.lang?"true":"false"))}
+function renderSaved(){const L=lsGet(KEY,[]);const h=$("slist");h.innerHTML="";if(!L.length){h.innerHTML='<li><em>Tiada prompt tersimpan.</em></li>';return}
+ L.forEach((it,i)=>{const li=document.createElement("li");const F=FUNCS.find(f=>f.id===it.state.fn)||{ic:""};li.innerHTML=`<span>${F.ic} <b></b></span><em>${new Date(it.t).toLocaleDateString("ms-MY")}</em>`;li.querySelector("b").textContent=it.name;
+  const lo=document.createElement("button");lo.className="btn mini";lo.textContent="Muat";lo.onclick=()=>{S=Object.assign(defaults(),JSON.parse(JSON.stringify(it.state)));renderAll();toast("Dimuat: "+it.name)};
+  const de=document.createElement("button");de.className="btn mini";de.textContent="Padam";de.onclick=()=>{const A=lsGet(KEY,[]);A.splice(i,1);lsSet(KEY,A);renderSaved()};li.append(lo,de);h.appendChild(li)})}
+function renderAll(){renderFuncs();renderA();renderB();renderC();update()}
+let tt;function toast(m){const t=$("toast");t.textContent=m;t.classList.add("on");clearTimeout(tt);tt=setTimeout(()=>t.classList.remove("on"),1800)}
+async function copyText(t){try{await navigator.clipboard.writeText(t);return true}catch(e){const a=document.createElement("textarea");a.value=t;document.body.appendChild(a);a.select();let ok=false;try{ok=document.execCommand("copy")}catch(_){}a.remove();return ok}}
+
+function bind(){
+ $("masalah").oninput=e=>{S.masalah=e.target.value;update()};$("audCustom").oninput=e=>{S.audCustom=e.target.value;update()};$("fokus").oninput=e=>{S.fokus=e.target.value;update()};
+ $("nada").onchange=e=>{S.nada=+e.target.value;update()};
+ document.querySelectorAll("#datab button").forEach(b=>b.onclick=()=>{S.data=b.dataset.v;renderA();update()});
+ document.querySelectorAll("[data-lang]").forEach(b=>b.onclick=()=>{S.lang=b.dataset.lang;update()});
+ $("shuffleBtn").onclick=()=>{shuffle();update();toast("Variasi ayat ditukar")};
+ $("copyBtn").onclick=async()=>{const r=gen(S);if(!r.canCopy)return;toast(await copyText(r.text)?"Prompt disalin":"Gagal salin, sila salin manual")};
+ $("resetBtn").onclick=()=>{S=defaults();renderAll();toast("Semua pilihan direset")};
+ $("saveBtn").onclick=()=>{const name=$("saveName").value.trim()||("Prompt "+new Date().toLocaleString("ms-MY"));const A=lsGet(KEY,[]);A.unshift({name,t:Date.now(),state:JSON.parse(JSON.stringify(S))});toast(lsSet(KEY,A)?"Disimpan":"Tidak dapat simpan dalam browser ini");$("saveName").value="";renderSaved()};
+ $("exportBtn").onclick=()=>{const blob=new Blob([JSON.stringify(lsGet(KEY,[]),null,2)],{type:"application/json"});const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="nlm-prompts-ai4u.json";a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000)};
+ $("importFile").onchange=e=>{const f=e.target.files[0];if(!f)return;const rd=new FileReader();rd.onload=()=>{try{const arr=JSON.parse(rd.result);if(!Array.isArray(arr))throw 0;const A=lsGet(KEY,[]).concat(arr.filter(x=>x&&x.state&&x.name));lsSet(KEY,A);renderSaved();toast(arr.length+" prompt diimport")}catch(_){toast("Fail JSON tidak sah")}};rd.readAsText(f);e.target.value=""};
+ $("themeBtn").onclick=()=>{const cur=document.documentElement.getAttribute("data-theme")==="light"?"dark":"light";document.documentElement.setAttribute("data-theme",cur);try{localStorage.setItem("ai4u-nlm-theme",cur)}catch(_){}};
+}
+try{const th=localStorage.getItem("ai4u-nlm-theme");if(th)document.documentElement.setAttribute("data-theme",th)}catch(_){}
+bind();renderAll();renderSaved();
+window.NLM={gen,defaults,FUNCS,POOL,SLOTS,hasDoubleComma,joinList,art,shuffleState:(st)=>{const prev=JSON.stringify(st.v);let n=0;do{st.v=Object.fromEntries(SLOTS.map(k=>[k,Math.floor(Math.random()*POOL[k].bm.length)]));n++}while(JSON.stringify(st.v)===prev&&n<20);return st},getState:()=>S};
+})();
+</script>
+</body>
+</html>

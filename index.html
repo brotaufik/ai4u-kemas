@@ -1610,7 +1610,7 @@ pcard("KC","M5 · Studio: 9 fungsi NotebookLM",3,()=>`
   <div class="body row" style="gap:18px;min-height:0">
     <div class="col" style="flex:1.05;gap:12px;min-width:0;min-height:0">
       <div class="g3" style="gap:12px;flex:1;grid-auto-rows:1fr;min-height:0">${STUDIO.map((s,i)=>`<button type="button" class="card ps col stbtn${i===0?" on":""}" data-st="${i}" style="gap:6px;align-items:flex-start;justify-content:center;text-align:left;border:2px solid ${s[2]};border-left:10px solid ${s[2]};background:linear-gradient(160deg,${s[2]}44,${s[2]}1a);cursor:pointer;padding:12px 14px"><div class="row" style="gap:10px;align-items:center"><span style="font-size:34px">${s[0]}</span><b class="t19" style="color:${s[2]}">${s[1]}</b></div><div class="t14 lh">${s[3]}</div></button>`).join("")}</div>
-      <div class="well ps t15 lh"><b class="acc">Satu peraturan untuk semua 9:</b> output dijana daripada sumber dalam notebook sahaja. Sumber awam atau rekaan sahaja; dokumen 🟡 Kuning hanya dalam akaun @kemas.gov.my tanpa nama individu.</div>
+      <div class="well ps t15 lh"><b class="acc">Satu peraturan untuk semua 9:</b> output dijana daripada sumber dalam notebook sahaja. Sumber awam atau rekaan sahaja; dokumen 🟡 Kuning hanya dalam akaun @kemas.gov.my tanpa nama individu. <a href="nlm-prompt/" target="_blank" rel="noopener" class="acc" style="font-weight:800;white-space:nowrap">Jana prompt Studio ↗</a></div>
     </div>
     <div class="card p col" id="sttip" style="flex:1;gap:8px;min-width:0;border-top:5px solid ${STUDIO[0][2]}">${studioTip(0)}</div>
   </div>`);
@@ -1903,6 +1903,7 @@ pcard("KE","M2 · Enjin Prompt AI4U",4,()=>`
         <div class="h4">Imbas untuk guna di telefon</div>
         <img src="${ENJIN_QR}" width="184" height="184" alt="Kod QR Enjin Prompt AI4U" style="background:#fff;padding:6px">
         ${ext("enjin-prompt.html","Buka enjin penuh",true)}
+        ${ext("nlm-prompt/","Prompt NotebookLM",true)}
       </div>
       <div class="card ps col" style="gap:10px">
         <div class="h4">Tiga langkah</div>
