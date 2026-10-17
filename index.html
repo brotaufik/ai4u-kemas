@@ -509,6 +509,8 @@ button.modgo:focus-visible{outline:3px solid #FFD23F;outline-offset:2px}
 #slides .stbtn.on{box-shadow:0 0 0 3px #FFD23F,0 8px 20px var(--sh);transform:scale(1.03)}
 :root[data-theme="dark"] #slides .stbtn b{filter:brightness(1.35)}
 :root[data-theme="light"] #slides .stbtn.on{box-shadow:0 0 0 3px #d99a00,0 8px 20px var(--sh)}
+
+:root[data-theme="light"] #slides .hitl{color:#a16207!important}
 </style>
 </head>
 <body>
@@ -1256,8 +1258,9 @@ pcard("KA","M1 · Tangga Autonomi AI",2,()=>`
       <div class="t14 faint" style="font-size:12.5px">Diadaptasi daripada modul Automasi Aliran Kerja AI &amp; AI Agentik (2026), dengan kebenaran pensyarah.</div></div>
   </div>`);
 pcard("KA","M1 · AI cadang, manusia bertanggungjawab",2,()=>`
-  ${cardHd("Modul 1 · Etika & Tadbir Urus","AI boleh mencadang. Manusia tetap bertanggungjawab.",2)}
-  <div class="body col" style="gap:18px">
+  ${cardHd("Modul 1 · Etika & Tadbir Urus","AI boleh mencadang. Manusia tetap bertanggungjawab.",2,plate("HUMAN IN THE LOOP"))}
+  <div class="body col" style="gap:14px">
+    <div class="row" style="gap:16px;align-items:center;padding:10px 18px;border-radius:14px;border:2px solid #FFD23F;background:linear-gradient(90deg,#FFD23F26,#FFD23F0a)"><b style="font:700 34px/1 Oswald,Osw,sans-serif;letter-spacing:2px;color:#FFD23F;white-space:nowrap" class="hitl">HUMAN IN THE LOOP</b><span class="t18 lh"><b>Manusia sentiasa berada dalam gelung keputusan.</b> AI menjana dan mencadang; manusia menyemak, mengesahkan, memutuskan dan bertanggungjawab.</span></div>
     <div class="col" style="gap:8px"><div class="h4">Hari ini · chatbot</div><div class="chev">${[["AI","cadang"],["Manusia","semak"],["Manusia","putuskan"],["Manusia","bertanggungjawab"]].map((x,i)=>`<div style="background:linear-gradient(180deg,${i?"#22c55e":"#3b82f6"},${i?"#16a34a":"#2563eb"})"><span class="t15" style="opacity:.85">${x[0]}</span><b class="t22">${x[1]}</b></div>`).join("")}</div></div>
     <div class="col" style="gap:8px"><div class="h4">Seterusnya · ejen AI</div><div class="chev">${[["AI","faham"],["AI","rancang"],["AI","guna alat"],["AI","bertindak"]].map(x=>`<div style="background:linear-gradient(180deg,#f97316,#c2410c)"><span class="t15" style="opacity:.85">${x[0]}</span><b class="t22">${x[1]}</b></div>`).join("")}</div></div>
     <div class="row" style="gap:16px;flex:1;min-height:0">
@@ -1272,7 +1275,7 @@ const UCF=[["1","Nama use case","Satu ayat: kata kerja + output","Draf laporan b
  ["4","Input & warna data","Apa yang boleh dimasukkan","🟢 Statistik agregat · 🟡 catatan aktiviti tanpa nama · 🔴 tiada nama murid"],
  ["5","Alat & aras autonomi","Alat yang diluluskan","ChatGPT Project 'Laporan TABIKA' atau Gemini MyGovUC · A2 Copilot"],
  ["6","Prompt standard","Prompt PTKF yang disimpan dan diberi versi","Prompt Laporan TABIKA v1.0 dalam Projects"],
- ["7","Semakan manusia","Siapa menyemak dan apa yang disemak","Penyelia semak setiap angka dan nada sebelum hantar"],
+ ["7","Semakan manusia (human in the loop)","Siapa menyemak dan apa yang disemak","Penyelia semak setiap angka dan nada sebelum hantar"],
  ["8","Metrik kejayaan","Ukuran sebelum dan selepas","2 jam → 40 minit · 0 kesilapan fakta"]];
 pcard("KA","M1 · Use case: AI kekal bila ada sebab",4,()=>`
   ${cardHd("Modul 1 · Etika & Tadbir Urus","Use case: AI kekal bila ada sebab",4,plate("SEBAB · KEPERLUAN · MANFAAT"))}
