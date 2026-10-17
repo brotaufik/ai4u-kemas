@@ -3,11 +3,11 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Enjin Prompt AI4U · Kursus AI KEMAS Perak</title>
+<title>Enjin Prompt AI4U by BRO · Kursus AI KEMAS Perak</title>
 <meta name="description" content="Isi formula PTKF secara ringkas, dapat prompt lengkap dalam Bahasa Melayu dan English untuk teks, imej, video, slaid, audio dan sumber NotebookLM.">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="AI4U - AI UNTUK SEMUA">
-<meta property="og:title" content="Enjin Prompt AI4U · Kursus AI KEMAS Perak">
+<meta property="og:title" content="Enjin Prompt AI4U by BRO · Kursus AI KEMAS Perak">
 <meta property="og:description" content="Isi formula ringkas, dapat prompt lengkap BM dan English untuk teks, imej, video, slaid dan audio.">
 <meta property="og:url" content="https://brotaufik.github.io/ai4u-kemas/enjin-prompt.html">
 <meta property="og:image" content="https://brotaufik.github.io/ai4u-kemas/og-enjin.jpg">
@@ -48,6 +48,8 @@ b,strong{font-weight:700}
 :root[data-theme="light"] .kick{background:rgba(193,18,31,.1);color:var(--ink);border:1px solid var(--acc)}
 h1{font:700 42px/1.02 var(--hd);text-transform:uppercase;letter-spacing:.8px;color:var(--ttl);margin:10px 0 6px;text-shadow:0 2px 0 rgba(0,0,0,.35),0 0 18px rgba(255,210,63,.2)}
 :root[data-theme="light"] h1{text-shadow:none}
+h1 .by{color:#5ff0f0}
+:root[data-theme="light"] h1 .by{color:#b45309}
 .sub{color:var(--mut);max-width:780px}
 .sub b{color:var(--ink)}
 .tools{display:flex;gap:8px;flex-wrap:wrap}
@@ -246,7 +248,7 @@ body.embed .solo pre.out{max-height:max(240px,calc(100vh - 340px))}
   <header class="top">
     <div>
       <span class="kick">AI4U · Kursus AI KEMAS Perak</span>
-      <h1>Enjin Prompt AI4U</h1>
+      <h1>Enjin Prompt AI4U <span class="by">by BRO</span></h1>
       <div class="sub">Isi formula <b>PTKF</b> secara ringkas. Enjin menyusun prompt lengkap dalam <b>Bahasa Melayu</b> dan <b>English</b> serentak, untuk teks, imej, video, slaid, audio dan sumber NotebookLM.</div>
     </div>
     <div class="tools">
@@ -350,7 +352,7 @@ const TOOL={gpt:["ChatGPT","https://chatgpt.com/"],gem:["Gemini","https://gemini
 /* ===== enam jenis output ===== */
 const TY={
 teks:{ic:"📝",n:"Teks",d:"Surat, laporan, minit, hebahan",nv:"",tools:[TOOL.gpt,TOOL.gem],dv:{bhs:"Bahasa Melayu standard"},
-  how:"Tampal dalam <b>ChatGPT</b>, atau <b>Gemini MyGovUC</b> untuk kerja rasmi. ChatGPT peribadi untuk data 🟢 Hijau sahaja. Semak fakta dengan <b>VERIFY</b> sebelum guna.",
+  how:"Tampal dalam <b>ChatGPT</b>, atau <b>Gemini MyGovUC</b> untuk kerja rasmi. ChatGPT peribadi untuk data 🟢 Hijau sahaja. Perlukan fail? ChatGPT boleh menjana <b>.docx, .pdf, .xlsx, .pptx</b> untuk dimuat turun; Gemini boleh eksport ke <b>Google Docs</b> atau <b>Sheets</b>. Semak fakta dengan <b>VERIFY</b> sebelum guna.",
   core:{
     P:{s:"Peranan",lb:"Peranan AI",q:"Siapa AI perlu jadi?",ph:"cth. penulis surat rasmi kerajaan",ch:[c("penulis surat rasmi kerajaan yang berpengalaman","an experienced writer of Malaysian government official letters","Penulis surat rasmi"),c("pegawai perhubungan awam yang kreatif","a creative public relations officer","Pegawai perhubungan awam"),c("pakar pendidikan awal kanak-kanak","an early childhood education specialist","Pakar pendidikan awal"),c("penganalisis data program komuniti","a community programme data analyst","Penganalisis data"),c("editor bahasa Melayu yang teliti","a meticulous Bahasa Melayu editor","Editor bahasa"),c("jurulatih dan fasilitator kursus yang berpengalaman","an experienced trainer and course facilitator","Fasilitator latihan")]},
     T:{s:"Tugas",lb:"Tugas",q:"Apa yang AI perlu hasilkan?",ph:"cth. Draf surat jemputan",ch:[c("Draf surat jemputan","Draft an invitation letter"),c("Tulis laporan ringkas program","Write a short programme report","Laporan program"),c("Ringkaskan minit mesyuarat dan senaraikan tindakan susulan","Summarise the meeting minutes and list the follow-up actions","Ringkas minit mesyuarat"),c("Tulis hebahan untuk media sosial","Write a social media announcement","Hebahan media sosial"),c("Cadangkan 5 idea aktiviti","Suggest 5 activity ideas"),c("Tulis teks ucapan aluan","Write a welcome speech","Ucapan aluan"),c("Baiki dan perkemaskan teks yang saya berikan","Improve and polish the text I provide","Baiki teks saya")]},
@@ -360,15 +362,16 @@ teks:{ic:"📝",n:"Teks",d:"Surat, laporan, minit, hebahan",nv:"",tools:[TOOL.gp
      {id:"nada",lb:"Nada",q:"Rasa bahasa",w:5,ch:NADA},
      {id:"pjg",lb:"Panjang",w:5,ch:[c("sekitar 100 patah perkataan","about 100 words"),c("sekitar 300 patah perkataan","about 300 words"),c("tidak melebihi satu muka surat","no more than one page","Maksimum 1 muka surat"),c("tiga perenggan pendek","three short paragraphs","3 perenggan"),c("maksimum 5 poin","a maximum of 5 points","Maksimum 5 poin")]},
      {id:"bhs",lb:"Bahasa hasil",q:"Bahasa jawapan AI",w:4,ch:BHS},
+     {id:"fail",lb:"Fail output",q:"Hasil dalam bentuk fail apa?",w:4,ch:[c("teks dalam chat sahaja, tanpa fail","plain text in the chat, no file","Teks dalam chat"),c("Microsoft Word (.docx) yang boleh dimuat turun","a downloadable Microsoft Word (.docx) file","Word (.docx)"),c("PDF (.pdf) yang boleh dimuat turun","a downloadable PDF (.pdf) file","PDF (.pdf)"),c("Excel (.xlsx) dengan jadual yang tersusun","an Excel (.xlsx) file with a well-structured table","Excel (.xlsx)"),c("PowerPoint (.pptx) yang boleh dimuat turun","a downloadable PowerPoint (.pptx) file","PowerPoint (.pptx)"),c("CSV (.csv) untuk diimport ke sistem lain","a CSV (.csv) file for importing into other systems","CSV (.csv)"),c("format sedia ditampal ke Google Docs","formatted ready to paste into Google Docs","Google Docs"),c("jadual sedia ditampal ke Google Sheets","a table ready to paste into Google Sheets","Google Sheets"),c("Markdown (.md)","a Markdown (.md) file","Markdown (.md)")]},
      {id:"kek",lb:"Kekangan",q:"Peraturan yang mesti dipatuhi",w:8,multi:1,ch:[c("Jangan reka fakta, nama atau angka","Do not invent facts, names or figures"),c("Tandakan maklumat yang tiada sebagai [ISI]","Mark any missing information as [FILL IN]"),c("Elakkan jargon teknikal","Avoid technical jargon"),c("Tiada emoji","No emojis"),c("Gunakan bahasa yang mudah difahami","Use plain, easy-to-understand language","Bahasa mudah")]},
      {id:"ctoh",lb:"Contoh atau bahan rujukan",q:"Tampal contoh gaya (data 🟢 Hijau sahaja)",w:4,area:1,raw:1,ph:"Tampal contoh surat, laporan atau teks yang mahu diikut gayanya"}],
   pro:{w:3,max:6,ch:[c("Jika ada maklumat penting yang tiada, tanya saya maksimum 3 soalan dahulu","If any key information is missing, ask me up to 3 questions first"),c("Nyatakan andaian yang anda buat","State any assumptions you make"),c("Semak hasil anda dengan setiap keperluan di atas sebelum memberi jawapan akhir","Check your output against every requirement above before giving the final answer"),c("Beri 2 versi untuk saya pilih","Give me 2 versions to choose from")]},
-  ex:[{P:"penulis surat rasmi kerajaan yang berpengalaman",T:"Draf surat jemputan",K:"Majlis graduasi TABIKA KEMAS hujung tahun pada Sabtu, 12 Disember 2026, 9.00 pagi, di dewan serbaguna kampung. Seramai 25 orang murid akan bergraduasi.",F:"surat rasmi mengikut format surat kerajaan",aud:"ibu bapa murid TABIKA",nada:"rasmi dan sopan",pjg:"tidak melebihi satu muka surat",bhs:"Bahasa Melayu standard",kek:[0,1],pro:[0,2]},
+  ex:[{P:"penulis surat rasmi kerajaan yang berpengalaman",T:"Draf surat jemputan",K:"Majlis graduasi TABIKA KEMAS hujung tahun pada Sabtu, 12 Disember 2026, 9.00 pagi, di dewan serbaguna kampung. Seramai 25 orang murid akan bergraduasi.",F:"surat rasmi mengikut format surat kerajaan",aud:"ibu bapa murid TABIKA",nada:"rasmi dan sopan",pjg:"tidak melebihi satu muka surat",bhs:"Bahasa Melayu standard",fail:"Microsoft Word (.docx) yang boleh dimuat turun",kek:[0,1],pro:[0,2]},
       {P:"pegawai perhubungan awam yang kreatif",T:"Tulis hebahan untuk media sosial",K:"Pendaftaran murid TABIKA KEMAS sesi 2027 dibuka mulai 1 November 2026 untuk kanak-kanak berumur 4 hingga 6 tahun. Borang boleh diperoleh di TABIKA KEMAS yang berdekatan.",F:"hebahan WhatsApp ringkas dengan emoji yang sesuai",aud:"komuniti setempat",nada:"mesra dan ceria",pjg:"sekitar 100 patah perkataan",bhs:"Bahasa Melayu standard",kek:[0],pro:[3]}],
   build(v,m,p,bm){const B=[];
     if(v.P)B.push({c:"P",k:"P",b:(bm?"Anda ialah ":"You are ")+dot(v.P)});
     B.push(S1("T","TUGAS","TASK",v.T,bm),S1("K","KONTEKS","CONTEXT",v.K,bm),S1("X","AUDIENS","AUDIENCE",v.aud,bm,"aud"));
-    B.push(L1("F","FORMAT HASIL","OUTPUT FORMAT",[v.F&&{c:"F",k:"F",t:cap(v.F)},I("nada","Nada: ","Tone: ",v.nada,bm),I("pjg","Panjang: ","Length: ",v.pjg,bm),I("bhs","Bahasa: ","Language: ",v.bhs,bm)],bm));
+    B.push(L1("F","FORMAT HASIL","OUTPUT FORMAT",[v.F&&{c:"F",k:"F",t:cap(v.F)},I("nada","Nada: ","Tone: ",v.nada,bm),I("pjg","Panjang: ","Length: ",v.pjg,bm),I("bhs","Bahasa: ","Language: ",v.bhs,bm),I("fail","Fail output: ","Output file: ",v.fail,bm)],bm));
     B.push(L1("X","KEKANGAN","CONSTRAINTS",m.kek.map(t=>({c:"X",k:"kek",t})),bm));
     if(v.ctoh)B.push({c:"X",k:"ctoh",h:bm?"CONTOH ATAU BAHAN RUJUKAN":"EXAMPLE OR REFERENCE MATERIAL",b:'"""\n'+v.ctoh+'\n"""'});
     B.push(L1("X","ARAHAN TAMBAHAN","ADDITIONAL INSTRUCTIONS",p.map(t=>({c:"X",k:"pro",t})),bm));
@@ -386,6 +389,7 @@ imej:{ic:"🖼️",n:"Imej",d:"Poster, ilustrasi, kad ucapan",nv:"Buat gambar ",
      {id:"cahaya",lb:"Pencahayaan & suasana",w:6,ch:CAHAYA},
      {id:"warna",lb:"Palet warna",w:5,ch:[c("biru dan kuning","blue and yellow"),c("pastel lembut","soft pastels"),c("warna-warni terang","bright, vibrant colours","Warna-warni terang"),c("hijau alam semula jadi","natural greens","Hijau alam")]},
      {id:"nisbah",lb:"Nisbah aspek",w:6,ch:[c("1:1 (segi empat sama)","1:1 (square)","1:1"),c("4:5 (hantaran media sosial)","4:5 (social media post)","4:5"),c("9:16 (menegak, story)","9:16 (vertical story)","9:16"),c("16:9 (skrin lebar)","16:9 (widescreen)","16:9"),c("3:4 (poster potret)","3:4 (portrait poster)","3:4")]},
+     {id:"fail",lb:"Fail output",q:"Format fail imej",w:3,ch:[c("PNG resolusi tinggi","a high-resolution PNG file","PNG"),c("JPG untuk media sosial","a JPG file for social media","JPG"),c("PNG dengan latar lutsinar (transparent)","a PNG file with a transparent background","PNG lutsinar")]},
      {id:"teks",lb:"Teks dalam imej",q:"Pendek dan eja tepat",w:3,raw:1,ph:"cth. PENDAFTARAN DIBUKA 2027"},
      {id:"elk",lb:"Elakkan",w:7,multi:1,ch:[c("teks herot atau salah ejaan","distorted or misspelled text","Teks herot"),c("logo rasmi seperti Jata Negara dan logo KEMAS","official emblems such as the national coat of arms or the KEMAS logo","Logo rasmi"),c("wajah orang sebenar yang boleh dikenali","real, identifiable people's faces","Wajah orang sebenar"),c("jari atau anggota badan yang cacat","malformed fingers or limbs","Jari cacat"),c("latar yang bersepah","a cluttered background","Latar bersepah")]}],
   pro:{w:3,max:6,ch:[c("Jika ada butiran yang kabur, tanya saya dahulu sebelum menjana","If anything is unclear, ask me before generating"),c("Selepas menjana, cadangkan 2 cara untuk menambah baik imej","After generating, suggest 2 ways to improve the image")]},
@@ -395,7 +399,7 @@ imej:{ic:"🖼️",n:"Imej",d:"Poster, ilustrasi, kad ucapan",nv:"Buat gambar ",
     if(v.P)B.push({c:"P",k:"P",b:(bm?"Anda ialah ":"You are ")+dot(v.P)});
     if(v.T)B.push({c:"T",k:"T",h:bm?"TUGAS":"TASK",b:(bm?"Hasilkan satu imej: ":"Create an image: ")+dot(v.T)});
     B.push(S1("K","KEGUNAAN","PURPOSE",v.K,bm));
-    B.push(L1("F","SPESIFIKASI VISUAL","VISUAL SPECIFICATIONS",[v.F&&{c:"F",k:"F",t:(bm?"Gaya: ":"Style: ")+v.F},I("latar","Latar: ","Setting: ",v.latar,bm),I("komp","Komposisi: ","Composition: ",v.komp,bm),I("cahaya","Pencahayaan dan suasana: ","Lighting and mood: ",v.cahaya,bm),I("warna","Palet warna: ","Colour palette: ",v.warna,bm),I("nisbah","Nisbah aspek: ","Aspect ratio: ",v.nisbah,bm),I("teks","Teks dalam imej (eja tepat): ","Text in the image (spell exactly): ",v.teks&&('"'+v.teks+'"'),bm)],bm));
+    B.push(L1("F","SPESIFIKASI VISUAL","VISUAL SPECIFICATIONS",[v.F&&{c:"F",k:"F",t:(bm?"Gaya: ":"Style: ")+v.F},I("latar","Latar: ","Setting: ",v.latar,bm),I("komp","Komposisi: ","Composition: ",v.komp,bm),I("cahaya","Pencahayaan dan suasana: ","Lighting and mood: ",v.cahaya,bm),I("warna","Palet warna: ","Colour palette: ",v.warna,bm),I("nisbah","Nisbah aspek: ","Aspect ratio: ",v.nisbah,bm),I("fail","Fail output: ","Output file: ",v.fail,bm),I("teks","Teks dalam imej (eja tepat): ","Text in the image (spell exactly): ",v.teks&&('"'+v.teks+'"'),bm)],bm));
     B.push(L1("X","ELAKKAN","AVOID",m.elk.map(t=>({c:"X",k:"elk",t})),bm));
     B.push(L1("X","ARAHAN TAMBAHAN","ADDITIONAL INSTRUCTIONS",p.map(t=>({c:"X",k:"pro",t})),bm));
     return B}},
@@ -428,7 +432,7 @@ video:{ic:"🎬",n:"Video",d:"Klip promosi, pembuka laporan",nv:"Buat video ",to
     return B}},
 
 slaid:{ic:"📊",n:"Slaid",d:"Deck pembentangan (Gamma)",nv:"",tools:[TOOL.gam,TOOL.gpt],dv:{bhs:"Bahasa Melayu standard"},
-  how:"<b>Gamma</b>: Create new → Generate → tampal prompt. Semak outline sebelum klik Generate untuk jimat kredit. Boleh juga minta outline daripada ChatGPT dahulu.",
+  how:"<b>Gamma</b>: Create new → Generate → tampal prompt. Semak outline sebelum klik Generate untuk jimat kredit. Fail akhir: Export → PowerPoint, PDF atau Google Slides. Boleh juga minta outline daripada ChatGPT dahulu.",
   core:{
     P:{s:"Peranan",lb:"Peranan AI",q:"Siapa AI perlu jadi?",ph:"cth. perunding pembentangan korporat",ch:[c("perunding pembentangan korporat","a corporate presentation consultant","Perunding pembentangan"),c("pakar penyampaian cerita melalui data","a data storytelling specialist","Pakar data"),c("jurulatih dan fasilitator kursus","a trainer and course facilitator","Fasilitator"),c("pegawai perancang strategik","a strategic planning officer","Perancang strategik")]},
     T:{s:"Topik",lb:"Topik & objektif",q:"Deck ini tentang apa, untuk capai apa?",ph:"cth. Cadangkan program kelas kemahiran 2027",area:1,ch:[c("Bentangkan laporan pencapaian program bagi suku tahun ketiga","Present the programme performance report for the third quarter","Laporan suku tahun"),c("Cadangkan program kelas kemahiran tahun 2027 untuk mendapatkan kelulusan","Propose the 2027 skills class programme to obtain approval","Cadangan program 2027"),c("Beri taklimat peraturan data Hijau, Kuning dan Merah kepada kakitangan","Brief staff on the Green, Yellow and Red data rules","Taklimat peraturan data"),c("Perkenalkan TABIKA KEMAS kepada ibu bapa baharu","Introduce TABIKA KEMAS to new parents","Kenali TABIKA")]},
@@ -438,15 +442,16 @@ slaid:{ic:"📊",n:"Slaid",d:"Deck pembentangan (Gamma)",nv:"",tools:[TOOL.gam,T
      {id:"elemen",lb:"Elemen visual",w:6,multi:1,ch:[c("carta","charts"),c("jadual","tables"),c("ikon","icons"),c("imej sokongan","supporting images"),c("nota penceramah","speaker notes")]},
      {id:"nada",lb:"Nada",w:5,ch:NADA},
      {id:"bhs",lb:"Bahasa",w:5,ch:BHS},
+     {id:"fail",lb:"Fail output",q:"Fail akhir yang diperlukan",w:4,ch:[c("PowerPoint (.pptx) yang boleh disunting","an editable PowerPoint (.pptx) file","PowerPoint (.pptx)"),c("PDF (.pdf) untuk diedarkan","a PDF (.pdf) file for distribution","PDF (.pdf)"),c("Google Slides yang boleh disunting bersama","Google Slides that can be edited collaboratively","Google Slides")]},
      {id:"isi",lb:"Isi atau outline",q:"Tampal outline dari ChatGPT (data 🟢 Hijau sahaja)",w:6,area:1,raw:1,ph:"Tampal isi atau outline deck di sini supaya Gamma tidak mereka fakta"},
      {id:"kek",lb:"Kekangan (arahan tetap Gamma)",w:8,multi:1,ch:[c("Maksimum 5 baris setiap slaid","Maximum 5 lines per slide"),c("Satu idea utama setiap slaid","One key idea per slide"),c("Tiada emoji","No emojis"),c("Jangan tambah fakta atau angka yang tidak saya berikan","Do not add facts or figures that I have not provided","Jangan tambah fakta")]}],
   pro:{w:2,max:4,ch:[c("Akhiri dengan slaid rumusan dan seruan tindakan","End with a summary slide and a call to action"),c("Cadangkan tajuk deck yang menarik","Suggest a compelling title for the deck")]},
-  ex:[{P:"perunding pembentangan korporat",T:"Cadangkan program kelas kemahiran tahun 2027 untuk mendapatkan kelulusan",K:"mesyuarat pengurusan bersama Pengarah KEMAS Negeri",F:"8 slaid: Latar belakang → Dapatan → Cadangan → Tindakan susulan",gaya:"korporat moden, biru gelap",elemen:[0,1,4],nada:"meyakinkan",bhs:"Bahasa Melayu standard",kek:[0,1,2,3],pro:[0]},
+  ex:[{P:"perunding pembentangan korporat",T:"Cadangkan program kelas kemahiran tahun 2027 untuk mendapatkan kelulusan",K:"mesyuarat pengurusan bersama Pengarah KEMAS Negeri",F:"8 slaid: Latar belakang → Dapatan → Cadangan → Tindakan susulan",gaya:"korporat moden, biru gelap",elemen:[0,1,4],nada:"meyakinkan",bhs:"Bahasa Melayu standard",fail:"PowerPoint (.pptx) yang boleh disunting",kek:[0,1,2,3],pro:[0]},
       {P:"jurulatih dan fasilitator kursus",T:"Beri taklimat peraturan data Hijau, Kuning dan Merah kepada kakitangan",K:"taklimat kakitangan pejabat KEMAS daerah",F:"10 slaid: Agenda → Isi utama → Contoh → Rumusan",gaya:"minimalis dan bersih",elemen:[2,3],nada:"mesra dan ceria",bhs:"Bahasa Melayu standard",kek:[1,2,3],pro:[1]}],
   build(v,m,p,bm){const B=[];
     if(v.P)B.push({c:"P",k:"P",b:(bm?"Anda ialah ":"You are ")+dot(v.P)});
     B.push(S1("T","TUGAS","TASK",v.T,bm),S1("K","AUDIENS DAN SITUASI","AUDIENCE AND SETTING",v.K,bm));
-    B.push(L1("F","STRUKTUR DECK","DECK STRUCTURE",[v.F&&{c:"F",k:"F",t:cap(v.F)},I("gaya","Gaya visual: ","Visual style: ",v.gaya,bm),I("elemen","Sertakan: ","Include: ",m.elemen.join(", "),bm),I("nada","Nada: ","Tone: ",v.nada,bm),I("bhs","Bahasa: ","Language: ",v.bhs,bm)],bm));
+    B.push(L1("F","STRUKTUR DECK","DECK STRUCTURE",[v.F&&{c:"F",k:"F",t:cap(v.F)},I("gaya","Gaya visual: ","Visual style: ",v.gaya,bm),I("elemen","Sertakan: ","Include: ",m.elemen.join(", "),bm),I("nada","Nada: ","Tone: ",v.nada,bm),I("bhs","Bahasa: ","Language: ",v.bhs,bm),I("fail","Fail output: ","Output file: ",v.fail,bm)],bm));
     if(v.isi)B.push({c:"X",k:"isi",h:bm?"ISI ATAU OUTLINE":"CONTENT OR OUTLINE",b:'"""\n'+v.isi+'\n"""'});
     B.push(L1("X","KEKANGAN","CONSTRAINTS",m.kek.map(t=>({c:"X",k:"kek",t})),bm));
     B.push(L1("X","ARAHAN TAMBAHAN","ADDITIONAL INSTRUCTIONS",p.map(t=>({c:"X",k:"pro",t})),bm));
