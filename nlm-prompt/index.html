@@ -42,8 +42,8 @@ header{display:flex;align-items:center;justify-content:space-between;gap:12px;fl
 .field small{color:var(--muted);font-size:12px}
 input[type=text],select,textarea{width:100%;background:var(--panel2);color:var(--text);border:1px solid var(--line);border-radius:9px;padding:9px 10px;font:14px "Plus Jakarta Sans",system-ui,sans-serif}
 input[type=text]:focus,select:focus,textarea:focus{outline:2px solid var(--acc2);border-color:transparent}
-.chips{display:flex;flex-wrap:wrap;gap:6px}
-.chip{border:1px solid var(--line);background:var(--chip);color:var(--text);border-radius:999px;padding:5px 11px;font:600 12.5px "Plus Jakarta Sans",system-ui,sans-serif;cursor:pointer}
+.chips{display:grid;grid-template-columns:repeat(var(--cols,3),minmax(0,1fr));gap:6px;align-items:stretch;grid-auto-rows:1fr}
+.chip{display:flex;align-items:center;justify-content:center;text-align:center;min-height:34px;line-height:1.2;border:1px solid var(--line);background:var(--chip);color:var(--text);border-radius:10px;padding:6px 8px;font:600 12.5px "Plus Jakarta Sans",system-ui,sans-serif;cursor:pointer}
 .chip[aria-pressed="true"]{background:var(--chipOn);color:var(--chipOnText);border-color:var(--chipOn)}
 .datab{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
 .datab button{border:2px solid var(--line);background:var(--panel2);color:var(--text);border-radius:10px;padding:8px 4px;font:700 12.5px "Plus Jakarta Sans",system-ui,sans-serif;cursor:pointer}
@@ -297,11 +297,11 @@ function lsSet(k,v){try{localStorage.setItem(k,JSON.stringify(v));return true}ca
 
 /* ===== UI ===== */
 const $=id=>document.getElementById(id);
-function chipGroup(host,opts,sel,onPick,{multi=false,optional=false}={}){host.innerHTML="";opts.forEach((o,i)=>{const b=document.createElement("button");b.type="button";b.className="chip";b.textContent=o[0];
+function chipGroup(host,opts,sel,onPick,{multi=false,optional=false,cols=3}={}){host.innerHTML="";host.style.setProperty("--cols",Math.min(cols,opts.length));opts.forEach((o,i)=>{const b=document.createElement("button");b.type="button";b.className="chip";b.textContent=o[0];
  const on=multi?(sel||[]).includes(i):sel===i;b.setAttribute("aria-pressed",on?"true":"false");
  b.onclick=()=>{if(multi){const s=new Set(sel||[]);s.has(i)?s.delete(i):s.add(i);onPick([...s].sort((a,b)=>a-b))}else{onPick(optional&&sel===i?null:i)}};host.appendChild(b)})}
 function renderFuncs(){const h=$("fgrid");h.innerHTML="";FUNCS.forEach(f=>{const b=document.createElement("button");b.type="button";b.className="ftile";b.style.setProperty("--fc",f.c);b.setAttribute("aria-pressed",S.fn===f.id?"true":"false");b.innerHTML=`<span class="ic">${f.ic}</span>${f.name}`;b.onclick=()=>{S.fn=f.id;renderAll()};h.appendChild(b)})}
-function renderA(){chipGroup($("audChips"),AUD,S.aud,v=>{S.aud=v;renderA();update()},{multi:true});
+function renderA(){chipGroup($("audChips"),AUD,S.aud,v=>{S.aud=v;renderA();update()},{multi:true,cols:2});
  const sel=$("nada");if(!sel.options.length)NADA.forEach((o,i)=>sel.add(new Option(o[0],i)));sel.value=S.nada;
  $("masalah").value=S.masalah;$("audCustom").value=S.audCustom;$("fokus").value=S.fokus;
  document.querySelectorAll("#datab button").forEach(b=>b.setAttribute("aria-pressed",S.data===b.dataset.v?"true":"false"));
