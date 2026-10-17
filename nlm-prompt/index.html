@@ -44,6 +44,7 @@ input[type=text],select,textarea{width:100%;background:var(--panel2);color:var(-
 input[type=text]:focus,select:focus,textarea:focus{outline:2px solid var(--acc2);border-color:transparent}
 .chips{display:grid;grid-template-columns:repeat(var(--cols,3),minmax(0,1fr));gap:6px;align-items:stretch;grid-auto-rows:1fr}
 .chip{display:flex;align-items:center;justify-content:center;text-align:center;min-height:34px;line-height:1.2;border:1px solid var(--line);background:var(--chip);color:var(--text);border-radius:10px;padding:6px 8px;font:600 12.5px "Plus Jakarta Sans",system-ui,sans-serif;cursor:pointer}
+.chip.none{border-style:dashed;letter-spacing:1px;font-weight:800}
 .chip[aria-pressed="true"]{background:var(--chipOn);color:var(--chipOnText);border-color:var(--chipOn)}
 .datab{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
 .datab button{border:2px solid var(--line);background:var(--panel2);color:var(--text);border-radius:10px;padding:8px 4px;font:700 12.5px "Plus Jakarta Sans",system-ui,sans-serif;cursor:pointer}
@@ -171,11 +172,11 @@ footer{margin:26px 0 10px;color:var(--muted);font-size:12.5px;text-align:center;
 const AUD=[["Pengarah / Ketua Jabatan","Pengarah atau Ketua Jabatan","directors or heads of department"],["Yang Berhormat ADUN/MP","Yang Berhormat ADUN/Ahli Parlimen","elected representatives (state assemblymen/MPs)"],["Pegawai KEMAS Daerah","Pegawai KEMAS Daerah","KEMAS district officers"],["Penyelia","penyelia","supervisors"],["Pendidik Masyarakat TABIKA/TASKA","Pendidik Masyarakat TABIKA/TASKA","TABIKA/TASKA community educators"],["Pemaju Masyarakat Kemahiran","Pemaju Masyarakat Kemahiran","skills community development officers"],["Ketua Kampung / Pemimpin Setempat","ketua kampung atau pemimpin setempat","village heads or local leaders"],["Peserta Kursus Kemahiran","peserta kursus kemahiran KEMAS","KEMAS skills course participants"],["Orang Kampung","orang kampung","villagers"],["Murid TABIKA","murid TABIKA","TABIKA pupils"]];
 const NADA=[["Formal","formal","formal"],["Mesra","mesra","friendly"],["Mendidik","mendidik","educational"],["Ringkas dan padat","ringkas dan padat","concise"],["Bercerita","bercerita","storytelling"],["Memujuk","memujuk","persuasive"],["Teknikal","teknikal","technical"]];
 const GAYA=[["Profesional","profesional","professional"],["Korporat","korporat","corporate"],["Minimalis","minimalis","minimalist"],["Akademik","akademik","academic"],["Ilustrasi","ilustrasi","illustrated"],["Ikon rata","ikon rata (flat)","flat icon"],["Lakaran nota","lakaran nota (sketch notes)","sketch notes"],["Peta minda","peta minda","mind map"],["Blueprint","blueprint","blueprint"],["Kertas potong","kertas potong (paper cut)","paper cut"],["Retro","retro","retro"],["Futuristik","futuristik","futuristic"],["Kartun mesra kanak-kanak","kartun mesra kanak-kanak","child-friendly cartoon"],["3D","3D","3D"],["Clay","clay","clay"]];
-const PALET=[["Biru korporat KEMAS","biru korporat KEMAS","KEMAS corporate blue"],["Pastel","pastel","pastel"],["Hangat","hangat","warm"],["Sejuk","sejuk","cool"],["Monokrom","monokrom","monochrome"],["Cerah bertenaga","cerah dan bertenaga","bright and vibrant"],["Neutral","neutral","neutral"],["Watercolour","watercolour","watercolour"]];
-const LATAR=[["Putih","putih","white"],["Kelabu cair","kelabu cair","light grey"],["Gelap","gelap","dark"],["Gradien","gradien","gradient"],["Tekstur kertas","bertekstur kertas","paper-textured"],["Papan kapur","papan kapur","chalkboard"],["Papan gabus","papan gabus","cork board"]];
-const FON=[["Sans-serif moden","sans-serif moden","modern sans-serif"],["Serif klasik","serif klasik","classic serif"],["Bulat mesra","bulat dan mesra","rounded, friendly"],["Tulisan tangan","tulisan tangan","handwritten"],["Display tebal","display tebal","bold display"],["Monospace","monospace","monospace"]];
-const MOTIF=[["Corak batik","corak batik","batik patterns"],["Motif Sarawak","motif tradisional Sarawak","traditional Sarawak motifs"],["Suasana kampung","suasana kampung","a Malaysian village setting"],["Kelas TABIKA","suasana kelas TABIKA","a TABIKA classroom setting"],["Bandar moden Malaysia","bandar moden Malaysia","a modern Malaysian cityscape"]];
-const TEMA=[["Upin Ipin","Upin Ipin","Upin Ipin"],["BoBoiBoy","BoBoiBoy","BoBoiBoy"],["Ejen Ali","Ejen Ali","Ejen Ali"],["Marvel","Marvel Superheroes","Marvel superheroes"],["Disney","Disney","Disney"],["Studio Ghibli","Studio Ghibli","Studio Ghibli"],["Lego","Lego","Lego"],["Minecraft","Minecraft","Minecraft"],["Pokémon","Pokémon","Pokémon"],["Hello Kitty","Hello Kitty","Hello Kitty"]];
+const PALET=[["TIADA",null,null],["Biru korporat KEMAS","biru korporat KEMAS","KEMAS corporate blue"],["Pastel","pastel","pastel"],["Hangat","hangat","warm"],["Sejuk","sejuk","cool"],["Monokrom","monokrom","monochrome"],["Cerah bertenaga","cerah dan bertenaga","bright and vibrant"],["Neutral","neutral","neutral"],["Watercolour","watercolour","watercolour"],["Hijau alam","hijau alam semula jadi","natural green"],["Emas-navy","emas-navy","gold-navy"],["Warna tanah","warna tanah (earth tone)","earth-tone"]];
+const LATAR=[["TIADA",null,null],["Putih","putih","white"],["Kelabu cair","kelabu cair","light grey"],["Gelap","gelap","dark"],["Gradien","gradien","gradient"],["Tekstur kertas","bertekstur kertas","paper-textured"],["Papan kapur","papan kapur","chalkboard"],["Papan gabus","papan gabus","cork board"],["Papan putih","papan putih","whiteboard"],["Kertas bergrid","kertas bergrid","grid-paper"],["Tekstur kayu","bertekstur kayu","wood-textured"],["Sapuan watercolour","sapuan watercolour","watercolour-wash"]];
+const FON=[["TIADA",null,null],["Sans-serif moden","sans-serif moden","modern sans-serif"],["Serif klasik","serif klasik","classic serif"],["Bulat mesra","bulat dan mesra","rounded, friendly"],["Tulisan tangan","tulisan tangan","handwritten"],["Display tebal","display tebal","bold display"],["Monospace","monospace","monospace"],["Krayon","krayon","crayon"],["Marker","marker","marker"],["Script elegan","script elegan","elegant script"],["Slab serif tegas","slab serif tegas","strong slab serif"],["Geometrik bersih","geometrik bersih","clean geometric"]];
+const MOTIF=[["TIADA",null,null],["Corak batik","corak batik","batik patterns"],["Motif Sarawak","motif tradisional Sarawak","traditional Sarawak motifs"],["Suasana kampung","suasana kampung","a Malaysian village setting"],["Kelas TABIKA","suasana kelas TABIKA","a TABIKA classroom setting"],["Bandar moden Malaysia","bandar moden Malaysia","a modern Malaysian cityscape"],["Songket","corak songket","songket patterns"],["Wau dan gasing","wau dan gasing","wau kites and gasing tops"],["Rumah panjang","rumah panjang Sarawak","Sarawak longhouses"],["Anyaman mengkuang","corak anyaman mengkuang","mengkuang weaving patterns"],["Sawah padi","pemandangan sawah padi","paddy field scenery"],["Hutan hujan tropika","hutan hujan tropika","a tropical rainforest"]];
+const TEMA=[["TIADA",null,null],["Upin Ipin","Upin Ipin","Upin Ipin"],["BoBoiBoy","BoBoiBoy","BoBoiBoy"],["Ejen Ali","Ejen Ali","Ejen Ali"],["Mechamato","Mechamato","Mechamato"],["Didi & Friends","Didi & Friends","Didi & Friends"],["Pada Zaman Dahulu","Pada Zaman Dahulu","Pada Zaman Dahulu"],["Marvel","Marvel Superheroes","Marvel superheroes"],["Disney","Disney","Disney"],["Studio Ghibli","Studio Ghibli","Studio Ghibli"],["Lego","Lego","Lego"],["Minecraft","Minecraft","Minecraft"],["Pokémon","Pokémon","Pokémon"],["Hello Kitty","Hello Kitty","Hello Kitty"],["Doraemon","Doraemon","Doraemon"]];
 const ORI=[["Landskap","landskap","landscape"],["Potret","potret","portrait"]];
 const TAHAP=[["Mudah","mudah","easy"],["Sederhana","sederhana","medium"],["Sukar","sukar","hard"]];
 const N=a=>a.map(x=>[String(x),String(x),String(x)]);
@@ -189,7 +190,7 @@ const FUNCS=[
   fields:[{k:"format",l:"Format",t:"chips",o:[["Penerangan","dalam format penerangan","as an explainer"],["Ringkas","dalam format ringkas","as a brief"]]},
           {k:"msg",l:"Bilangan mesej utama",t:"chips",o:N([3,4,5])}]},
  {id:"reports",ic:"📑",name:"Reports",c:"#db2777",vis:false,nbm:"satu laporan",nen:"report",
-  fields:[{k:"jenis",l:"Jenis laporan",t:"chips",o:[["Briefing doc","briefing doc","a briefing doc"],["Study guide","study guide","a study guide"],["FAQ","FAQ","an FAQ"],["Garis masa","garis masa","a timeline"],["Tersuai","format tersuai","a custom format"]]},
+  fields:[{k:"jenis",l:"Jenis laporan",t:"chips",o:[["Briefing doc","briefing doc","a briefing doc"],["Study guide","study guide","a study guide"],["FAQ","FAQ","an FAQ"],["Garis masa","garis masa","a timeline"],["Ringkasan eksekutif","ringkasan eksekutif","an executive summary"],["Tersuai","format tersuai","a custom format"]]},
           {k:"pjg",l:"Panjang maksimum",t:"chips",o:[["1 muka","tidak melebihi satu muka","no longer than one page"],["2 muka","tidak melebihi dua muka","no longer than two pages"]]},
           {k:"sek",l:"Seksyen yang diperlukan",t:"text",ph:"Contoh: latar belakang, isu, cadangan, tindakan"}]},
  {id:"quiz",ic:"❓",name:"Quiz",c:"#0891b2",vis:false,nbm:"satu kuiz",nen:"quiz",
@@ -211,10 +212,10 @@ const FUNCS=[
           {k:"tahap",l:"Tahap",t:"chips",o:TAHAP,d:1},
           {k:"fokus",l:"Fokus kad",t:"chips",o:[["Istilah","istilah dan definisi","terms and definitions"],["Tarikh","tarikh penting","key dates"],["Prosedur","langkah prosedur","procedural steps"]]}]},
  {id:"info",ic:"📊",name:"Infographic",c:"#f59e0b",vis:true,nbm:"satu infografik",nen:"infographic",
-  fields:[{k:"layout",l:"Susun atur",t:"chips",o:[["Satu lajur","satu lajur","a single column"],["2 lajur","dua lajur","two columns"],["3 lajur","tiga lajur","three columns"],["Grid 2x2","grid 2x2","a 2x2 grid"],["Grid 3x3","grid 3x3","a 3x3 grid"],["Bento","susun atur bento","a bento layout"],["Bebas","susun atur bebas","a freeform layout"]]},
+  fields:[{k:"layout",l:"Susun atur",t:"chips",o:[["Satu lajur","satu lajur","a single column"],["2 lajur","dua lajur","two columns"],["3 lajur","tiga lajur","three columns"],["Grid 2x2","grid 2x2","a 2x2 grid"],["Grid 3x3","grid 3x3","a 3x3 grid"],["Bento","susun atur bento","a bento layout"],["Bebas","susun atur bebas","a freeform layout"],["Garis masa","format garis masa","a timeline layout"],["Carta alir","format carta alir","a flowchart layout"]]},
           {k:"ori",l:"Orientasi",t:"chips",o:ORI,d:1}]}
 ];
-const VIS=[{k:"gaya",l:"Gaya",o:GAYA},{k:"palet",l:"Palet warna",o:PALET},{k:"latar",l:"Latar",o:LATAR},{k:"fon",l:"Fon",o:FON},{k:"motif",l:"Motif tempatan (pilihan)",o:MOTIF,opt:true},{k:"tema",l:"Tema watak (pilihan)",o:TEMA,opt:true}];
+const VIS=[{k:"gaya",l:"Gaya",o:GAYA},{k:"palet",l:"Palet warna",o:PALET},{k:"latar",l:"Latar",o:LATAR},{k:"fon",l:"Fon",o:FON},{k:"motif",l:"Motif tempatan",o:MOTIF},{k:"tema",l:"Tema watak",o:TEMA}];
 
 /* ===== Kolam variasi (teks asal AI4U) ===== */
 const POOL={
@@ -238,7 +239,7 @@ function fill(t,o){return t.replace(/\{(\w+)\}/g,(m,k)=>o[k]!=null?o[k]:"")}
 function tidy(t){return t.replace(/\s+([,.;:])/g,"$1").replace(/,\s*,+/g,",").replace(/\.\s*\./g,".").replace(/\s{2,}/g," ").replace(/\s+\./g,".").trim()}
 function hasDoubleComma(t){return/,\s*,/.test(t)||/\.\s*\./.test(t)||/\s,/.test(t)||/\(\s*\)/.test(t)}
 const pick=(arr,i)=>arr[((i%arr.length)+arr.length)%arr.length];
-const optVal=(opts,i,L)=>{const o=opts[i];return o?(L==="en"?o[2]:o[1]):""};
+const optVal=(opts,i,L)=>{const o=opts[i];return o?((L==="en"?o[2]:o[1])||""):""};
 
 /* ===== Penjana (pure) ===== */
 function gen(S){
@@ -286,7 +287,7 @@ function gen(S){
 }
 
 /* ===== Keadaan ===== */
-function defaults(){return{fn:"info",lang:"bm",masalah:"",aud:[],audCustom:"",fokus:"",nada:2,data:null,f:{},vis:{gaya:0,palet:0,latar:0,fon:0,motif:null,tema:null},v:Object.fromEntries(SLOTS.map(k=>[k,0]))}}
+function defaults(){return{fn:"info",lang:"bm",masalah:"",aud:[],audCustom:"",fokus:"",nada:2,data:null,f:{},vis:{gaya:0,palet:1,latar:1,fon:1,motif:0,tema:0},v:Object.fromEntries(SLOTS.map(k=>[k,0]))}}
 let S=defaults();let lastV=null;
 function shuffle(){const prev=JSON.stringify(S.v);let tries=0;do{S.v=Object.fromEntries(SLOTS.map(k=>[k,Math.floor(Math.random()*POOL[k].bm.length)]));tries++}while(JSON.stringify(S.v)===prev&&tries<20);lastV=prev}
 
@@ -297,7 +298,7 @@ function lsSet(k,v){try{localStorage.setItem(k,JSON.stringify(v));return true}ca
 
 /* ===== UI ===== */
 const $=id=>document.getElementById(id);
-function chipGroup(host,opts,sel,onPick,{multi=false,optional=false,cols=3}={}){host.innerHTML="";host.style.setProperty("--cols",Math.min(cols,opts.length));opts.forEach((o,i)=>{const b=document.createElement("button");b.type="button";b.className="chip";b.textContent=o[0];
+function chipGroup(host,opts,sel,onPick,{multi=false,optional=false,cols=3}={}){host.innerHTML="";const n=opts.length;const c=cols!==3?cols:(n%3===0?3:(n%2===0?2:3));host.style.setProperty("--cols",Math.min(c,n));opts.forEach((o,i)=>{const b=document.createElement("button");b.type="button";b.className="chip"+(o[1]===null?" none":"");b.textContent=o[0];
  const on=multi?(sel||[]).includes(i):sel===i;b.setAttribute("aria-pressed",on?"true":"false");
  b.onclick=()=>{if(multi){const s=new Set(sel||[]);s.has(i)?s.delete(i):s.add(i);onPick([...s].sort((a,b)=>a-b))}else{onPick(optional&&sel===i?null:i)}};host.appendChild(b)})}
 function renderFuncs(){const h=$("fgrid");h.innerHTML="";FUNCS.forEach(f=>{const b=document.createElement("button");b.type="button";b.className="ftile";b.style.setProperty("--fc",f.c);b.setAttribute("aria-pressed",S.fn===f.id?"true":"false");b.innerHTML=`<span class="ic">${f.ic}</span>${f.name}`;b.onclick=()=>{S.fn=f.id;renderAll()};h.appendChild(b)})}
@@ -314,7 +315,7 @@ function renderB(){const F=FUNCS.find(f=>f.id===S.fn);$("fnTitle").textContent=F
  $("fnNote").innerHTML=F.id==="mindmap"?'<div class="banner i">🧠 Mind Map tiada kotak arahan sendiri. Tampal prompt ini dalam <b>Chat</b> NotebookLM, kemudian klik Mind Map.</div>':""}
 function renderC(){const F=FUNCS.find(f=>f.id===S.fn);$("panelC").classList.toggle("hidden",!F.vis);const h=$("visFields");h.innerHTML="";
  VIS.forEach(d=>{const w=document.createElement("div");w.className="field";w.innerHTML=`<span class="flabel">${d.l}</span><div class="chips"></div>`;chipGroup(w.querySelector(".chips"),d.o,S.vis[d.k],i=>{S.vis[d.k]=i;renderC();update()},{optional:!!d.opt});h.appendChild(w)});
- $("temaBanner").innerHTML=S.vis.tema!=null?'<div class="banner y">⚠️ Watak berhak cipta. Jangan guna untuk bahan rasmi, hebahan awam atau media sosial KEMAS. Untuk latihan dan bahan dalaman sahaja.</div>':""}
+ $("temaBanner").innerHTML=(S.vis.tema!=null&&TEMA[S.vis.tema]&&TEMA[S.vis.tema][1])?'<div class="banner y">⚠️ Watak berhak cipta. Jangan guna untuk bahan rasmi, hebahan awam atau media sosial KEMAS. Untuk latihan dan bahan dalaman sahaja.</div>':""}
 function update(){const r=gen(S);const ob=$("outbox");
  if(r.missing.length){ob.textContent=r.text;ob.classList.remove("empty");$("hint").textContent="Isi: "+r.missing.join(", ")}else{ob.textContent=r.text;ob.classList.remove("empty");$("hint").textContent=r.data?"":"Pilih warna data sumber"}
  $("wc").textContent=r.words+" patah perkataan";$("copyBtn").disabled=!r.canCopy;
