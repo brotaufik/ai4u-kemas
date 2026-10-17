@@ -73,6 +73,9 @@ footer{margin:26px 0 10px;color:var(--muted);font-size:12.5px;text-align:center;
 :root[data-theme="light"] .toast{color:#fff}
 .toast.on{opacity:1}
 .hidden{display:none!important}
+.embed #portalLink,.embed #themeBtn{display:none}
+.embed .wrap{padding:10px}
+.embed header{padding-top:0}
 @media (max-width:1000px){.fgrid{grid-template-columns:repeat(5,minmax(0,1fr))}.cols{grid-template-columns:1fr 1fr}}
 @media (max-width:680px){.fgrid{grid-template-columns:repeat(3,minmax(0,1fr))}.cols{grid-template-columns:1fr}.brand h1{font-size:20px}}
 </style>
@@ -338,6 +341,10 @@ function bind(){
  $("themeBtn").onclick=()=>{const cur=document.documentElement.getAttribute("data-theme")==="light"?"dark":"light";document.documentElement.setAttribute("data-theme",cur);try{localStorage.setItem("ai4u-nlm-theme",cur)}catch(_){}};
 }
 try{const th=localStorage.getItem("ai4u-nlm-theme");if(th)document.documentElement.setAttribute("data-theme",th)}catch(_){}
+const QS=new URLSearchParams(location.search);const EMBED=QS.get("embed")==="1";
+if(QS.get("theme"))document.documentElement.setAttribute("data-theme",QS.get("theme")==="light"?"light":"dark");
+if(EMBED){document.documentElement.classList.add("embed")}
+addEventListener("message",e=>{const t=e.data&&e.data.ai4uTheme;if(t==="light"||t==="dark")document.documentElement.setAttribute("data-theme",t)});
 bind();renderAll();renderSaved();
 try{if(location.protocol==="file:")$("portalLink").href="../Portal_Kursus_AI_KEMAS_Perak.html"}catch(_){}
 window.NLM={gen,defaults,FUNCS,POOL,SLOTS,hasDoubleComma,joinList,art,shuffleState:(st)=>{const prev=JSON.stringify(st.v);let n=0;do{st.v=Object.fromEntries(SLOTS.map(k=>[k,Math.floor(Math.random()*POOL[k].bm.length)]));n++}while(JSON.stringify(st.v)===prev&&n<20);return st},getState:()=>S};
