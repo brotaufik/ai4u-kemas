@@ -78,7 +78,8 @@ footer{margin:26px 0 10px;color:var(--muted);font-size:12.5px;text-align:center;
 :root[data-theme="light"] .toast{color:#fff}
 .toast.on{opacity:1}
 .hidden{display:none!important}
-.embed #portalLink,.embed #themeBtn{display:none}
+.embed #portalLink,.embed #themeBtn,.embed .brand{display:none}
+.embed header{justify-content:flex-end}
 .embed .wrap{padding:10px}
 .embed header{padding-top:0}
 @media (max-width:1000px){.fgrid{grid-template-columns:repeat(5,minmax(0,1fr))}.cols{grid-template-columns:1fr 1fr}.outgrid{grid-template-columns:1fr}}
@@ -104,9 +105,9 @@ footer{margin:26px 0 10px;color:var(--muted);font-size:12.5px;text-align:center;
 <div class="cols">
   <section class="panel" id="panelA">
     <h2><b>A</b> Konteks</h2>
-    <div class="field"><label for="masalah">Masalah / tujuan <i>*</i></label>
-      <input type="text" id="masalah" placeholder="Contoh: ibu bapa tak faham syarat pendaftaran TABIKA 2027">
-      <small>Mula dengan masalah, bukan dengan AI.</small></div>
+    <div class="field"><label for="masalah">Tujuan <i>*</i></label>
+      <input type="text" id="masalah" placeholder="Contoh: menerangkan syarat pendaftaran TABIKA 2027 kepada ibu bapa">
+      <small>Mula dengan tujuan kerja anda, bukan dengan AI.</small></div>
     <div class="field"><span class="flabel">Audiens <i>*</i></span>
       <div class="chips" id="audChips"></div>
       <input type="text" id="audCustom" placeholder="Atau taip audiens lain" style="margin-top:6px"></div>
@@ -231,7 +232,7 @@ const VIS=[{k:"gaya",l:"Gaya",o:GAYA},{k:"palet",l:"Palet warna",o:PALET},{k:"la
 /* ===== Kolam variasi (teks asal AI4U) ===== */
 const POOL={
  verb:{bm:["Hasilkan","Sediakan","Bina","Jana"],en:["Create","Produce","Generate","Prepare"]},
- link:{bm:["yang membantu menyelesaikan masalah ini:","bagi menangani masalah berikut:","untuk menyelesaikan isu ini:","yang menjawab keperluan ini:"],en:["that helps solve this problem:","to address the following problem:","that tackles this issue:","that responds to this need:"]},
+ link:{bm:["untuk tujuan berikut:","dengan matlamat berikut:","bagi mencapai tujuan ini:","yang dihasilkan untuk tujuan ini:"],en:["for the following purpose:","with this goal:","to achieve this aim:","aimed at the following purpose:"]},
  aud:{bm:["Audiens sasaran ialah {a}.","Ia ditujukan kepada {a}.","Tulis untuk {a}.","Audiens utama: {a}."],en:["The target audience is {a}.","It is aimed at {a}.","Write for {a}.","Primary audience: {a}."]},
  fokus:{bm:["Fokus pada {f}.","Beri tumpuan kepada {f}.","Tekankan {f}.","Utamakan {f}."],en:["Focus on {f}.","Concentrate on {f}.","Emphasise {f}.","Prioritise {f}."]},
  vis:{bm:["Gunakan","Terapkan","Pilih","Gayakan dengan"],en:["Use","Apply","Go for","Style it with"]},
@@ -259,7 +260,7 @@ function gen(S){
  const masalah=clean(S.masalah);
  // audiens
  const audList=(S.aud||[]).map(i=>optVal(AUD,i,L)).concat(clean(S.audCustom)?[clean(S.audCustom)]:[]);
- const missing=[];if(!masalah)missing.push("Masalah / tujuan");if(!audList.length)missing.push("Audiens");
+ const missing=[];if(!masalah)missing.push("Tujuan");if(!audList.length)missing.push("Audiens");
  // pembuka
  const noun=L==="en"?(art(F.nen)+" "+F.nen):F.nbm;
  out.push(masalah?`${P("verb")} ${noun} ${P("link")} ${masalah}.`:`${P("verb")} ${noun}.`);

@@ -511,6 +511,9 @@ button.modgo:focus-visible{outline:3px solid #FFD23F;outline-offset:2px}
 :root[data-theme="light"] #slides .stbtn.on{box-shadow:0 0 0 3px #d99a00,0 8px 20px var(--sh)}
 
 :root[data-theme="light"] #slides .hitl{color:#a16207!important}
+
+#slides .hd h2 .dt2{color:#5ff0f0}
+:root[data-theme="light"] #slides .hd h2 .dt2{color:#b45309!important}
 </style>
 </head>
 <body>
@@ -1617,7 +1620,7 @@ pcard("KC","M5 · Studio: 9 fungsi NotebookLM",3,()=>`
 addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-st]");if(!b)return;const i=+b.dataset.st;const sl=b.closest(".slide");sl.querySelectorAll(".stbtn").forEach(x=>x.classList.toggle("on",x===b));const t=sl.querySelector("#sttip");if(t){t.innerHTML=studioTip(i);t.style.borderTopColor=STUDIO[i][2]}});
 const NLM_QR="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAARgAAAEYAQAAAACv9dQhAAAB4klEQVR4nO2ay27rMBBDDwP//y+zi3lYu646nXtVA0Eci0AIgpqXLPPt9fke8t9iHhQ3RpaRIb96ZRvnWX0wgBDkpy2VK9s4T2MkQaph+dRK+gU+SzGSMcbG8LpoM+dBTG+zcJN+m88OzMPrFAtjWciyXCvbOA/rk05RKnMsap7PNsxzxJkQ5409tbKN8ywmTCLAVlooIpAyge3jPIeRUxuEszhEVrgnvrZxHsYIbOE3hVnGkkK2jZzHMCWLj1vbxp3Vru4v5Cp0onLGylt3p7GN83T/FbUOFo5QVFeEoKv981RJaEWwoRt4Ra/qdZzH47Nld/n8rpnYfws5D2Iyu8upx1EQKaL0Ps5zmFDAkbscDTzUj3i6jfOwfxwhqGOzW6McA+3jPIcpz1R1mMnLr0x31z8PQPbt7rkG1JzV1/un91THmzST0z5X++dDSCIQ6uFzqGNfH38+AJa6NrSjlSfHY5fXP5nYyy+9w3wE6m2cp/uLEEgWR21IP1vHeVafOiV1badMZDlu/eu/Yt5DHzGfjbxujz8PNUWNJJa5DJyHqrreP3VJWJHkSyn4O3/vy7gOeBQNfYajxZx/HHOcn8pYqI8v+mWObZwnMT1/dpyfku/+IPploG2cZ/WZ+69/EfMFRHcM83q6dy8AAAAASUVORK5CYII=";
 pcard("KC","M5 · NotebookLM Prompt Generator by Bro",2,()=>`
-  ${cardHd("Modul 5 · NotebookLM (Gemini Notebook)","NotebookLM Prompt Generator by Bro",2,plate("9 FUNGSI STUDIO · BM + ENGLISH"))}
+  ${cardHd("Modul 5 · NotebookLM (Gemini Notebook)","NotebookLM Prompt Generator <span class=dt2>by Bro</span>",2,plate("9 FUNGSI STUDIO · BM + ENGLISH"))}
   <div class="body row" style="gap:16px;align-items:stretch">
     <div class="enjin-wrap"><iframe class="enjin" src="nlm-prompt/index.html?embed=1&theme=${document.documentElement.getAttribute("data-theme")||"dark"}" title="NotebookLM Prompt Generator by Bro" loading="lazy" onload="try{this.contentWindow.postMessage({ai4uTheme:document.documentElement.getAttribute('data-theme')||'dark'},'*')}catch(e){}"></iframe></div>
     <div class="col" style="flex:0 0 268px;width:268px;gap:12px">
@@ -1628,9 +1631,9 @@ pcard("KC","M5 · NotebookLM Prompt Generator by Bro",2,()=>`
       </div>
       <div class="card ps col" style="gap:10px">
         <div class="h4">Tiga langkah</div>
-        ${steps(["Pilih fungsi Studio yang sesuai dengan masalah anda.","Isi masalah, audiens dan warna data. 🔴 Merah menyekat Copy.","Copy, tampal dalam Customize Studio (Mind Map: dalam Chat), kemudian semak hasil dengan sumber."],"t15")}
+        ${steps(["Pilih fungsi Studio yang sesuai dengan masalah anda.","Isi tujuan, audiens dan warna data. 🔴 Merah menyekat Copy.","Copy, tampal dalam Customize Studio (Mind Map: dalam Chat), kemudian semak hasil dengan sumber."],"t15")}
       </div>
-      ${facNote("Demo 2 minit: pilih Infographic, isi masalah TABIKA 2027, pilih Ibu bapa TABIKA dan 🟢 Hijau, tunjuk Shuffle, tukar BM ke EN, kemudian Copy dan tampal dalam Studio. Minta peserta imbas QR dan jana satu prompt untuk masalah kerja sendiri.")}
+      ${facNote("Demo 2 minit: pilih Infographic, isi tujuan ‘menerangkan syarat pendaftaran TABIKA 2027 kepada ibu bapa’, pilih Ibu bapa TABIKA dan 🟢 Hijau, tunjuk Shuffle, tukar BM ke EN, kemudian Copy dan tampal dalam Studio. Minta peserta imbas QR dan jana satu prompt untuk tujuan kerja sendiri.")}
     </div>
   </div>`);
 pcard("KC","Aktiviti 5.1: Sahkan draf dengan notebook",12,()=>`
