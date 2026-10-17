@@ -254,6 +254,7 @@ const FUNCS=[
           {ui:true,k:"detail",l:"Level of detail",o:[["Concise"],["Standard"],["Detailed"]],d:1},
           {k:"layout",l:"Layout",o:[["Single Column","single column","a single column"],["2 Columns","2 columns","two columns"],["3 Columns","3 columns","three columns"],["Grid 2x2","grid 2x2","a 2x2 grid"],["Grid 3x3","grid 3x3","a 3x3 grid"],["Bento","bento","a bento layout"],["Freeform","freeform","a freeform layout"],["Timeline","timeline","a timeline layout"],["Flowchart","flowchart","a flowchart layout"]]}]}
 ];
+const ORDER=["slides","info","video","audio","reports","quiz","table","mindmap","flash"];FUNCS.sort((a,b)=>ORDER.indexOf(a.id)-ORDER.indexOf(b.id));
 const VIS=[{k:"gaya",l:"Style",o:GAYA},{k:"palet",l:"Colour Palette",o:PALET},{k:"latar",l:"Background",o:LATAR},{k:"fon",l:"Font",o:FON},{k:"motif",l:"Motif tempatan",o:MOTIF},{k:"tema",l:"Tema watak",o:TEMA}];
 
 /* ===== Kolam variasi (teks asal AI4U) ===== */
