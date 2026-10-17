@@ -201,7 +201,7 @@ const FUNCS=[
           {k:"susun",l:"Susun baris mengikut",t:"text",ph:"Contoh: tarikh akhir paling awal"}]},
  {id:"slides",ic:"🖼️",name:"Slide Deck",c:"#c026d3",vis:true,nbm:"satu slide deck",nen:"slide deck",
   fields:[{k:"ori",l:"Orientasi",t:"chips",o:ORI},
-          {k:"n",l:"Bilangan slaid",t:"chips",o:N([5,8,10,12]),d:1},
+          {k:"n",l:"Bilangan slaid",t:"chips",o:N([4,8,10,12,16,20]),d:1},
           {k:"satu",l:"Satu mesej utama setiap slaid",t:"chips",o:[["Ya","ya","yes"],["Tidak","tidak","no"]]}]},
  {id:"mindmap",ic:"🧠",name:"Mind Map",c:"#7c3aed",vis:false,nbm:"satu peta minda",nen:"mind map",
   fields:[{k:"pusat",l:"Nod pusat",t:"text",ph:"Contoh: Garis Panduan Program TABIKA 2027"},
@@ -261,7 +261,7 @@ function gen(S){
   reports(){const j=g("jenis"),p=g("pjg");if(j||p)out.push(L==="en"?`Format it as ${j}${p?", "+p:""}.`:`Formatnya ialah ${j}${p?", "+p:""}.`);if(g("sek"))out.push(L==="en"?`Use these sections: ${joinList(g("sek").split(/\s*,\s*/),L)}.`:`Gunakan seksyen berikut: ${joinList(g("sek").split(/\s*,\s*/),L)}.`)},
   quiz(){out.push(L==="en"?`Include ${g("n")} multiple-choice questions at ${art(g("tahap"))} ${g("tahap")} difficulty level, each with the answer and an explanation.`:`Sediakan ${g("n")} soalan aneka pilihan pada tahap ${g("tahap")}, setiap satu dengan jawapan dan penerangan.`);if(g("topik"))out.push(L==="en"?`Limit the questions to: ${g("topik")}.`:`Hadkan soalan kepada topik: ${g("topik")}.`)},
   table(){if(g("lajur"))out.push(L==="en"?`Use these columns: ${joinList(g("lajur").split(/\s*,\s*/),L)}.`:`Gunakan lajur berikut: ${joinList(g("lajur").split(/\s*,\s*/),L)}.`);if(g("susun"))out.push(L==="en"?`Sort the rows by ${g("susun")}.`:`Susun baris mengikut ${g("susun")}.`);out.push(L==="en"?"Leave a cell blank if the information is not in the sources.":"Biarkan sel kosong jika maklumat tiada dalam sumber.")},
-  slides(){out.push(L==="en"?`Make ${g("n")} slides in ${g("ori")} orientation.`:`Hasilkan ${g("n")} slaid dalam orientasi ${g("ori")}.`);if((fv.satu||0)===0)out.push(L==="en"?"Keep one key message per slide.":"Satu mesej utama setiap slaid.")},
+  slides(){out.push(L==="en"?`Make ${g("n")} slides in ${g("ori")} orientation.`:`Deck ini mengandungi ${g("n")} slaid dalam orientasi ${g("ori")}.`);if((fv.satu||0)===0)out.push(L==="en"?"Keep one key message per slide.":"Satu mesej utama setiap slaid.")},
   mindmap(){if(g("pusat"))out.push(L==="en"?`Use "${g("pusat")}" as the central node.`:`Jadikan "${g("pusat")}" sebagai nod pusat.`);out.push(L==="en"?`Branch out to ${g("aras")} levels.`:`Susun cabang sehingga ${g("aras")} aras.`)},
   flash(){out.push(L==="en"?`Create ${g("n")} cards at ${art(g("tahap"))} ${g("tahap")} level focusing on ${g("fokus")}.`:`Sediakan ${g("n")} kad pada tahap ${g("tahap")} yang memberi fokus kepada ${g("fokus")}.`)},
   info(){out.push(L==="en"?`Lay it out in ${g("layout")}, in ${g("ori")} orientation.`:`Susun dalam ${g("layout")}, orientasi ${g("ori")}.`)}
