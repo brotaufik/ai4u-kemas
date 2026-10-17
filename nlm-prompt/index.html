@@ -91,7 +91,7 @@ footer{margin:26px 0 10px;color:var(--muted);font-size:12.5px;text-align:center;
     </div>
     <button type="button" class="btn" id="themeBtn" aria-label="Tukar tema">🌓 Tema</button>
     <a class="btn" href="https://notebooklm.google.com" target="_blank" rel="noopener">Buka NotebookLM ↗</a>
-    <a class="btn" href="../">← Portal AI4U</a>
+    <a class="btn" id="portalLink" href="../index.html">← Portal AI4U</a>
   </div>
 </header>
 
@@ -339,6 +339,7 @@ function bind(){
 }
 try{const th=localStorage.getItem("ai4u-nlm-theme");if(th)document.documentElement.setAttribute("data-theme",th)}catch(_){}
 bind();renderAll();renderSaved();
+try{if(location.protocol==="file:")$("portalLink").href="../Portal_Kursus_AI_KEMAS_Perak.html"}catch(_){}
 window.NLM={gen,defaults,FUNCS,POOL,SLOTS,hasDoubleComma,joinList,art,shuffleState:(st)=>{const prev=JSON.stringify(st.v);let n=0;do{st.v=Object.fromEntries(SLOTS.map(k=>[k,Math.floor(Math.random()*POOL[k].bm.length)]));n++}while(JSON.stringify(st.v)===prev&&n<20);return st},getState:()=>S};
 })();
 </script>
