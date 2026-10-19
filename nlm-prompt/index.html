@@ -42,6 +42,9 @@ header{display:flex;align-items:center;justify-content:space-between;gap:12px;fl
 .field label i,.flabel i{font-style:normal;color:var(--bad)}
 .field small{color:var(--muted);font-size:12px}
 input[type=text],select,textarea{width:100%;background:var(--panel2);color:var(--text);border:1px solid var(--line);border-radius:9px;padding:9px 10px;font:14px "Plus Jakarta Sans",system-ui,sans-serif}
+input[type=text],select,textarea{border:1.5px solid #5a6ea8}
+:root[data-theme="light"] input[type=text],:root[data-theme="light"] select,:root[data-theme="light"] textarea{border-color:#9aa8c7}
+input[type=text]::placeholder{color:#7d8ab0}
 input[type=text]:focus,select:focus,textarea:focus{outline:2px solid var(--acc2);border-color:transparent}
 .chips{display:grid;grid-template-columns:repeat(var(--cols,3),minmax(0,1fr));gap:6px;align-items:stretch;grid-auto-rows:1fr}
 .chip{display:flex;align-items:center;justify-content:center;text-align:center;min-height:34px;line-height:1.2;border:1px solid var(--line);background:var(--chip);color:var(--text);border-radius:10px;padding:6px 8px;font:600 12.5px "Plus Jakarta Sans",system-ui,sans-serif;cursor:pointer}
@@ -69,7 +72,8 @@ input[type=text]:focus,select:focus,textarea:focus{outline:2px solid var(--acc2)
 .outgrid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
 .outgrid .panel h2 b{width:auto;padding:0 6px}
 .btn.wide{width:100%;justify-content:center;margin-top:6px}
-#hint{color:var(--bad);font-weight:700}
+#hint:empty{display:none}#hint{display:block;width:100%;border-radius:10px;padding:9px 12px;font-size:13.5px;font-weight:700;border-left:5px solid var(--warn);background:color-mix(in srgb,var(--warn) 16%,transparent);color:var(--text)}
+#hint.r{border-color:var(--bad);background:color-mix(in srgb,var(--bad) 16%,transparent)}
 .outbox{background:var(--panel2);border:1px solid var(--line);border-radius:12px;padding:14px;font-size:15.5px;line-height:1.65;min-height:110px;white-space:pre-wrap}
 .outbox.empty{color:var(--muted);font-style:italic}
 .meta{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;color:var(--muted);font-size:12.5px;margin:6px 2px}
@@ -323,7 +327,7 @@ function gen(S){
  text=text.replace(/(^|[.!?]\s+)([a-z])/g,(m,a,b)=>a+b.toUpperCase());
  const words=text.split(/\s+/).filter(Boolean).length;
  const data=S.data||null;
- return{text,words,missing,data,warn,ui,box:F.box,canCopy:!missing.length&&data&&data!=="r"};
+ if(!data)missing.push("Warna data sumber");return{text,words,missing,data,warn,ui,box:F.box,incomplete:missing.length>0,canCopy:data!=="r"};
 }
 
 /* ===== Keadaan ===== */
@@ -363,7 +367,7 @@ function renderC(){const F=FUNCS.find(f=>f.id===S.fn);$("panelC").classList.togg
 function update(){const rb=gen(Object.assign({},S,{lang:"bm"})),re=gen(Object.assign({},S,{lang:"en"}));
  $("outBM").textContent=rb.text;$("boxName").textContent="“"+rb.box+"”";const ul=$("uiList");ul.innerHTML="";rb.ui.forEach(([k,val])=>{const li=document.createElement("li");li.innerHTML="<span></span><b></b>";li.children[0].textContent="☐ "+k;li.children[1].textContent=val;ul.appendChild(li)});$("outEN").textContent=re.text;
  $("wcBM").textContent=rb.words+" patah perkataan";$("wcEN").textContent=re.words+" words";
- $("hint").textContent=rb.missing.length?"Isi dahulu: "+rb.missing.join(", "):(rb.data?"":"Pilih warna data sumber sebelum Copy");
+ const H=$("hint");H.className=rb.data==="r"?"r":"";H.textContent=rb.data==="r"?"🔴 Data Merah: Copy dikunci. Jangan masukkan data ini ke NotebookLM.":(rb.incomplete?"⚠️ Prompt belum lengkap: "+rb.missing.join(", ")+" belum diisi. Anda masih boleh Copy, tetapi hasil mungkin terlalu umum.":"");
  $("copyBM").disabled=!rb.canCopy;$("copyEN").disabled=!re.canCopy}
 function renderSaved(){const L=lsGet(KEY,[]);const h=$("slist");h.innerHTML="";if(!L.length){h.innerHTML='<li><em>Tiada prompt tersimpan.</em></li>';return}
  L.forEach((it,i)=>{const li=document.createElement("li");const F=FUNCS.find(f=>f.id===it.state.fn)||{ic:""};li.innerHTML=`<span>${F.ic} <b></b></span><em>${new Date(it.t).toLocaleDateString("ms-MY")}</em>`;li.querySelector("b").textContent=it.name;
@@ -378,7 +382,7 @@ function bind(){
  $("nada").onchange=e=>{S.nada=+e.target.value;update()};
  document.querySelectorAll("#datab button").forEach(b=>b.onclick=()=>{S.data=b.dataset.v;renderA();update()});
   $("shuffleBtn").onclick=()=>{shuffle();update();toast("Variasi ayat ditukar")};
- const doCopy=async L=>{const r=gen(Object.assign({},S,{lang:L}));if(!r.canCopy)return;toast(await copyText(r.text)?(L==="bm"?"Prompt BM disalin":"English prompt copied"):"Gagal salin, sila salin manual")};
+ const doCopy=async L=>{const r=gen(Object.assign({},S,{lang:L}));if(!r.canCopy)return;toast(await copyText(r.text)?(r.incomplete?(L==="bm"?"Disalin · prompt belum lengkap":"Copied · prompt incomplete"):(L==="bm"?"Prompt BM disalin":"English prompt copied")):"Gagal salin, sila salin manual")};
  $("copyBM").onclick=()=>doCopy("bm");$("copyEN").onclick=()=>doCopy("en");
  $("resetBtn").onclick=()=>{S=defaults();renderAll();toast("Semua pilihan direset")};
  $("saveBtn").onclick=()=>{const name=$("saveName").value.trim()||("Prompt "+new Date().toLocaleString("ms-MY"));const A=lsGet(KEY,[]);A.unshift({name,t:Date.now(),state:JSON.parse(JSON.stringify(S))});toast(lsSet(KEY,A)?"Disimpan":"Tidak dapat simpan dalam browser ini");$("saveName").value="";renderSaved()};
