@@ -62,6 +62,7 @@ a{color:inherit}
 #stage::after{content:"";position:absolute;inset:14px;border-radius:22px;border:2px dashed var(--stitch);pointer-events:none}
 .slide{position:absolute;inset:0;padding:50px 70px 84px;display:none;flex-direction:column}
 .slide.on{display:flex;animation:fadeIn .45s ease}
+.ql small:empty{display:none}
 .cvimg{position:absolute;inset:0;overflow:hidden;border-radius:30px;background:#000}.cvimg img{width:100%;height:100%;object-fit:cover;display:block}.cvimg::after{content:"";position:absolute;left:0;right:0;bottom:0;height:96px;background:linear-gradient(180deg,rgba(0,0,0,0),rgba(0,0,0,.6));pointer-events:none}
 @keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
 @media (prefers-reduced-motion: reduce){.slide.on{animation:none}}
@@ -4952,7 +4953,7 @@ function NARROW(){try{return matchMedia("(max-width:999.98px)").matches}catch(e)
 if(NARROW()||st.side===0)B.classList.add("side-off");
 function renderLinks(){
  const U=[["📝","Praujian","GOOGLE FORM",LINKS.pra],["📁","Nota peserta","GOOGLE DRIVE",DRIVE],["🎥","Rakaman taklimat","GOOGLE DRIVE",LINKS.taklimat],["🌐","schtg.com","KOD ypa75g · 11 OKT",LINKS.host],["💻","Muat turun XAMPP","APACHEFRIENDS",LINKS.xampp],["📍","Lokasi hotel","GOOGLE MAPS",LINKS.map]];
- const Bl=[["🧩","Workspace","@KEMAS.GOV.MY","https://workspace.google.com/dashboard"],["📝","Pre test","QR · 20 SOALAN","","Pre test"],["✅","Post test","QR · 25 SOALAN","","Post test & maklum balas"],["📁","Folder bahan","GOOGLE DRIVE",st.links.folder],["📘","NotebookLM","GOOGLE","https://notebooklm.google.com"],["📊","Gamma AI","GAMMA.APP","https://gamma.app"],["✍️","ChatGPT","OPENAI","https://chatgpt.com"]];
+ const Bl=[["📝","Pre test","QR · 20 SOALAN","","Pre test"],["✅","Post test","QR · 25 SOALAN","","Post test & maklum balas"],["📁","Folder bahan","GOOGLE DRIVE",st.links.folder],["🧩","Google<br>Workspace","","https://workspace.google.com/dashboard"],["📘","NotebookLM","GOOGLE","https://notebooklm.google.com"],["📊","Gamma AI","GAMMA.APP","https://gamma.app"],["✍️","ChatGPT","OPENAI","https://chatgpt.com"]];
  $("#links").innerHTML=(st.track==="B"?Bl:U).map(r=>r[3]?`<a class="ql" href="${r[3]}" target="_blank" rel="noopener"><span><b>${r[1]}</b><small>${r[2]}</small></span></a>`:r[4]?`<a class="ql" href="#" data-goslide="${r[4]}" title="Buka slaid ${r[1]}"><span><b>${r[1]}</b><small>${r[2]}</small></span></a>`:`<span class="ql" style="opacity:.55" title="Tetapkan pautan dalam slaid Tetapan fasilitator"><span><b>${r[1]}</b><small>AKAN DIKONGSI</small></span></span>`).join("");
  $$("#links [data-goslide]").forEach(a=>a.onclick=e=>{e.preventDefault();const i=SL.findIndex(x=>x.tr==="B"&&x.t===a.dataset.goslide);if(i>=0)go(i)});
  $("#trkName").textContent=ORG().toUpperCase();
