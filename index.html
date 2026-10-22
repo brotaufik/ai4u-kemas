@@ -905,13 +905,13 @@ add("A","Isu kritikal",()=>`
 
 /* ===== SIRI 1 PERAK · PAPAN PEMBELAJARAN (mod mengajar) ===== */
 st.pk=st.pk||{}; st.links=st.links||{};
-const DEFL={pra:"https://docs.google.com/forms/d/e/1FAIpQLSdgbkaGhEAdzYxoGRTMla97oDTiWE-j9yIwGfU-Cl48lOp6Pg/viewform",pasca:"https://docs.google.com/forms/d/e/1FAIpQLScBtSOttSasDuFQRIuQRTrdqY_Us6wC5_AZtC803FM4Bkv9IQ/viewform",folder:"https://drive.google.com/drive/folders/1X9TR5ZHAjhyqEjIeOoqNKMym48rkopup",pek:"https://drive.google.com/drive/folders/1DZ1BFi1SfYZ4pyxcSy9JTMbJptYpVUzL"};
+const DEFL={pra:"https://docs.google.com/forms/d/e/1FAIpQLSdgbkaGhEAdzYxoGRTMla97oDTiWE-j9yIwGfU-Cl48lOp6Pg/viewform",folder:"https://drive.google.com/drive/folders/1X9TR5ZHAjhyqEjIeOoqNKMym48rkopup",pek:"https://drive.google.com/drive/folders/1DZ1BFi1SfYZ4pyxcSy9JTMbJptYpVUzL"};
 Object.keys(DEFL).forEach(k=>{if(!st.links[k]&&DEFL[k])st.links[k]=DEFL[k]});
 const PK=k=>st.pk[k]||"";
 const pinp=(k,ph,style)=>`<input class="inp" id="pk-${k}" data-pk="${k}" value="${esc(PK(k))}" placeholder="${esc(ph)}" style="${style||""}">`;
 function pseg(k,opts){const v=PK(k);return `<span class="seg">${opts.map(o=>`<label title="${esc(o[2]||o[1])}"><input type="radio" name="pk-${k}" value="${o[0]}" data-pkr="${k}" ${v===o[0]?"checked":""}><span>${o[1]}</span></label>`).join("")}</span>`}
 const pchk=(k,label)=>`<label class="chk"><input type="checkbox" data-pkc="${k}" ${PK(k)?"checked":""}><span class="bx">✓</span><span class="tx">${label}</span></label>`;
-const LNK={pra:"Pre test (Google Form)",pasca:"Post test (Google Form)",folder:"Folder bahan kursus",pek:"Pek dokumen latihan (M4)"};
+const LNK={pra:"Kaji selidik penggunaan AI (Google Form)",folder:"Folder bahan kursus",pek:"Pek dokumen latihan (M4)"};
 const kzL=k=>st.links[k]||""; const lbtn=(key,label)=>{const u=(key==="pra"||key==="pasca")?kzL(key):st.links[key];return u?ext(u,label||LNK[key],true):`<span class="tagc warn">PAUTAN AKAN DIKONGSI OLEH FASILITATOR</span>`}; const kzSet=k=>`<div class="t17 muted nofac" style="flex:1">Pautan dan kod QR akan dipaparkan oleh fasilitator semasa sesi.</div><div class="col fac-only" style="gap:8px;flex:1"><label class="t16 b" for="kz-${k}">Tampal URL Kuiz Live (berakhir /exec) untuk aktifkan QR dan butang</label><input class="inp" id="kz-${k}" data-lnk="kuiz" value="${esc(st.links.kuiz||"")}" placeholder="https://script.google.com/macros/s/.../exec"></div>`; const kzQR=(k,px)=>{const u=kzL(k);return u?`<img src="https://api.qrserver.com/v1/create-qr-code/?size=${px*2}x${px*2}&margin=6&data=${encodeURIComponent(u)}" width="${px}" height="${px}" alt="QR" style="border-radius:10px;background:#fff">`:`<div class="t16 muted" style="width:${px}px;height:${px}px;display:flex;align-items:center;justify-content:center;border:2px dashed currentColor;border-radius:10px;padding:10px">QR akan dipaparkan oleh fasilitator</div>`};
 const tmrBtn=m=>`<button class="btn sm tmr" type="button" data-tmr="${m}">⏱ ${m} MINIT · MULA</button>`;
 const facNote=t=>`<div class="well ps fac-only t16"><b class="acc">NOTA FASILITATOR:</b> ${t}</div>`;
@@ -1061,11 +1061,11 @@ const QRBOX=(lbl,url,qr,btn,foot)=>!url?`<div class="card p col" style="flex:1;g
     <img src="${qr}" width="230" height="230" alt="Kod QR ${lbl}" style="background:#fff;padding:6px;flex:0 0 auto">
     <div class="col" style="gap:10px;align-items:flex-start;text-align:left;max-width:230px"><div class="t14 b muted" style="letter-spacing:1px">ATAU KLIK PAUTAN</div>${ext(url,btn,true)}<a href="${url}" target="_blank" rel="noopener" class="t13 muted" style="word-break:break-all;line-height:1.3;color:inherit">${url.replace(/^https:\/\//,"").slice(0,58)}…</a></div>
   </div><div class="t16 muted">${foot}</div></div>`;
-pcard("K1","Pre test",1,()=>`
-  ${cardHd("Mula di sini","Pre test · AI Readiness Assessment",1)}
+pcard("K1","Kaji selidik penggunaan AI",1,()=>`
+  ${cardHd("Mula di sini","Kaji selidik penggunaan AI anggota KEMAS",1)}
   <div class="body row" style="gap:22px;align-items:center">
-    <div class="card p col" style="flex:1.1;gap:16px"><div class="h4">Dua langkah mudah</div>${steps(["<b>Sebelum kursus:</b> imbas kod QR atau klik pautan, isi profil, jawab 20 soalan (15 bermarkah), klik <b>Submit</b>, kemudian <b>Lihat skor</b>.","<b>Dalam sesi (1 minit):</b> fasilitator tunjuk ringkasan dapatan: purata, alat yang pernah diguna dan tiga soalan paling lemah. Belum jawab? Buat sekarang dalam 7 minit."],"t20")}<div class="t17 muted">Markah tidak dinilai; ia dibandingkan dengan post test di akhir kursus.</div></div>
-    ${QRBOX("Imbas untuk pre test",st.links.pra||PRE_URL,(st.links.pra||PRE_URL)===PRE_URL?PRE_QR:qrApi(st.links.pra),"Buka pre test","Sasaran post test: purata <b>13.5/15</b>, tiada peserta bawah 10")}
+    <div class="card p col" style="flex:1.1;gap:16px"><div class="h4">Dua langkah mudah</div>${steps(["<b>Sebelum kursus:</b> imbas kod QR atau klik pautan, isi profil dan corak penggunaan AI anda, jawab 15 soalan literasi AI, klik <b>Submit</b>, kemudian <b>Lihat skor</b>.","<b>Dalam sesi (1 minit):</b> fasilitator tunjuk ringkasan dapatan: purata skor, alat yang paling banyak diguna dan tiga soalan paling lemah. Belum isi? Buat sekarang dalam 7 minit."],"t20")}<div class="t17 muted">Tiada penilaian individu. Data digunakan untuk memetakan tahap penggunaan AI anggota KEMAS dan merancang latihan susulan.</div></div>
+    ${QRBOX("Imbas untuk kaji selidik",st.links.pra||PRE_URL,(st.links.pra||PRE_URL)===PRE_URL?PRE_QR:qrApi(st.links.pra),"Buka kaji selidik","± 10 minit · 20 soalan · terbuka kepada semua anggota KEMAS")}
   </div>`);
 pcard("K1","Aktiviti 0.1: Tugas berulang saya",4,()=>`
   ${cardHd("Mula di sini","Aktiviti 0.1: Tugas berulang saya",4)}
@@ -1332,7 +1332,7 @@ pcard("KA","M1 · Dasar AI Malaysia & dunia",1,()=>`
     ["GPAISA · JDN &amp; MDEC<br><span class='faint' style='font-weight:600'>27 Feb 2025</span>","Garis Panduan Pengadaptasian AI Sektor Awam (158 muka surat). Enam bab: pengenalan AI, prinsip etika, peranan dan tanggungjawab, pengurusan risiko, kaedah adaptasi, templat penilaian kendiri agensi."],
     ["PDPA (Pindaan) 2024<br><span class='faint' style='font-weight:600'>Diwartakan 17 Okt 2024</span>","Wajib lantik Pegawai Perlindungan Data, wajib notifikasi pelanggaran data, hak mudah alih data, data biometrik sebagai data sensitif. Nota: PDPA tidak terpakai kepada Kerajaan Persekutuan dan Negeri; data jabatan dikawal Arahan Keselamatan dan Akta Rahsia Rasmi."],
     ["Rujukan antarabangsa","Saranan Etika AI UNESCO, Prinsip AI OECD, EU AI Act (pendekatan berasaskan risiko)."]])}
-    <div class="bub no t16"><b>Data kursus rintis:</b> 36 daripada 39 peserta belum pernah membaca AIGE. Sebut tujuh prinsip dan tunjuk pautan; soalan ini ditanya semula dalam post test.</div>
+    <div class="bub no t16"><b>Data kursus rintis:</b> 36 daripada 39 peserta belum pernah membaca AIGE. Sebut tujuh prinsip dan tunjuk pautan.</div>
     ${facNote("Tekankan GPAISA sebagai dokumen paling relevan untuk penjawat awam. Templat penilaian kendiri dalam GPAISA boleh digunakan unit sebelum memulakan projek AI.")}</div>`);
 pcard("KA","M1 · Rujukan & video",0,()=>`
   ${cardHd("Modul 1 · Etika & Tadbir Urus","Rujukan &amp; kursus pilihan",0,plate("UNTUK BACAAN LANJUT"))}
@@ -1506,7 +1506,7 @@ add("KG","M4 · Bonus: Gemini untuk TABIKA/TASKA",()=>`
       <div class="bub no t15" style="flex:1.3"><b>🔴 Data kanak-kanak dilarang:</b> nama murid, gambar, rekod perkembangan dan maklumat ibu bapa, walaupun dalam akaun @kemas.gov.my.</div>
       <div class="bub ya t15" style="flex:1"><b>Pendidik yang kendalikan.</b> Aktiviti singkat dan berkumpulan di TV kelas. Semak ejaan dan jawapan sebelum guna.</div>
     </div>
-    ${facNote("Bonus 1 minit, tunjuk sahaja; tiada hands-on. 20 daripada 39 peserta pre test ialah Pendidik Masyarakat TABIKA/TASKA. Ciri Study notebooks, Guided Learning dan Gemini dalam Classroom direka untuk pelajar 13 tahun ke atas dan akaun edisi Education (DELIMa KPM); akaun @kemas.gov.my ialah MyGovUC, jadi fokus pada Canvas dan Gems yang digunakan oleh pendidik sendiri.")}
+    ${facNote("Bonus 1 minit, tunjuk sahaja; tiada hands-on. 20 daripada 39 responden kaji selidik ialah Pendidik Masyarakat TABIKA/TASKA. Ciri Study notebooks, Guided Learning dan Gemini dalam Classroom direka untuk pelajar 13 tahun ke atas dan akaun edisi Education (DELIMa KPM); akaun @kemas.gov.my ialah MyGovUC, jadi fokus pada Canvas dan Gems yang digunakan oleh pendidik sendiri.")}
   </div>`);
 pcard("KG","Aktiviti 4.1: Gmail & Calendar",7,()=>`
   ${cardHd(KGH,"Aktiviti 4.1: Jemputan dan acara dalam 7 minit",7,plate("HANDS-ON · @KEMAS.GOV.MY"))}
@@ -2174,13 +2174,6 @@ pcard("K4","Galeri hasil",6,()=>`
     ${box("Format galeri",steps(["Tiga peserta membentangkan deck masing-masing, 2 minit setiap seorang.","Peserta lain memberi satu pujian dan satu cadangan.","Fasilitator menonjolkan satu amalan etika yang baik daripada setiap deck."],"t19"),"flex:1.2")}
     ${box("Soalan panduan maklum balas",`<div class="t18 lh">Adakah mesej utama jelas dalam 10 saat?<br>Adakah setiap angka boleh dijejak kepada sumber?<br>Adakah deck ini boleh dibentang di mesyuarat sebenar minggu depan?</div>`,"flex:1")}
     ${QRBOX("Hantar hasil anda",REKOD_URL,REKOD_QR,"Buka borang rekod","Nama, pautan deck, draf disahkan, borang M4 dan ikrar 30 hari. Masuk terus ke rekod kursus.")}
-  </div>`);
-const POST_URL="https://docs.google.com/forms/d/e/1FAIpQLScBtSOttSasDuFQRIuQRTrdqY_Us6wC5_AZtC803FM4Bkv9IQ/viewform",POST_QR="data:image/png;base64,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";
-pcard("K4","Post test & maklum balas",8,()=>`
-  ${cardHd("Penilaian","Post test &amp; maklum balas",8)}
-  <div class="body row" style="gap:22px;align-items:center">
-    <div class="card p col" style="flex:1.1;gap:16px"><div class="h4">Dua langkah terakhir</div>${steps(["Imbas kod QR atau klik pautan di sebelah. Guna <b>nama yang sama</b> seperti pre test.","Jawab 20 soalan (sama dengan pre test, susunan jawapan dikocok) dan 5 soalan maklum balas kursus."],"t22")}<div class="t17 muted">± 10 minit · Klik <b>Submit</b>, kemudian <b>Lihat skor</b> untuk bandingkan dengan pre test.</div></div>
-    ${QRBOX("Imbas untuk post test",st.links.pasca||POST_URL,(st.links.pasca||POST_URL)===POST_URL?POST_QR:qrApi(st.links.pasca),"Buka post test","Sasaran: purata <b>13.5/15</b>, tiada bawah 10 · kepuasan <b>85%</b>")}
   </div>`);
 pcard("K4","Ikrar 30 hari",4,()=>{const s=`Dalam tempoh 30 hari, saya akan menggunakan AI untuk ${PK("ik1")||"[tugasan]"}, diukur dengan ${PK("ik2")||"[satu metrik bernombor]"}, dan disemak oleh ${PK("ik3")||"[nama jawatan penyemak]"}.`;return `
   ${cardHd("Penutup","Ikrar 30 hari",4)}
@@ -4847,19 +4840,19 @@ pcard("KE","M2 · Galeri Prompt Makeover KEMAS",0,()=>`
   ].map(x=>`<div class="card ps col" style="gap:8px"><div class="t18 b">${x[0]}</div><div class="bub no t15" style="padding:8px 12px"><b>Sebelum:</b> “${x[1]}”</div>${code(x[2],true)}</div>`).join("")}</div></div>`);
 pcard("KE","M2 · Laluan belajar selepas kursus",0,()=>{
   const L=(t,m,u)=>`<a href="${u}" target="_blank" rel="noopener" class="row" style="gap:8px;align-items:baseline;text-decoration:none;color:inherit;padding:6px 0;border-bottom:1px solid var(--line)"><span class="t16 b" style="flex:1">${t} ↗</span><span class="t13 muted" style="white-space:nowrap">${m}</span></a>`;
-  const T=[["🌱 ASAS","Skor pre test 6/15 ke bawah",[
+  const T=[["🌱 ASAS","Skor kaji selidik 6/15 ke bawah",[
       ["Apa Itu ChatGPT? (Husna Amira)","BM · video","https://www.youtube.com/watch?v=_xyGY377mVI"],
       ["Kenali NotebookLM (Cikgu Muktasim)","BM · video","https://www.youtube.com/watch?v=JZB6j4yL_rA"],
       ["Gamma AI Tutorial (Husna Amira)","BM · video","https://www.youtube.com/watch?v=5Z5DeNSwQQA"],
       ["AI Untuk Rakyat (MyDIGITAL)","BM · kendiri","https://mydigital.gov.my/empowering-malaysia-ai-untuk-rakyat"],
       ["ChatGPT for Everyone (Learn Prompting)","EN · ±1 jam","https://learnprompting.org/courses/chatgpt-for-everyone"]]],
-    ["🚀 PERTENGAHAN","Skor pre test 7 hingga 10 daripada 15",[
+    ["🚀 PERTENGAHAN","Skor kaji selidik 7 hingga 10 daripada 15",[
       ["ChatGPT for Government 101 (OpenAI Academy)","EN · ±1 jam","https://academy.openai.com/public/resources/chatgpt-for-government-101-2025-10-18"],
       ["Intro to NotebookLM (Google Skills)","EN · 15 min","https://www.cloudskillsboost.google/paths/2480/course_templates/1418"],
       ["Write effective prompts (Microsoft Learn)","EN · 30 min","https://learn.microsoft.com/en-us/training/modules/write-effective-prompts-do-more-prompting"],
       ["AI Fluency (Anthropic)","EN · 3 – 4 jam","https://www.anthropic.com/ai-fluency"],
       ["Gandalf: permainan prompt injection (Lakera)","EN · 15 min","https://gandalf.lakera.ai"]]],
-    ["🏆 MAHIR","Skor pre test 11/15 ke atas",[
+    ["🏆 MAHIR","Skor kaji selidik 11/15 ke atas",[
       ["Generative AI for Everyone (Coursera)","EN · ±6 jam · audit percuma","https://www.coursera.org/learn/generative-ai-for-everyone"],
       ["Google Prompting Essentials","EN · <10 jam · berbayar","https://grow.google/intl/en_my/prompting-essentials/"],
       ["Prompt Engineering Playbook (GovTech)","EN · 134 ms","https://developer.tech.gov.sg/products/collections/data-science-and-artificial-intelligence/playbooks/prompt-engineering-playbook-beta-v3.pdf"],
@@ -4953,7 +4946,7 @@ function NARROW(){try{return matchMedia("(max-width:999.98px)").matches}catch(e)
 if(NARROW()||st.side===0)B.classList.add("side-off");
 function renderLinks(){
  const U=[["📝","Praujian","GOOGLE FORM",LINKS.pra],["📁","Nota peserta","GOOGLE DRIVE",DRIVE],["🎥","Rakaman taklimat","GOOGLE DRIVE",LINKS.taklimat],["🌐","schtg.com","KOD ypa75g · 11 OKT",LINKS.host],["💻","Muat turun XAMPP","APACHEFRIENDS",LINKS.xampp],["📍","Lokasi hotel","GOOGLE MAPS",LINKS.map]];
- const Bl=[["📝","Pre test","QR · 20 SOALAN","","Pre test"],["✅","Post test","QR · 25 SOALAN","","Post test & maklum balas"],["📁","Folder bahan","GOOGLE DRIVE",st.links.folder],["🧩","Google","WORKSPACE","https://workspace.google.com/dashboard"],["📘","NotebookLM","GOOGLE","https://notebooklm.google.com"],["📊","Gamma AI","GAMMA.APP","https://gamma.app"],["✍️","ChatGPT","OPENAI","https://chatgpt.com"]];
+ const Bl=[["📝","Kaji selidik","PENGGUNAAN AI","","Kaji selidik penggunaan AI"],["📁","Folder bahan","GOOGLE DRIVE",st.links.folder],["🧩","Google","WORKSPACE","https://workspace.google.com/dashboard"],["📘","NotebookLM","GOOGLE","https://notebooklm.google.com"],["📊","Gamma AI","GAMMA.APP","https://gamma.app"],["✍️","ChatGPT","OPENAI","https://chatgpt.com"]];
  $("#links").innerHTML=(st.track==="B"?Bl:U).map(r=>r[3]?`<a class="ql" href="${r[3]}" target="_blank" rel="noopener"><span><b>${r[1]}</b><small>${r[2]}</small></span></a>`:r[4]?`<a class="ql" href="#" data-goslide="${r[4]}" title="Buka slaid ${r[1]}"><span><b>${r[1]}</b><small>${r[2]}</small></span></a>`:`<span class="ql" style="opacity:.55" title="Tetapkan pautan dalam slaid Tetapan fasilitator"><span><b>${r[1]}</b><small>AKAN DIKONGSI</small></span></span>`).join("");
  $$("#links [data-goslide]").forEach(a=>a.onclick=e=>{e.preventDefault();const i=SL.findIndex(x=>x.tr==="B"&&x.t===a.dataset.goslide);if(i>=0)go(i)});
  $("#trkName").textContent=ORG().toUpperCase();
