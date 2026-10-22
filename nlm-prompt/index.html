@@ -396,7 +396,7 @@ if(QS.get("theme"))document.documentElement.setAttribute("data-theme",QS.get("th
 if(EMBED){document.documentElement.classList.add("embed")}
 addEventListener("message",e=>{const t=e.data&&e.data.ai4uTheme;if(t==="light"||t==="dark")document.documentElement.setAttribute("data-theme",t)});
 bind();renderAll();renderSaved();
-try{if(location.protocol==="file:")$("portalLink").href="../Portal_Kursus_AI_KEMAS_Perak.html"}catch(_){}
+try{if(location.protocol==="file:")$("portalLink").href="../Portal_AI4U_KEMAS.html"}catch(_){}
 window.NLM={gen,defaults,FUNCS,POOL,SLOTS,hasDoubleComma,joinList,art,shuffleState:(st)=>{const prev=JSON.stringify(st.v);let n=0;do{st.v=Object.fromEntries(SLOTS.map(k=>[k,Math.floor(Math.random()*POOL[k].bm.length)]));n++}while(JSON.stringify(st.v)===prev&&n<20);return st},getState:()=>S};
 })();
 </script>
